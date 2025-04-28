@@ -1,0 +1,23 @@
+-- V1__init_products.sql
+
+INSERT INTO product (id, name, brand, model, price)
+VALUES (1, 'Laptop', 'Apple', 'MacBook Pro 14', 1999.99),
+       (2,'Smartphone', 'Samsung', 'Galaxy S21', 799.99),
+       (3,'Tablet', 'Apple', 'iPad Air', 599.99),
+       (4,'Headphones', 'Sony', 'WH-1000XM4', 349.99),
+       (5,'Monitor', 'LG', 'UltraGear 27GN950', 699.99),
+       (6,'Smartwatch', 'Apple', 'Apple Watch Series 7', 399.99),
+       (7,'Laptop', 'Dell', 'XPS 13', 1499.99),
+       (8,'Smartphone', 'Google', 'Pixel 6', 599.99),
+       (9,'Tablet', 'Samsung', 'Galaxy Tab S7', 649.99),
+       (10,'Headphones', 'Bose', 'QuietComfort 35 II', 299.99),
+       (11,'Monitor', 'Samsung', 'Odyssey G7', 749.99),
+       (12,'Smartwatch', 'Samsung', 'Galaxy Watch 4', 249.99),
+       (13,'Laptop', 'HP', 'Spectre x360', 1599.99),
+       (14,'Smartphone', 'OnePlus', 'OnePlus 9 Pro', 1069.99),
+       (15,'Tablet', 'Microsoft', 'Surface Pro 7', 749.99),
+       (16,'Headphones', 'Sennheiser', 'Momentum 3', 399.99),
+       (17,'Monitor', 'BenQ', 'EL2870U', 379.99),
+       (18,'Smartwatch', 'Garmin', 'Fenix 6', 599.99),
+       (19,'Laptop', 'Lenovo', 'ThinkPad X1 Carbon', 1899.99),
+       (20,'Smartphone', 'Xiaomi', 'Mi 11', 749.99);

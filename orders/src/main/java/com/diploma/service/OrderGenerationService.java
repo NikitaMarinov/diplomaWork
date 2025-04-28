@@ -1,0 +1,75 @@
+package com.diploma.service;
+
+import com.diploma.constants.OrderStatus;
+import com.diploma.model.Order;
+import com.diploma.model.Product;
+import com.diploma.repository.OrderRepository;
+import com.diploma.repository.ProductRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+@Service
+public class OrderGenerationService {
+    @Value("${order.batch-size}")
+    private int batchSize;
+
+    @Value("${order.quantity-size}")
+    private int quantitySize;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Transactional
+    public void generateOrders() {
+        List<Product> products = productRepository.findAll();
+        if (products.isEmpty()) {
+            System.out.println("Products DB is empty!");
+            return;
+        }
+
+        Random random = new Random();
+        List<Order> ordersBatch = new ArrayList<>(batchSize);
+
+        for (int i = 0; i < quantitySize; i++) {
+            Product randomProduct = products.get(random.nextInt(products.size()));
+            Order order = getRandomOrder(randomProduct, random);
+
+            ordersBatch.add(order);
+
+
+            if (ordersBatch.size() == batchSize) {
+                orderRepository.saveAll(ordersBatch);
+                ordersBatch.clear();
+            }
+        }
+
+        if (!ordersBatch.isEmpty()) {
+            orderRepository.saveAll(ordersBatch);
+        }
+    }
+
+    private Order getRandomOrder(Product randomProduct, Random random) {
+        int quantity = random.nextInt(10) + 1;
+        Long totalPrice = randomProduct.getPrice() * quantity;
+
+        Order order = new Order();
+        order.setProduct(randomProduct);
+        order.setPrice(totalPrice);
+        order.setQuantity(quantity);
+        order.setOrderDate(LocalDate.now());
+        order.setCustomerName("Customer " + random.nextInt(1000));
+        order.setStatus(OrderStatus.OPEN);
+
+        return order;
+    }
+}
