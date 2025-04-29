@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.diploma.constants.OrderStatus.DELIVERY;
+
 @Service
 public class ManufactureService {
 
@@ -48,6 +50,10 @@ public class ManufactureService {
     }
 
     public void sendOrdersToLogisticAndUpdateStatus() {
+        List<Long> expiredOrders = orderRepository.findExpiredOrderIds();
+        orderRepository.updateStatusByIds(DELIVERY, expiredOrders);
+        orderRepository.findOrdersByIds(expiredOrders);
+
 
     }
 }

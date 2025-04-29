@@ -22,6 +22,7 @@
       { "name": "quantity", "type": "int" },
       { "name": "orderDate", "type": { "type": "int", "logicalType": "date" } },
       { "name": "customerName", "type": "string" },
+      { "name": "city", "type": "string" },
       { "name": "status", "type": "com.diplome.avro.OrderStatus" }
     ]
   },

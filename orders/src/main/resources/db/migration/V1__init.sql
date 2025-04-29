@@ -13,6 +13,7 @@ CREATE TABLE t_order (
                          quantity INT NOT NULL,
                          order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
                          customer_name VARCHAR(255) NOT NULL,
+                         city VARCHAR(255) NOT NULL,
                          status VARCHAR(255) NOT NULL,
                          FOREIGN KEY (product_id) REFERENCES product(id)
 );
