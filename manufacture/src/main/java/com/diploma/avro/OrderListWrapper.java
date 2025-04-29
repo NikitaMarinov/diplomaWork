@@ -5,21 +5,20 @@
  */
 package com.diploma.avro;
 
+import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
+import org.apache.avro.util.Utf8;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class OrderListWrapper extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -4171754016147901871L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderListWrapper\",\"namespace\":\"com.diplome.avro\",\"fields\":[{\"name\":\"orders\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"OrderDTO\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":\"long\"},{\"name\":\"price\",\"type\":\"long\"},{\"name\":\"quantity\",\"type\":\"int\"},{\"name\":\"orderDate\",\"type\":{\"type\":\"int\",\"logicalType\":\"date\"}},{\"name\":\"customerName\",\"type\":\"string\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"RETURNED\"]}}]}}}]}");
+  private static final long serialVersionUID = 5055106405248372556L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderListWrapper\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"orders\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"OrderDTO\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":\"long\"},{\"name\":\"quantity\",\"type\":\"int\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"RETURNED\"]}},{\"name\":\"production_time\",\"type\":[\"null\",\"string\"],\"default\":null}]}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
-static {
-    MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.DateConversion());
-  }
 
   private static final BinaryMessageEncoder<OrderListWrapper> ENCODER =
       new BinaryMessageEncoder<OrderListWrapper>(MODEL$, SCHEMA$);
@@ -270,6 +269,78 @@ static {
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
+  @Override protected boolean hasCustomCoders() { return true; }
+
+  @Override public void customEncode(org.apache.avro.io.Encoder out)
+    throws java.io.IOException
+  {
+    long size0 = this.orders.size();
+    out.writeArrayStart();
+    out.setItemCount(size0);
+    long actualSize0 = 0;
+    for (com.diploma.avro.OrderDTO e0: this.orders) {
+      actualSize0++;
+      out.startItem();
+      e0.customEncode(out);
+    }
+    out.writeArrayEnd();
+    if (actualSize0 != size0)
+      throw new java.util.ConcurrentModificationException("Array-size written was " + size0 + ", but element count was " + actualSize0 + ".");
+
+  }
+
+  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
+    throws java.io.IOException
+  {
+    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
+    if (fieldOrder == null) {
+      long size0 = in.readArrayStart();
+      java.util.List<com.diploma.avro.OrderDTO> a0 = this.orders;
+      if (a0 == null) {
+        a0 = new SpecificData.Array<com.diploma.avro.OrderDTO>((int)size0, SCHEMA$.getField("orders").schema());
+        this.orders = a0;
+      } else a0.clear();
+      SpecificData.Array<com.diploma.avro.OrderDTO> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<com.diploma.avro.OrderDTO>)a0 : null);
+      for ( ; 0 < size0; size0 = in.arrayNext()) {
+        for ( ; size0 != 0; size0--) {
+          com.diploma.avro.OrderDTO e0 = (ga0 != null ? ga0.peek() : null);
+          if (e0 == null) {
+            e0 = new com.diploma.avro.OrderDTO();
+          }
+          e0.customDecode(in);
+          a0.add(e0);
+        }
+      }
+
+    } else {
+      for (int i = 0; i < 1; i++) {
+        switch (fieldOrder[i].pos()) {
+        case 0:
+          long size0 = in.readArrayStart();
+          java.util.List<com.diploma.avro.OrderDTO> a0 = this.orders;
+          if (a0 == null) {
+            a0 = new SpecificData.Array<com.diploma.avro.OrderDTO>((int)size0, SCHEMA$.getField("orders").schema());
+            this.orders = a0;
+          } else a0.clear();
+          SpecificData.Array<com.diploma.avro.OrderDTO> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<com.diploma.avro.OrderDTO>)a0 : null);
+          for ( ; 0 < size0; size0 = in.arrayNext()) {
+            for ( ; size0 != 0; size0--) {
+              com.diploma.avro.OrderDTO e0 = (ga0 != null ? ga0.peek() : null);
+              if (e0 == null) {
+                e0 = new com.diploma.avro.OrderDTO();
+              }
+              e0.customDecode(in);
+              a0.add(e0);
+            }
+          }
+          break;
+
+        default:
+          throw new java.io.IOException("Corrupt ResolvingDecoder.");
+        }
+      }
+    }
+  }
 }
 
 

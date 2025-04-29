@@ -11,7 +11,16 @@
         <module name="data-processor" />
         <module name="eureka-server" />
       </profile>
-      <profile name="Annotation profile for manufacture" enabled="true">
+      <profile name="Annotation profile for logistics" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="logistics" />
+      </profile>
+      <profile name="Annotation profile for orders" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -21,7 +30,6 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="manufacture" />
-        <module name="logistics" />
         <module name="orders" />
         <module name="sales" />
       </profile>

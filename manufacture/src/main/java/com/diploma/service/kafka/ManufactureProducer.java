@@ -25,6 +25,6 @@ public class ManufactureProducer {
                 .build();
 
         kafkaTemplate.send(TOPIC, wrapper);
-        System.out.println("Sent to Kafka: " + wrapper);
+        System.out.println("Sent to Kafka Manufacture: " + wrapper);
     }
 }

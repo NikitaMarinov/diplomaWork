@@ -28,17 +28,28 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
     private Long migration_id;
+    private String production_time;
 
     public Order() {
     }
 
-    public Order(Long id, Product product, Integer quantity, LocalDateTime production_end_time, OrderStatus status, Long migration_id) {
-        this.id = id;
-        this.product = product;
-        this.quantity = quantity;
-        this.production_end_time = production_end_time;
-        this.status = status;
+    public Order(String production_time, Long migration_id, OrderStatus status, LocalDateTime production_end_time, Integer quantity, Product product, Long id) {
+        this.production_time = production_time;
         this.migration_id = migration_id;
+        this.status = status;
+        this.production_end_time = production_end_time;
+        this.quantity = quantity;
+        this.product = product;
+        this.id = id;
+    }
+
+    public String getProduction_time() {
+        return production_time;
+    }
+
+    public Order setProduction_time(String production_time) {
+        this.production_time = production_time;
+        return this;
     }
 
     public Long getId() {

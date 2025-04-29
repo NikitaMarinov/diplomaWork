@@ -7,6 +7,7 @@ import com.diploma.model.Order;
 import com.diploma.avro.OrderDTO;
 import com.diploma.repository.ManufactureRepository;
 import com.diploma.repository.OrderRepository;
+import com.diploma.service.kafka.ManufactureProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.diploma.constants.OrderStatus.DELIVERY;
+import static org.hibernate.grammars.hql.HqlParser.CURRENT_TIMESTAMP;
 
 @Service
 public class ManufactureService {
@@ -30,6 +32,9 @@ public class ManufactureService {
     @Autowired
     private Mapper mapper;
 
+    @Autowired
+    ManufactureProducer manufactureProducer;
+
     @Transactional
     public void sentToManufacture(List<OrderDTO> ordersDtoList) {
         List<Order> orderList = mapper.toEntityList(ordersDtoList);
@@ -37,12 +42,13 @@ public class ManufactureService {
         Map<Long, Manufacture> manufactureMap = manufactureRepository.findAll()
                 .stream()
                 .collect(Collectors.toMap(manufacture -> manufacture.getProduct().getId(), manufacture -> manufacture));
-        Integer manufacturingTimePerObject;
+        int manufacturingTimePerObject;
 
         for (Order order : orderList) {
-            manufacturingTimePerObject = Integer.valueOf(manufactureMap.get(order.getProduct().getId()).getManufacturing_time());
+            manufacturingTimePerObject = Integer.parseInt(manufactureMap.get(order.getProduct().getId()).getManufacturing_time());
             order.setStatus(OrderStatus.IN_PRODUCTION);
             order.setProduction_end_time(LocalDateTime.now().plusSeconds((long) manufacturingTimePerObject * order.getQuantity()));
+            order.setProduction_time(String.valueOf((long) manufacturingTimePerObject * order.getQuantity()));
             order.setId(null);
         }
 
@@ -52,8 +58,9 @@ public class ManufactureService {
     public void sendOrdersToLogisticAndUpdateStatus() {
         List<Long> expiredOrders = orderRepository.findExpiredOrderIds();
         orderRepository.updateStatusByIds(DELIVERY, expiredOrders);
-        orderRepository.findOrdersByIds(expiredOrders);
+        List<Order> orders = orderRepository.findOrdersByIds(expiredOrders);
 
-
+        List<OrderDTO> ordersDtoList = mapper.toDtoList(orders);
+        manufactureProducer.sendManufacture(ordersDtoList);
     }
 }

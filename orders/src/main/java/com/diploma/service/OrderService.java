@@ -1,9 +1,9 @@
 package com.diploma.service;
 
+import com.diploma.avro.OrderDTO;
 import com.diploma.constants.OrderStatus;
 import com.diploma.mapper.Mapper;
 import com.diploma.model.Order;
-import com.diploma.avro.OrderDTO;
 import com.diploma.repository.OrderRepository;
 import com.diploma.service.kafka.OrderProducer;
 import org.springframework.beans.factory.annotation.Autowired;

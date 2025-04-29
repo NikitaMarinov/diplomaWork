@@ -14,6 +14,7 @@ CREATE TABLE t_order
     quantity        INT          NOT NULL,
     status          VARCHAR(255) NOT NULL,
     production_end_time TIMESTAMP NOT NULL,
+    production_time VARCHAR(255) NOT NULL,
     migration_id BIGINT NOT NULL,
     FOREIGN KEY (product_id) REFERENCES product (id)
 );

@@ -2,7 +2,7 @@
   {
     "type": "enum",
     "name": "OrderStatus",
-    "namespace": "com.diplome.avro",
+    "namespace": "com.diploma.avro",
     "symbols": [
       "OPEN",
       "IN_PRODUCTION",
@@ -14,27 +14,25 @@
   {
     "type": "record",
     "name": "OrderDTO",
-    "namespace": "com.diplome.avro",
+    "namespace": "com.diploma.avro",
     "fields": [
       { "name": "id", "type": ["null", "long"], "default": null },
       { "name": "productId", "type": "long" },
-      { "name": "price",  "type": "long" },
       { "name": "quantity", "type": "int" },
-      { "name": "orderDate", "type": { "type": "int", "logicalType": "date" } },
-      { "name": "customerName", "type": "string" },
-      { "name": "status", "type": "com.diplome.avro.OrderStatus" }
+      { "name": "status", "type": "com.diploma.avro.OrderStatus" },
+      { "name": "production_time", "type": ["null", "string"], "default": null  }
     ]
   },
   {
     "type": "record",
     "name": "OrderListWrapper",
-    "namespace": "com.diplome.avro",
+    "namespace": "com.diploma.avro",
     "fields": [
       {
         "name": "orders",
         "type": {
           "type": "array",
-          "items": "com.diplome.avro.OrderDTO"
+          "items": "com.diploma.avro.OrderDTO"
         }
       }
     ]

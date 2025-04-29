@@ -29,11 +29,12 @@ public class Order {
     private String customerName;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+    private String city;
 
     public Order() {
     }
 
-    public Order(Long id, Product product, Long price, Integer quantity, LocalDate orderDate, String customerName, OrderStatus status) {
+    public Order(Long id, Product product, Long price, Integer quantity, LocalDate orderDate, String customerName, OrderStatus status, String city) {
         this.id = id;
         this.product = product;
         this.price = price;
@@ -41,6 +42,7 @@ public class Order {
         this.orderDate = orderDate;
         this.customerName = customerName;
         this.status = status;
+        this.city = city;
     }
 
     public Long getId() {
@@ -54,6 +56,15 @@ public class Order {
 
     public Product getProduct() {
         return product;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public Order setCity(String city) {
+        this.city = city;
+        return this;
     }
 
     public Order setProduct(Product product) {
@@ -87,6 +98,8 @@ public class Order {
         this.orderDate = orderDate;
         return this;
     }
+
+
 
     public String getCustomerName() {
         return customerName;

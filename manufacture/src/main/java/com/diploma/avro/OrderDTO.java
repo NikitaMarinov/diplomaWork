@@ -5,21 +5,20 @@
  */
 package com.diploma.avro;
 
+import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
+import org.apache.avro.util.Utf8;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 8635769174278918639L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderDTO\",\"namespace\":\"com.diplome.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":\"long\"},{\"name\":\"price\",\"type\":\"long\"},{\"name\":\"quantity\",\"type\":\"int\"},{\"name\":\"orderDate\",\"type\":{\"type\":\"int\",\"logicalType\":\"date\"}},{\"name\":\"customerName\",\"type\":\"string\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"RETURNED\"]}}]}");
+  private static final long serialVersionUID = 8685590667074667192L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":\"long\"},{\"name\":\"quantity\",\"type\":\"int\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"RETURNED\"]}},{\"name\":\"production_time\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
-static {
-    MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.DateConversion());
-  }
 
   private static final BinaryMessageEncoder<OrderDTO> ENCODER =
       new BinaryMessageEncoder<OrderDTO>(MODEL$, SCHEMA$);
@@ -74,11 +73,9 @@ static {
 
    private java.lang.Long id;
    private long productId;
-   private long price;
    private int quantity;
-   private java.time.LocalDate orderDate;
-   private java.lang.CharSequence customerName;
    private com.diploma.avro.OrderStatus status;
+   private java.lang.CharSequence production_time;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -91,20 +88,16 @@ static {
    * All-args constructor.
    * @param id The new value for id
    * @param productId The new value for productId
-   * @param price The new value for price
    * @param quantity The new value for quantity
-   * @param orderDate The new value for orderDate
-   * @param customerName The new value for customerName
    * @param status The new value for status
+   * @param production_time The new value for production_time
    */
-  public OrderDTO(java.lang.Long id, java.lang.Long productId, java.lang.Long price, java.lang.Integer quantity, java.time.LocalDate orderDate, java.lang.CharSequence customerName, com.diploma.avro.OrderStatus status) {
+  public OrderDTO(java.lang.Long id, java.lang.Long productId, java.lang.Integer quantity, com.diploma.avro.OrderStatus status, java.lang.CharSequence production_time) {
     this.id = id;
     this.productId = productId;
-    this.price = price;
     this.quantity = quantity;
-    this.orderDate = orderDate;
-    this.customerName = customerName;
     this.status = status;
+    this.production_time = production_time;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -114,30 +107,11 @@ static {
     switch (field$) {
     case 0: return id;
     case 1: return productId;
-    case 2: return price;
-    case 3: return quantity;
-    case 4: return orderDate;
-    case 5: return customerName;
-    case 6: return status;
+    case 2: return quantity;
+    case 3: return status;
+    case 4: return production_time;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
-  }
-
-  private static final org.apache.avro.Conversion<?>[] conversions =
-      new org.apache.avro.Conversion<?>[] {
-      null,
-      null,
-      null,
-      null,
-      new org.apache.avro.data.TimeConversions.DateConversion(),
-      null,
-      null,
-      null
-  };
-
-  @Override
-  public org.apache.avro.Conversion<?> getConversion(int field) {
-    return conversions[field];
   }
 
   // Used by DatumReader.  Applications should not call.
@@ -146,11 +120,9 @@ static {
     switch (field$) {
     case 0: id = (java.lang.Long)value$; break;
     case 1: productId = (java.lang.Long)value$; break;
-    case 2: price = (java.lang.Long)value$; break;
-    case 3: quantity = (java.lang.Integer)value$; break;
-    case 4: orderDate = (java.time.LocalDate)value$; break;
-    case 5: customerName = (java.lang.CharSequence)value$; break;
-    case 6: status = (com.diploma.avro.OrderStatus)value$; break;
+    case 2: quantity = (java.lang.Integer)value$; break;
+    case 3: status = (com.diploma.avro.OrderStatus)value$; break;
+    case 4: production_time = (java.lang.CharSequence)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -190,23 +162,6 @@ static {
   }
 
   /**
-   * Gets the value of the 'price' field.
-   * @return The value of the 'price' field.
-   */
-  public long getPrice() {
-    return price;
-  }
-
-
-  /**
-   * Sets the value of the 'price' field.
-   * @param value the value to set.
-   */
-  public void setPrice(long value) {
-    this.price = value;
-  }
-
-  /**
    * Gets the value of the 'quantity' field.
    * @return The value of the 'quantity' field.
    */
@@ -224,40 +179,6 @@ static {
   }
 
   /**
-   * Gets the value of the 'orderDate' field.
-   * @return The value of the 'orderDate' field.
-   */
-  public java.time.LocalDate getOrderDate() {
-    return orderDate;
-  }
-
-
-  /**
-   * Sets the value of the 'orderDate' field.
-   * @param value the value to set.
-   */
-  public void setOrderDate(java.time.LocalDate value) {
-    this.orderDate = value;
-  }
-
-  /**
-   * Gets the value of the 'customerName' field.
-   * @return The value of the 'customerName' field.
-   */
-  public java.lang.CharSequence getCustomerName() {
-    return customerName;
-  }
-
-
-  /**
-   * Sets the value of the 'customerName' field.
-   * @param value the value to set.
-   */
-  public void setCustomerName(java.lang.CharSequence value) {
-    this.customerName = value;
-  }
-
-  /**
    * Gets the value of the 'status' field.
    * @return The value of the 'status' field.
    */
@@ -272,6 +193,23 @@ static {
    */
   public void setStatus(com.diploma.avro.OrderStatus value) {
     this.status = value;
+  }
+
+  /**
+   * Gets the value of the 'production_time' field.
+   * @return The value of the 'production_time' field.
+   */
+  public java.lang.CharSequence getProductionTime() {
+    return production_time;
+  }
+
+
+  /**
+   * Sets the value of the 'production_time' field.
+   * @param value the value to set.
+   */
+  public void setProductionTime(java.lang.CharSequence value) {
+    this.production_time = value;
   }
 
   /**
@@ -317,11 +255,9 @@ static {
 
     private java.lang.Long id;
     private long productId;
-    private long price;
     private int quantity;
-    private java.time.LocalDate orderDate;
-    private java.lang.CharSequence customerName;
     private com.diploma.avro.OrderStatus status;
+    private java.lang.CharSequence production_time;
 
     /** Creates a new Builder */
     private Builder() {
@@ -342,25 +278,17 @@ static {
         this.productId = data().deepCopy(fields()[1].schema(), other.productId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.price)) {
-        this.price = data().deepCopy(fields()[2].schema(), other.price);
+      if (isValidValue(fields()[2], other.quantity)) {
+        this.quantity = data().deepCopy(fields()[2].schema(), other.quantity);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.quantity)) {
-        this.quantity = data().deepCopy(fields()[3].schema(), other.quantity);
+      if (isValidValue(fields()[3], other.status)) {
+        this.status = data().deepCopy(fields()[3].schema(), other.status);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.orderDate)) {
-        this.orderDate = data().deepCopy(fields()[4].schema(), other.orderDate);
+      if (isValidValue(fields()[4], other.production_time)) {
+        this.production_time = data().deepCopy(fields()[4].schema(), other.production_time);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
-      }
-      if (isValidValue(fields()[5], other.customerName)) {
-        this.customerName = data().deepCopy(fields()[5].schema(), other.customerName);
-        fieldSetFlags()[5] = other.fieldSetFlags()[5];
-      }
-      if (isValidValue(fields()[6], other.status)) {
-        this.status = data().deepCopy(fields()[6].schema(), other.status);
-        fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
     }
 
@@ -378,25 +306,17 @@ static {
         this.productId = data().deepCopy(fields()[1].schema(), other.productId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.price)) {
-        this.price = data().deepCopy(fields()[2].schema(), other.price);
+      if (isValidValue(fields()[2], other.quantity)) {
+        this.quantity = data().deepCopy(fields()[2].schema(), other.quantity);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.quantity)) {
-        this.quantity = data().deepCopy(fields()[3].schema(), other.quantity);
+      if (isValidValue(fields()[3], other.status)) {
+        this.status = data().deepCopy(fields()[3].schema(), other.status);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.orderDate)) {
-        this.orderDate = data().deepCopy(fields()[4].schema(), other.orderDate);
+      if (isValidValue(fields()[4], other.production_time)) {
+        this.production_time = data().deepCopy(fields()[4].schema(), other.production_time);
         fieldSetFlags()[4] = true;
-      }
-      if (isValidValue(fields()[5], other.customerName)) {
-        this.customerName = data().deepCopy(fields()[5].schema(), other.customerName);
-        fieldSetFlags()[5] = true;
-      }
-      if (isValidValue(fields()[6], other.status)) {
-        this.status = data().deepCopy(fields()[6].schema(), other.status);
-        fieldSetFlags()[6] = true;
       }
     }
 
@@ -480,45 +400,6 @@ static {
     }
 
     /**
-      * Gets the value of the 'price' field.
-      * @return The value.
-      */
-    public long getPrice() {
-      return price;
-    }
-
-
-    /**
-      * Sets the value of the 'price' field.
-      * @param value The value of 'price'.
-      * @return This builder.
-      */
-    public com.diploma.avro.OrderDTO.Builder setPrice(long value) {
-      validate(fields()[2], value);
-      this.price = value;
-      fieldSetFlags()[2] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'price' field has been set.
-      * @return True if the 'price' field has been set, false otherwise.
-      */
-    public boolean hasPrice() {
-      return fieldSetFlags()[2];
-    }
-
-
-    /**
-      * Clears the value of the 'price' field.
-      * @return This builder.
-      */
-    public com.diploma.avro.OrderDTO.Builder clearPrice() {
-      fieldSetFlags()[2] = false;
-      return this;
-    }
-
-    /**
       * Gets the value of the 'quantity' field.
       * @return The value.
       */
@@ -533,9 +414,9 @@ static {
       * @return This builder.
       */
     public com.diploma.avro.OrderDTO.Builder setQuantity(int value) {
-      validate(fields()[3], value);
+      validate(fields()[2], value);
       this.quantity = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -544,7 +425,7 @@ static {
       * @return True if the 'quantity' field has been set, false otherwise.
       */
     public boolean hasQuantity() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[2];
     }
 
 
@@ -553,86 +434,7 @@ static {
       * @return This builder.
       */
     public com.diploma.avro.OrderDTO.Builder clearQuantity() {
-      fieldSetFlags()[3] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'orderDate' field.
-      * @return The value.
-      */
-    public java.time.LocalDate getOrderDate() {
-      return orderDate;
-    }
-
-
-    /**
-      * Sets the value of the 'orderDate' field.
-      * @param value The value of 'orderDate'.
-      * @return This builder.
-      */
-    public com.diploma.avro.OrderDTO.Builder setOrderDate(java.time.LocalDate value) {
-      validate(fields()[4], value);
-      this.orderDate = value;
-      fieldSetFlags()[4] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'orderDate' field has been set.
-      * @return True if the 'orderDate' field has been set, false otherwise.
-      */
-    public boolean hasOrderDate() {
-      return fieldSetFlags()[4];
-    }
-
-
-    /**
-      * Clears the value of the 'orderDate' field.
-      * @return This builder.
-      */
-    public com.diploma.avro.OrderDTO.Builder clearOrderDate() {
-      fieldSetFlags()[4] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'customerName' field.
-      * @return The value.
-      */
-    public java.lang.CharSequence getCustomerName() {
-      return customerName;
-    }
-
-
-    /**
-      * Sets the value of the 'customerName' field.
-      * @param value The value of 'customerName'.
-      * @return This builder.
-      */
-    public com.diploma.avro.OrderDTO.Builder setCustomerName(java.lang.CharSequence value) {
-      validate(fields()[5], value);
-      this.customerName = value;
-      fieldSetFlags()[5] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'customerName' field has been set.
-      * @return True if the 'customerName' field has been set, false otherwise.
-      */
-    public boolean hasCustomerName() {
-      return fieldSetFlags()[5];
-    }
-
-
-    /**
-      * Clears the value of the 'customerName' field.
-      * @return This builder.
-      */
-    public com.diploma.avro.OrderDTO.Builder clearCustomerName() {
-      customerName = null;
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -651,9 +453,9 @@ static {
       * @return This builder.
       */
     public com.diploma.avro.OrderDTO.Builder setStatus(com.diploma.avro.OrderStatus value) {
-      validate(fields()[6], value);
+      validate(fields()[3], value);
       this.status = value;
-      fieldSetFlags()[6] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -662,7 +464,7 @@ static {
       * @return True if the 'status' field has been set, false otherwise.
       */
     public boolean hasStatus() {
-      return fieldSetFlags()[6];
+      return fieldSetFlags()[3];
     }
 
 
@@ -672,7 +474,47 @@ static {
       */
     public com.diploma.avro.OrderDTO.Builder clearStatus() {
       status = null;
-      fieldSetFlags()[6] = false;
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'production_time' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getProductionTime() {
+      return production_time;
+    }
+
+
+    /**
+      * Sets the value of the 'production_time' field.
+      * @param value The value of 'production_time'.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder setProductionTime(java.lang.CharSequence value) {
+      validate(fields()[4], value);
+      this.production_time = value;
+      fieldSetFlags()[4] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'production_time' field has been set.
+      * @return True if the 'production_time' field has been set, false otherwise.
+      */
+    public boolean hasProductionTime() {
+      return fieldSetFlags()[4];
+    }
+
+
+    /**
+      * Clears the value of the 'production_time' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder clearProductionTime() {
+      production_time = null;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -683,11 +525,9 @@ static {
         OrderDTO record = new OrderDTO();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.Long) defaultValue(fields()[0]);
         record.productId = fieldSetFlags()[1] ? this.productId : (java.lang.Long) defaultValue(fields()[1]);
-        record.price = fieldSetFlags()[2] ? this.price : (java.lang.Long) defaultValue(fields()[2]);
-        record.quantity = fieldSetFlags()[3] ? this.quantity : (java.lang.Integer) defaultValue(fields()[3]);
-        record.orderDate = fieldSetFlags()[4] ? this.orderDate : (java.time.LocalDate) defaultValue(fields()[4]);
-        record.customerName = fieldSetFlags()[5] ? this.customerName : (java.lang.CharSequence) defaultValue(fields()[5]);
-        record.status = fieldSetFlags()[6] ? this.status : (com.diploma.avro.OrderStatus) defaultValue(fields()[6]);
+        record.quantity = fieldSetFlags()[2] ? this.quantity : (java.lang.Integer) defaultValue(fields()[2]);
+        record.status = fieldSetFlags()[3] ? this.status : (com.diploma.avro.OrderStatus) defaultValue(fields()[3]);
+        record.production_time = fieldSetFlags()[4] ? this.production_time : (java.lang.CharSequence) defaultValue(fields()[4]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -715,6 +555,99 @@ static {
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
+  @Override protected boolean hasCustomCoders() { return true; }
+
+  @Override public void customEncode(org.apache.avro.io.Encoder out)
+    throws java.io.IOException
+  {
+    if (this.id == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeLong(this.id);
+    }
+
+    out.writeLong(this.productId);
+
+    out.writeInt(this.quantity);
+
+    out.writeEnum(this.status.ordinal());
+
+    if (this.production_time == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.production_time);
+    }
+
+  }
+
+  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
+    throws java.io.IOException
+  {
+    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
+    if (fieldOrder == null) {
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.id = null;
+      } else {
+        this.id = in.readLong();
+      }
+
+      this.productId = in.readLong();
+
+      this.quantity = in.readInt();
+
+      this.status = com.diploma.avro.OrderStatus.values()[in.readEnum()];
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.production_time = null;
+      } else {
+        this.production_time = in.readString(this.production_time instanceof Utf8 ? (Utf8)this.production_time : null);
+      }
+
+    } else {
+      for (int i = 0; i < 5; i++) {
+        switch (fieldOrder[i].pos()) {
+        case 0:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.id = null;
+          } else {
+            this.id = in.readLong();
+          }
+          break;
+
+        case 1:
+          this.productId = in.readLong();
+          break;
+
+        case 2:
+          this.quantity = in.readInt();
+          break;
+
+        case 3:
+          this.status = com.diploma.avro.OrderStatus.values()[in.readEnum()];
+          break;
+
+        case 4:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.production_time = null;
+          } else {
+            this.production_time = in.readString(this.production_time instanceof Utf8 ? (Utf8)this.production_time : null);
+          }
+          break;
+
+        default:
+          throw new java.io.IOException("Corrupt ResolvingDecoder.");
+        }
+      }
+    }
+  }
 }
 
 

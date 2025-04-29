@@ -5,6 +5,7 @@ import com.diploma.model.Order;
 import com.diploma.model.Product;
 import com.diploma.repository.OrderRepository;
 import com.diploma.repository.ProductRepository;
+import com.github.javafaker.Faker;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 @Service
@@ -28,6 +30,9 @@ public class OrderGenerationService {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    Faker faker = new Faker(new Locale("en"));
+
 
     @Transactional
     public void generateOrders() {
@@ -69,6 +74,7 @@ public class OrderGenerationService {
         order.setOrderDate(LocalDate.now());
         order.setCustomerName("Customer " + random.nextInt(1000));
         order.setStatus(OrderStatus.OPEN);
+        order.setCity(faker.address().city());
 
         return order;
     }
