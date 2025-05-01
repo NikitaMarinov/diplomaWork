@@ -12,12 +12,17 @@ CREATE TABLE location (
                           country VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE transport (
+                           id SERIAL PRIMARY KEY,
+                           type VARCHAR(50) NOT NULL,
+                           speed INT NOT NULL,
+                           capacity INT NOT NULL
+);
+
 CREATE TABLE t_order (
                          id BIGINT AUTO_INCREMENT PRIMARY KEY,
                          product_id BIGINT,
-                         price DECIMAL(10, 2) NOT NULL,
                          quantity INT NOT NULL,
-                         order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
                          customer_name VARCHAR(255) NOT NULL,
                          status VARCHAR(255) NOT NULL,
                          location_id BIGINT,

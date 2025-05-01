@@ -24,31 +24,40 @@ public class Order {
     @JoinColumn(name = "product_id")
     private Product product;
     private Integer quantity;
-    private LocalDateTime production_end_time;
+    private LocalDateTime productionEndTime;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
     private Long migration_id;
-    private String production_time;
+    private String productionTime;
 
     public Order() {
     }
 
-    public Order(String production_time, Long migration_id, OrderStatus status, LocalDateTime production_end_time, Integer quantity, Product product, Long id) {
-        this.production_time = production_time;
-        this.migration_id = migration_id;
-        this.status = status;
-        this.production_end_time = production_end_time;
-        this.quantity = quantity;
-        this.product = product;
+    public Order(Long id, Product product, Integer quantity, LocalDateTime productionEndTime, OrderStatus status, Long migration_id, String productionTime) {
         this.id = id;
+        this.product = product;
+        this.quantity = quantity;
+        this.productionEndTime = productionEndTime;
+        this.status = status;
+        this.migration_id = migration_id;
+        this.productionTime = productionTime;
     }
 
-    public String getProduction_time() {
-        return production_time;
+    public String getProductionTime() {
+        return productionTime;
     }
 
-    public Order setProduction_time(String production_time) {
-        this.production_time = production_time;
+    public Order setProductionTime(String productionTime) {
+        this.productionTime = productionTime;
+        return this;
+    }
+
+    public LocalDateTime getProductionEndTime() {
+        return productionEndTime;
+    }
+
+    public Order setProductionEndTime(LocalDateTime productionEndTime) {
+        this.productionEndTime = productionEndTime;
         return this;
     }
 
@@ -79,14 +88,7 @@ public class Order {
         return this;
     }
 
-    public LocalDateTime getProduction_end_time() {
-        return production_end_time;
-    }
 
-    public Order setProduction_end_time(LocalDateTime production_end_time) {
-        this.production_end_time = production_end_time;
-        return this;
-    }
 
     public OrderStatus getStatus() {
         return status;
@@ -104,5 +106,18 @@ public class Order {
     public Order setMigration_id(Long migration_id) {
         this.migration_id = migration_id;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", product=" + product +
+                ", quantity=" + quantity +
+                ", productionEndTime=" + productionEndTime +
+                ", status=" + status +
+                ", migration_id=" + migration_id +
+                ", productionTime='" + productionTime + '\'' +
+                '}';
     }
 }

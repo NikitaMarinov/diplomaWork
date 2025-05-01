@@ -22,4 +22,8 @@ public interface Mapper {
     List<OrderDTO> toDtoList(List<Order> orders);
 
     List<Order> toEntityList(List<OrderDTO> orderDTOs);
+
+    default String map(CharSequence value) {
+        return value == null ? null : value.toString();
+    }
 }

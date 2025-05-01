@@ -20,7 +20,7 @@
       { "name": "productId", "type": "long" },
       { "name": "quantity", "type": "int" },
       { "name": "status", "type": "com.diploma.avro.OrderStatus" },
-      { "name": "production_time", "type": ["null", "string"], "default": null  }
+      { "name": "productionTime", "type": ["null", "string"], "default": null  }
     ]
   },
   {

@@ -12,16 +12,15 @@ import java.util.List;
 public interface Mapper {
 
     @Mapping(source = "product.id", target = "productId")
+    @Mapping(source = "location.id", target = "locationId")
     OrderDTO toDto(Order order);
 
     @Mapping(source = "productId", target = "product.id")
-    @Mapping(target = "city", source = "city",  qualifiedByName = "charSequenceToString")
-    @Mapping(target = "customerName", source = "customerName", qualifiedByName = "charSequenceToString")
+    @Mapping(source = "locationId", target = "location.id")
     Order toEntity(OrderDTO orderDTO);
 
-    @Named("charSequenceToString")
-    default String charSequenceToString(CharSequence value) {
-        return value != null ? value.toString() : null;
+    default String map(CharSequence value) {
+        return value == null ? null : value.toString();
     }
 
     List<OrderDTO> toDtoList(List<Order> orders);

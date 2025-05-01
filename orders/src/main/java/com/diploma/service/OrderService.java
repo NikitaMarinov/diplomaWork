@@ -34,4 +34,12 @@ public class OrderService {
 
         orderRepository.updateStatusByIds(OrderStatus.IN_PRODUCTION, ordersId);
     }
+
+    @Transactional
+    public void changeStatusToManufacture(List<OrderDTO> orders) {
+        List<Long> ordersId = orders.stream().map(OrderDTO::getId).toList();
+
+        orderRepository.updateStatusByIds(OrderStatus.DELIVERY, ordersId);
+
+    }
 }

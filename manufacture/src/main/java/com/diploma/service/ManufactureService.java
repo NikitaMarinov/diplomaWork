@@ -1,10 +1,10 @@
 package com.diploma.service;
 
+import com.diploma.avro.OrderDTO;
 import com.diploma.constants.OrderStatus;
 import com.diploma.mapper.Mapper;
 import com.diploma.model.Manufacture;
 import com.diploma.model.Order;
-import com.diploma.avro.OrderDTO;
 import com.diploma.repository.ManufactureRepository;
 import com.diploma.repository.OrderRepository;
 import com.diploma.service.kafka.ManufactureProducer;
@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.diploma.constants.OrderStatus.DELIVERY;
-import static org.hibernate.grammars.hql.HqlParser.CURRENT_TIMESTAMP;
 
 @Service
 public class ManufactureService {
@@ -47,8 +46,8 @@ public class ManufactureService {
         for (Order order : orderList) {
             manufacturingTimePerObject = Integer.parseInt(manufactureMap.get(order.getProduct().getId()).getManufacturing_time());
             order.setStatus(OrderStatus.IN_PRODUCTION);
-            order.setProduction_end_time(LocalDateTime.now().plusSeconds((long) manufacturingTimePerObject * order.getQuantity()));
-            order.setProduction_time(String.valueOf((long) manufacturingTimePerObject * order.getQuantity()));
+            order.setProductionEndTime(LocalDateTime.now().plusSeconds(((long) manufacturingTimePerObject * order.getQuantity()) / 10000)); // TODO ПОТОМУ УБРАТЬ ОДИН НОЛЬ!!!!!
+            order.setProductionTime(String.valueOf((long) manufacturingTimePerObject * order.getQuantity()));
             order.setId(null);
         }
 
@@ -59,8 +58,8 @@ public class ManufactureService {
         List<Long> expiredOrders = orderRepository.findExpiredOrderIds();
         orderRepository.updateStatusByIds(DELIVERY, expiredOrders);
         List<Order> orders = orderRepository.findOrdersByIds(expiredOrders);
-
         List<OrderDTO> ordersDtoList = mapper.toDtoList(orders);
+
         manufactureProducer.sendManufacture(ordersDtoList);
     }
 }

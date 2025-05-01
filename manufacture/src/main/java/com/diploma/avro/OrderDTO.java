@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 8685590667074667192L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":\"long\"},{\"name\":\"quantity\",\"type\":\"int\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"RETURNED\"]}},{\"name\":\"production_time\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
+  private static final long serialVersionUID = 5658823457464650798L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":\"long\"},{\"name\":\"quantity\",\"type\":\"int\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"RETURNED\"]}},{\"name\":\"productionTime\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -75,7 +75,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
    private long productId;
    private int quantity;
    private com.diploma.avro.OrderStatus status;
-   private java.lang.CharSequence production_time;
+   private java.lang.CharSequence productionTime;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -90,14 +90,14 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
    * @param productId The new value for productId
    * @param quantity The new value for quantity
    * @param status The new value for status
-   * @param production_time The new value for production_time
+   * @param productionTime The new value for productionTime
    */
-  public OrderDTO(java.lang.Long id, java.lang.Long productId, java.lang.Integer quantity, com.diploma.avro.OrderStatus status, java.lang.CharSequence production_time) {
+  public OrderDTO(java.lang.Long id, java.lang.Long productId, java.lang.Integer quantity, com.diploma.avro.OrderStatus status, java.lang.CharSequence productionTime) {
     this.id = id;
     this.productId = productId;
     this.quantity = quantity;
     this.status = status;
-    this.production_time = production_time;
+    this.productionTime = productionTime;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -109,7 +109,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     case 1: return productId;
     case 2: return quantity;
     case 3: return status;
-    case 4: return production_time;
+    case 4: return productionTime;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -122,7 +122,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     case 1: productId = (java.lang.Long)value$; break;
     case 2: quantity = (java.lang.Integer)value$; break;
     case 3: status = (com.diploma.avro.OrderStatus)value$; break;
-    case 4: production_time = (java.lang.CharSequence)value$; break;
+    case 4: productionTime = (java.lang.CharSequence)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -196,20 +196,20 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   /**
-   * Gets the value of the 'production_time' field.
-   * @return The value of the 'production_time' field.
+   * Gets the value of the 'productionTime' field.
+   * @return The value of the 'productionTime' field.
    */
   public java.lang.CharSequence getProductionTime() {
-    return production_time;
+    return productionTime;
   }
 
 
   /**
-   * Sets the value of the 'production_time' field.
+   * Sets the value of the 'productionTime' field.
    * @param value the value to set.
    */
   public void setProductionTime(java.lang.CharSequence value) {
-    this.production_time = value;
+    this.productionTime = value;
   }
 
   /**
@@ -257,7 +257,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     private long productId;
     private int quantity;
     private com.diploma.avro.OrderStatus status;
-    private java.lang.CharSequence production_time;
+    private java.lang.CharSequence productionTime;
 
     /** Creates a new Builder */
     private Builder() {
@@ -286,8 +286,8 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         this.status = data().deepCopy(fields()[3].schema(), other.status);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.production_time)) {
-        this.production_time = data().deepCopy(fields()[4].schema(), other.production_time);
+      if (isValidValue(fields()[4], other.productionTime)) {
+        this.productionTime = data().deepCopy(fields()[4].schema(), other.productionTime);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
     }
@@ -314,8 +314,8 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         this.status = data().deepCopy(fields()[3].schema(), other.status);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.production_time)) {
-        this.production_time = data().deepCopy(fields()[4].schema(), other.production_time);
+      if (isValidValue(fields()[4], other.productionTime)) {
+        this.productionTime = data().deepCopy(fields()[4].schema(), other.productionTime);
         fieldSetFlags()[4] = true;
       }
     }
@@ -479,29 +479,29 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     }
 
     /**
-      * Gets the value of the 'production_time' field.
+      * Gets the value of the 'productionTime' field.
       * @return The value.
       */
     public java.lang.CharSequence getProductionTime() {
-      return production_time;
+      return productionTime;
     }
 
 
     /**
-      * Sets the value of the 'production_time' field.
-      * @param value The value of 'production_time'.
+      * Sets the value of the 'productionTime' field.
+      * @param value The value of 'productionTime'.
       * @return This builder.
       */
     public com.diploma.avro.OrderDTO.Builder setProductionTime(java.lang.CharSequence value) {
       validate(fields()[4], value);
-      this.production_time = value;
+      this.productionTime = value;
       fieldSetFlags()[4] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'production_time' field has been set.
-      * @return True if the 'production_time' field has been set, false otherwise.
+      * Checks whether the 'productionTime' field has been set.
+      * @return True if the 'productionTime' field has been set, false otherwise.
       */
     public boolean hasProductionTime() {
       return fieldSetFlags()[4];
@@ -509,11 +509,11 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
 
 
     /**
-      * Clears the value of the 'production_time' field.
+      * Clears the value of the 'productionTime' field.
       * @return This builder.
       */
     public com.diploma.avro.OrderDTO.Builder clearProductionTime() {
-      production_time = null;
+      productionTime = null;
       fieldSetFlags()[4] = false;
       return this;
     }
@@ -527,7 +527,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         record.productId = fieldSetFlags()[1] ? this.productId : (java.lang.Long) defaultValue(fields()[1]);
         record.quantity = fieldSetFlags()[2] ? this.quantity : (java.lang.Integer) defaultValue(fields()[2]);
         record.status = fieldSetFlags()[3] ? this.status : (com.diploma.avro.OrderStatus) defaultValue(fields()[3]);
-        record.production_time = fieldSetFlags()[4] ? this.production_time : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.productionTime = fieldSetFlags()[4] ? this.productionTime : (java.lang.CharSequence) defaultValue(fields()[4]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -574,12 +574,12 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
 
     out.writeEnum(this.status.ordinal());
 
-    if (this.production_time == null) {
+    if (this.productionTime == null) {
       out.writeIndex(0);
       out.writeNull();
     } else {
       out.writeIndex(1);
-      out.writeString(this.production_time);
+      out.writeString(this.productionTime);
     }
 
   }
@@ -604,9 +604,9 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
 
       if (in.readIndex() != 1) {
         in.readNull();
-        this.production_time = null;
+        this.productionTime = null;
       } else {
-        this.production_time = in.readString(this.production_time instanceof Utf8 ? (Utf8)this.production_time : null);
+        this.productionTime = in.readString(this.productionTime instanceof Utf8 ? (Utf8)this.productionTime : null);
       }
 
     } else {
@@ -636,9 +636,9 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         case 4:
           if (in.readIndex() != 1) {
             in.readNull();
-            this.production_time = null;
+            this.productionTime = null;
           } else {
-            this.production_time = in.readString(this.production_time instanceof Utf8 ? (Utf8)this.production_time : null);
+            this.productionTime = in.readString(this.productionTime instanceof Utf8 ? (Utf8)this.productionTime : null);
           }
           break;
 

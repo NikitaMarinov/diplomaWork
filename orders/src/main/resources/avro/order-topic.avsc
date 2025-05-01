@@ -17,12 +17,12 @@
     "namespace": "com.diploma.avro",
     "fields": [
       { "name": "id", "type": ["null", "long"], "default": null },
-      { "name": "productId", "type": "long" },
-      { "name": "price",  "type": "long" },
-      { "name": "quantity", "type": "int" },
-      { "name": "orderDate", "type": { "type": "int", "logicalType": "date" } },
-      { "name": "customerName", "type": "string" },
-      { "name": "city", "type": "string" },
+      { "name": "productId", "type": ["null", "long"], "default": null},
+      { "name": "locationId", "type": ["null", "long"], "default": null },
+      { "name": "price",  "type": ["null", "long"], "default": null},
+      { "name": "quantity", "type": ["null", "int"], "default": null },
+      { "name": "orderDate", "type": ["null", { "type": "int", "logicalType": "date" }], "default": null },
+      { "name": "customerName", "type": ["null", "string"], "default": null },
       { "name": "status", "type": "com.diploma.avro.OrderStatus" },
       { "name": "production_time", "type": ["null", "string"], "default": null  }
     ]

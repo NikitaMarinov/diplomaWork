@@ -1,8 +1,10 @@
 package com.diploma.service;
 
 import com.diploma.constants.OrderStatus;
+import com.diploma.model.Location;
 import com.diploma.model.Order;
 import com.diploma.model.Product;
+import com.diploma.repository.LocationRepository;
 import com.diploma.repository.OrderRepository;
 import com.diploma.repository.ProductRepository;
 import com.github.javafaker.Faker;
@@ -31,13 +33,20 @@ public class OrderGenerationService {
     @Autowired
     private OrderRepository orderRepository;
 
-    Faker faker = new Faker(new Locale("en"));
+    @Autowired
+    private LocationRepository locationRepository;
 
+    Faker faker = new Faker(new Locale("en"));
 
     @Transactional
     public void generateOrders() {
         List<Product> products = productRepository.findAll();
         if (products.isEmpty()) {
+            System.out.println("Products DB is empty!");
+            return;
+        }
+        List<Location> locations = locationRepository.findAll();
+        if (locations.isEmpty()) {
             System.out.println("Products DB is empty!");
             return;
         }
@@ -47,7 +56,9 @@ public class OrderGenerationService {
 
         for (int i = 0; i < quantitySize; i++) {
             Product randomProduct = products.get(random.nextInt(products.size()));
-            Order order = getRandomOrder(randomProduct, random);
+            Location randomLocation = locations.get(random.nextInt(locations.size()));
+
+            Order order = getRandomOrder(randomProduct, randomLocation, random);
 
             ordersBatch.add(order);
 
@@ -63,8 +74,8 @@ public class OrderGenerationService {
         }
     }
 
-    private Order getRandomOrder(Product randomProduct, Random random) {
-        int quantity = random.nextInt(10) + 1;
+    private Order getRandomOrder(Product randomProduct,Location randomLocation, Random random) {
+        int quantity = (random.nextInt(100) + 1) * 1000;
         Long totalPrice = randomProduct.getPrice() * quantity;
 
         Order order = new Order();
@@ -72,9 +83,9 @@ public class OrderGenerationService {
         order.setPrice(totalPrice);
         order.setQuantity(quantity);
         order.setOrderDate(LocalDate.now());
-        order.setCustomerName("Customer " + random.nextInt(1000));
+        order.setCustomerName(faker.name().fullName());
         order.setStatus(OrderStatus.OPEN);
-        order.setCity(faker.address().city());
+        order.setLocation(randomLocation);
 
         return order;
     }

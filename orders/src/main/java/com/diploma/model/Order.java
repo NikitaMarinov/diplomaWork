@@ -23,26 +23,28 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
     private Long price;
     private Integer quantity;
     private LocalDate orderDate;
     private String customerName;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
-    private String city;
 
     public Order() {
     }
 
-    public Order(Long id, Product product, Long price, Integer quantity, LocalDate orderDate, String customerName, OrderStatus status, String city) {
+    public Order(Long id, Product product, Location location, Long price, Integer quantity, LocalDate orderDate, String customerName, OrderStatus status) {
         this.id = id;
         this.product = product;
+        this.location = location;
         this.price = price;
         this.quantity = quantity;
         this.orderDate = orderDate;
         this.customerName = customerName;
         this.status = status;
-        this.city = city;
     }
 
     public Long getId() {
@@ -58,12 +60,12 @@ public class Order {
         return product;
     }
 
-    public String getCity() {
-        return city;
+    public Location getLocation() {
+        return location;
     }
 
-    public Order setCity(String city) {
-        this.city = city;
+    public Order setLocation(Location location) {
+        this.location = location;
         return this;
     }
 
