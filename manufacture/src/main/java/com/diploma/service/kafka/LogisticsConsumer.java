@@ -7,14 +7,12 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class OrderConsumer {
-
+public class LogisticsConsumer {
     @Autowired
     private ManufactureService manufactureService;
 
-    @KafkaListener(topics = "${kafka.order-topic}", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "${kafka.logistics-topic}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenOrder(OrderListWrapper orderListWrapper) {
-        manufactureService.sentToManufacture(orderListWrapper.getOrders());
+        manufactureService.sentToSales(orderListWrapper.getOrders());
     }
-
 }

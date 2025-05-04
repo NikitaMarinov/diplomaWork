@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 2148897391236476313L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"locationId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"quantity\",\"type\":[\"null\",\"int\"],\"default\":null},{\"name\":\"customerName\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"RETURNED\"]}}]}");
+  private static final long serialVersionUID = -5874399459108487988L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"locationId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"transportId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"quantity\",\"type\":[\"null\",\"int\"],\"default\":null},{\"name\":\"customerName\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"SOLD\",\"RETURNED\"]}},{\"name\":\"deliveryDuration\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -74,9 +74,11 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
    private java.lang.Long id;
    private java.lang.Long productId;
    private java.lang.Long locationId;
+   private java.lang.Long transportId;
    private java.lang.Integer quantity;
    private java.lang.CharSequence customerName;
    private com.diploma.avro.OrderStatus status;
+   private java.lang.CharSequence deliveryDuration;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -90,17 +92,21 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
    * @param id The new value for id
    * @param productId The new value for productId
    * @param locationId The new value for locationId
+   * @param transportId The new value for transportId
    * @param quantity The new value for quantity
    * @param customerName The new value for customerName
    * @param status The new value for status
+   * @param deliveryDuration The new value for deliveryDuration
    */
-  public OrderDTO(java.lang.Long id, java.lang.Long productId, java.lang.Long locationId, java.lang.Integer quantity, java.lang.CharSequence customerName, com.diploma.avro.OrderStatus status) {
+  public OrderDTO(java.lang.Long id, java.lang.Long productId, java.lang.Long locationId, java.lang.Long transportId, java.lang.Integer quantity, java.lang.CharSequence customerName, com.diploma.avro.OrderStatus status, java.lang.CharSequence deliveryDuration) {
     this.id = id;
     this.productId = productId;
     this.locationId = locationId;
+    this.transportId = transportId;
     this.quantity = quantity;
     this.customerName = customerName;
     this.status = status;
+    this.deliveryDuration = deliveryDuration;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -111,9 +117,11 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     case 0: return id;
     case 1: return productId;
     case 2: return locationId;
-    case 3: return quantity;
-    case 4: return customerName;
-    case 5: return status;
+    case 3: return transportId;
+    case 4: return quantity;
+    case 5: return customerName;
+    case 6: return status;
+    case 7: return deliveryDuration;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -125,9 +133,11 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     case 0: id = (java.lang.Long)value$; break;
     case 1: productId = (java.lang.Long)value$; break;
     case 2: locationId = (java.lang.Long)value$; break;
-    case 3: quantity = (java.lang.Integer)value$; break;
-    case 4: customerName = (java.lang.CharSequence)value$; break;
-    case 5: status = (com.diploma.avro.OrderStatus)value$; break;
+    case 3: transportId = (java.lang.Long)value$; break;
+    case 4: quantity = (java.lang.Integer)value$; break;
+    case 5: customerName = (java.lang.CharSequence)value$; break;
+    case 6: status = (com.diploma.avro.OrderStatus)value$; break;
+    case 7: deliveryDuration = (java.lang.CharSequence)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -184,6 +194,23 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   /**
+   * Gets the value of the 'transportId' field.
+   * @return The value of the 'transportId' field.
+   */
+  public java.lang.Long getTransportId() {
+    return transportId;
+  }
+
+
+  /**
+   * Sets the value of the 'transportId' field.
+   * @param value the value to set.
+   */
+  public void setTransportId(java.lang.Long value) {
+    this.transportId = value;
+  }
+
+  /**
    * Gets the value of the 'quantity' field.
    * @return The value of the 'quantity' field.
    */
@@ -235,6 +262,23 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   /**
+   * Gets the value of the 'deliveryDuration' field.
+   * @return The value of the 'deliveryDuration' field.
+   */
+  public java.lang.CharSequence getDeliveryDuration() {
+    return deliveryDuration;
+  }
+
+
+  /**
+   * Sets the value of the 'deliveryDuration' field.
+   * @param value the value to set.
+   */
+  public void setDeliveryDuration(java.lang.CharSequence value) {
+    this.deliveryDuration = value;
+  }
+
+  /**
    * Creates a new OrderDTO RecordBuilder.
    * @return A new OrderDTO RecordBuilder
    */
@@ -278,9 +322,11 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     private java.lang.Long id;
     private java.lang.Long productId;
     private java.lang.Long locationId;
+    private java.lang.Long transportId;
     private java.lang.Integer quantity;
     private java.lang.CharSequence customerName;
     private com.diploma.avro.OrderStatus status;
+    private java.lang.CharSequence deliveryDuration;
 
     /** Creates a new Builder */
     private Builder() {
@@ -305,17 +351,25 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         this.locationId = data().deepCopy(fields()[2].schema(), other.locationId);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.quantity)) {
-        this.quantity = data().deepCopy(fields()[3].schema(), other.quantity);
+      if (isValidValue(fields()[3], other.transportId)) {
+        this.transportId = data().deepCopy(fields()[3].schema(), other.transportId);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.customerName)) {
-        this.customerName = data().deepCopy(fields()[4].schema(), other.customerName);
+      if (isValidValue(fields()[4], other.quantity)) {
+        this.quantity = data().deepCopy(fields()[4].schema(), other.quantity);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
-      if (isValidValue(fields()[5], other.status)) {
-        this.status = data().deepCopy(fields()[5].schema(), other.status);
+      if (isValidValue(fields()[5], other.customerName)) {
+        this.customerName = data().deepCopy(fields()[5].schema(), other.customerName);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
+      }
+      if (isValidValue(fields()[6], other.status)) {
+        this.status = data().deepCopy(fields()[6].schema(), other.status);
+        fieldSetFlags()[6] = other.fieldSetFlags()[6];
+      }
+      if (isValidValue(fields()[7], other.deliveryDuration)) {
+        this.deliveryDuration = data().deepCopy(fields()[7].schema(), other.deliveryDuration);
+        fieldSetFlags()[7] = other.fieldSetFlags()[7];
       }
     }
 
@@ -337,17 +391,25 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         this.locationId = data().deepCopy(fields()[2].schema(), other.locationId);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.quantity)) {
-        this.quantity = data().deepCopy(fields()[3].schema(), other.quantity);
+      if (isValidValue(fields()[3], other.transportId)) {
+        this.transportId = data().deepCopy(fields()[3].schema(), other.transportId);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.customerName)) {
-        this.customerName = data().deepCopy(fields()[4].schema(), other.customerName);
+      if (isValidValue(fields()[4], other.quantity)) {
+        this.quantity = data().deepCopy(fields()[4].schema(), other.quantity);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.status)) {
-        this.status = data().deepCopy(fields()[5].schema(), other.status);
+      if (isValidValue(fields()[5], other.customerName)) {
+        this.customerName = data().deepCopy(fields()[5].schema(), other.customerName);
         fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.status)) {
+        this.status = data().deepCopy(fields()[6].schema(), other.status);
+        fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.deliveryDuration)) {
+        this.deliveryDuration = data().deepCopy(fields()[7].schema(), other.deliveryDuration);
+        fieldSetFlags()[7] = true;
       }
     }
 
@@ -472,6 +534,46 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     }
 
     /**
+      * Gets the value of the 'transportId' field.
+      * @return The value.
+      */
+    public java.lang.Long getTransportId() {
+      return transportId;
+    }
+
+
+    /**
+      * Sets the value of the 'transportId' field.
+      * @param value The value of 'transportId'.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder setTransportId(java.lang.Long value) {
+      validate(fields()[3], value);
+      this.transportId = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'transportId' field has been set.
+      * @return True if the 'transportId' field has been set, false otherwise.
+      */
+    public boolean hasTransportId() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'transportId' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder clearTransportId() {
+      transportId = null;
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'quantity' field.
       * @return The value.
       */
@@ -486,9 +588,9 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return This builder.
       */
     public com.diploma.avro.OrderDTO.Builder setQuantity(java.lang.Integer value) {
-      validate(fields()[3], value);
+      validate(fields()[4], value);
       this.quantity = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -497,7 +599,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return True if the 'quantity' field has been set, false otherwise.
       */
     public boolean hasQuantity() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[4];
     }
 
 
@@ -507,7 +609,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       */
     public com.diploma.avro.OrderDTO.Builder clearQuantity() {
       quantity = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -526,9 +628,9 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return This builder.
       */
     public com.diploma.avro.OrderDTO.Builder setCustomerName(java.lang.CharSequence value) {
-      validate(fields()[4], value);
+      validate(fields()[5], value);
       this.customerName = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[5] = true;
       return this;
     }
 
@@ -537,7 +639,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return True if the 'customerName' field has been set, false otherwise.
       */
     public boolean hasCustomerName() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[5];
     }
 
 
@@ -547,7 +649,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       */
     public com.diploma.avro.OrderDTO.Builder clearCustomerName() {
       customerName = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -566,9 +668,9 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return This builder.
       */
     public com.diploma.avro.OrderDTO.Builder setStatus(com.diploma.avro.OrderStatus value) {
-      validate(fields()[5], value);
+      validate(fields()[6], value);
       this.status = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[6] = true;
       return this;
     }
 
@@ -577,7 +679,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return True if the 'status' field has been set, false otherwise.
       */
     public boolean hasStatus() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[6];
     }
 
 
@@ -587,7 +689,47 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       */
     public com.diploma.avro.OrderDTO.Builder clearStatus() {
       status = null;
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[6] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'deliveryDuration' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getDeliveryDuration() {
+      return deliveryDuration;
+    }
+
+
+    /**
+      * Sets the value of the 'deliveryDuration' field.
+      * @param value The value of 'deliveryDuration'.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder setDeliveryDuration(java.lang.CharSequence value) {
+      validate(fields()[7], value);
+      this.deliveryDuration = value;
+      fieldSetFlags()[7] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'deliveryDuration' field has been set.
+      * @return True if the 'deliveryDuration' field has been set, false otherwise.
+      */
+    public boolean hasDeliveryDuration() {
+      return fieldSetFlags()[7];
+    }
+
+
+    /**
+      * Clears the value of the 'deliveryDuration' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder clearDeliveryDuration() {
+      deliveryDuration = null;
+      fieldSetFlags()[7] = false;
       return this;
     }
 
@@ -599,9 +741,11 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.Long) defaultValue(fields()[0]);
         record.productId = fieldSetFlags()[1] ? this.productId : (java.lang.Long) defaultValue(fields()[1]);
         record.locationId = fieldSetFlags()[2] ? this.locationId : (java.lang.Long) defaultValue(fields()[2]);
-        record.quantity = fieldSetFlags()[3] ? this.quantity : (java.lang.Integer) defaultValue(fields()[3]);
-        record.customerName = fieldSetFlags()[4] ? this.customerName : (java.lang.CharSequence) defaultValue(fields()[4]);
-        record.status = fieldSetFlags()[5] ? this.status : (com.diploma.avro.OrderStatus) defaultValue(fields()[5]);
+        record.transportId = fieldSetFlags()[3] ? this.transportId : (java.lang.Long) defaultValue(fields()[3]);
+        record.quantity = fieldSetFlags()[4] ? this.quantity : (java.lang.Integer) defaultValue(fields()[4]);
+        record.customerName = fieldSetFlags()[5] ? this.customerName : (java.lang.CharSequence) defaultValue(fields()[5]);
+        record.status = fieldSetFlags()[6] ? this.status : (com.diploma.avro.OrderStatus) defaultValue(fields()[6]);
+        record.deliveryDuration = fieldSetFlags()[7] ? this.deliveryDuration : (java.lang.CharSequence) defaultValue(fields()[7]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -658,6 +802,14 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       out.writeLong(this.locationId);
     }
 
+    if (this.transportId == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeLong(this.transportId);
+    }
+
     if (this.quantity == null) {
       out.writeIndex(0);
       out.writeNull();
@@ -675,6 +827,14 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     }
 
     out.writeEnum(this.status.ordinal());
+
+    if (this.deliveryDuration == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.deliveryDuration);
+    }
 
   }
 
@@ -706,6 +866,13 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
 
       if (in.readIndex() != 1) {
         in.readNull();
+        this.transportId = null;
+      } else {
+        this.transportId = in.readLong();
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
         this.quantity = null;
       } else {
         this.quantity = in.readInt();
@@ -720,8 +887,15 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
 
       this.status = com.diploma.avro.OrderStatus.values()[in.readEnum()];
 
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.deliveryDuration = null;
+      } else {
+        this.deliveryDuration = in.readString(this.deliveryDuration instanceof Utf8 ? (Utf8)this.deliveryDuration : null);
+      }
+
     } else {
-      for (int i = 0; i < 6; i++) {
+      for (int i = 0; i < 8; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           if (in.readIndex() != 1) {
@@ -753,13 +927,22 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         case 3:
           if (in.readIndex() != 1) {
             in.readNull();
+            this.transportId = null;
+          } else {
+            this.transportId = in.readLong();
+          }
+          break;
+
+        case 4:
+          if (in.readIndex() != 1) {
+            in.readNull();
             this.quantity = null;
           } else {
             this.quantity = in.readInt();
           }
           break;
 
-        case 4:
+        case 5:
           if (in.readIndex() != 1) {
             in.readNull();
             this.customerName = null;
@@ -768,8 +951,17 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
           }
           break;
 
-        case 5:
+        case 6:
           this.status = com.diploma.avro.OrderStatus.values()[in.readEnum()];
+          break;
+
+        case 7:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.deliveryDuration = null;
+          } else {
+            this.deliveryDuration = in.readString(this.deliveryDuration instanceof Utf8 ? (Utf8)this.deliveryDuration : null);
+          }
           break;
 
         default:

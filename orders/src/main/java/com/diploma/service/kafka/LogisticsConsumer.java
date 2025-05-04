@@ -2,19 +2,19 @@ package com.diploma.service.kafka;
 
 import com.diploma.avro.OrderListWrapper;
 import com.diploma.service.ManufactureService;
+import com.diploma.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class OrderConsumer {
-
+public class LogisticsConsumer {
     @Autowired
-    private ManufactureService manufactureService;
+    private OrderService orderService;
 
-    @KafkaListener(topics = "${kafka.order-topic}", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "${kafka.logistics-topic}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenOrder(OrderListWrapper orderListWrapper) {
-        manufactureService.sentToManufacture(orderListWrapper.getOrders());
+        orderService.sentToSales(orderListWrapper.getOrders());
+        System.out.println(orderListWrapper.getOrders());
     }
-
 }

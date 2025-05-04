@@ -11,6 +11,10 @@ import com.diploma.model.dto.LocationDto;
 import com.diploma.repository.LocationRepository;
 import com.diploma.repository.OrderRepository;
 import com.diploma.repository.TransportRepository;
+import com.diploma.service.kafka.LogisticsProducer;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -20,7 +24,9 @@ import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import static com.diploma.constants.OrderStatus.DELIVERED;
 import static com.diploma.constants.OrderStatus.DELIVERY;
 
 @Service
@@ -44,41 +50,31 @@ public class LogisticsService {
     @Autowired
     Mapper mapper;
 
+    @Autowired
+    private LogisticsProducer logisticsProducer;
+
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Transactional
     public void applicationAcceptance(List<OrderDTO> orders) {
         List<Order> ordersList = mapper.toEntityList(orders);
-        List<Location> locationList = locationRepository.findAll();
-
-        List<Transport> transports = transportRepository.findAll()
-                .stream()
-                .sorted(Comparator.comparingLong(Transport::getLoadVolume))
-                .toList();
 
         for (Order order : ordersList) {
-            Transport suitableTransport = transports.stream()
-                    .filter(t -> t.getLoadVolume() >= order.getQuantity())
-                    .findFirst()
-                    .orElseThrow(() -> new RuntimeException("No suitable transport for order " + order.getId()));
-            order.setTransport(suitableTransport);
-        }
-        for (Order order : ordersList) {
-            Integer distanceToWarehouse = locationList.get((int) (order.getLocation().getId() - 1)).getDistanceToWarehouse();
-            String deliveryDuration = String.valueOf(distanceToWarehouse / order.getTransport().getSpeed());
-            order.setDeliveryTime(LocalDateTime.now().plusSeconds(Long.parseLong(deliveryDuration))); // TODO ПОТОМУ УБРАТЬ ОДИН НОЛЬ!!!!!
-            order.setDeliveryDuration(deliveryDuration);
             order.setMigrationId(order.getId());
             order.setStatus(OrderStatus.IN_PRODUCTION);
             order.setId(null);
+            order.setTransport(null);
         }
 
-        System.out.println("SAVE ORDERS----"+ ordersList.get(0).getMigrationId());
         orderRepository.saveAll(ordersList);
     }
 
     @Transactional
     public Location addNewLocation(LocationDto locationDto) throws LocationNotFoundException {
         Map<String, Double> cityLoc = geoService.getCityCoordinates(locationDto.getCity());
-        Map<String,Double> warLoc = geoService.getCityCoordinates(WAREHOUSE);
+        Map<String, Double> warLoc = geoService.getCityCoordinates(WAREHOUSE);
 
         double distance = geoService.distanceBetweenCities(warLoc.get("lat"), warLoc.get("lon"), cityLoc.get("lat"), cityLoc.get("lon"));
 
@@ -91,10 +87,81 @@ public class LogisticsService {
 
     @Transactional
     public void changeStatusToDelivery(List<OrderDTO> orders) {
-        List<Long> ordersId = orders.stream().map(OrderDTO::getId).toList();
+        List<Order> ordersList = mapper.toEntityList(orders);
+        List<Location> locationList = locationRepository.findAll();
 
-        orderRepository.updateStatusByIds(OrderStatus.DELIVERY, ordersId);
+        List<Transport> transports = transportRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparingLong(Transport::getLoadVolume))
+                .toList();
+        Map<Long, Location> locationMap = locationList.stream()
+                .collect(Collectors.toMap(Location::getId, location -> location));
+
+        for (Order order : ordersList) {
+            Transport suitableTransport = transports.stream()
+                    .filter(t -> t.getLoadVolume() >= order.getQuantity())
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("No suitable transport for order " + order.getId()));
+            order.setTransport(suitableTransport);
+            order.setLocation(locationMap.get(order.getLocation().getId()));
+        }
+
+        for (Order order : ordersList) {
+            Integer distanceToWarehouse = locationMap.get(order.getLocation().getId()).getDistanceToWarehouse();
+            String deliveryDuration = String.valueOf(distanceToWarehouse / order.getTransport().getSpeed());
+
+            order.setDeliveryTime(LocalDateTime.now().plusSeconds(Long.parseLong(deliveryDuration))); // TODO ПОТОМУ УБРАТЬ ОДИН НОЛЬ!!!!!
+            order.setDeliveryDuration(deliveryDuration);
+            order.setStatus(DELIVERY);
+            System.out.println("orderrrr"+order.toString());
+        }
+
+        updateAllByMigrationId(ordersList);
     }
 
+    @Transactional
+    public void updateAllByMigrationId(List<Order> orders) {
+        int batchSize = 1; // TODO INCREMENT BATCH SIZE
+        for (int i = 0; i < orders.size(); i++) {
+            Order order = orders.get(i);
+
+            String jpql = "UPDATE Order o SET " +
+                    "o.status = :status, " +
+                    "o.deliveryDuration = :deliveryDuration, " +
+                    "o.deliveryTime = :deliveryTime, " +
+                    "o.transport = :transport, " +
+                    "o.location = :location " +
+                    "WHERE o.migrationId = :migrationId";
+
+            Query query = entityManager.createQuery(jpql);
+            query.setParameter("status", order.getStatus());
+            query.setParameter("deliveryDuration", order.getDeliveryDuration());
+            query.setParameter("deliveryTime", order.getDeliveryTime());
+            query.setParameter("transport", order.getTransport());
+            query.setParameter("location", order.getLocation());
+            query.setParameter("migrationId", order.getMigrationId());
+            query.executeUpdate();
+            if (i % batchSize == 0) {
+                entityManager.flush();
+                entityManager.clear();
+            }
+        }
+    }
+
+
+    @Transactional
+    public void sendOrdersToSalesAndUpdateStatus() {
+        System.out.println("call this");
+        List<Long> expiredOrders = orderRepository.findExpiredOrderIds();
+        orderRepository.updateStatusByIds(DELIVERED, expiredOrders);
+        List<Order> orders = orderRepository.findOrdersByIds(expiredOrders);
+        if (!orders.isEmpty())
+            System.out.println("order----------" + orders.get(0).toString());
+        List<OrderDTO> ordersDtoList = mapper.toDtoList(orders);
+
+        logisticsProducer.sendLogistics(ordersDtoList);
+        if (!ordersDtoList.isEmpty())
+            System.out.println(ordersDtoList.get(0).toString());
+    }
 
 }

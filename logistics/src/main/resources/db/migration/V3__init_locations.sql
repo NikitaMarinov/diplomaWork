@@ -18,7 +18,7 @@ INSERT INTO location (id, city, country, distance_to_warehouse) VALUES
                                              (17, 'Riga', 'Latvia',1149),
                                              (18, 'Tallinn', 'Estonia',1406),
                                              (19, 'Oslo', 'Norway',1855),
-                                             (20, 'Athens', 'Greece',8757),
+                                             (20, 'Athens', 'Greece',875),
                                              (21, 'Zagreb', 'Croatia',993),
                                              (22, 'Sarajevo', 'Bosnia and Herzegovina',887),
                                              (23, 'Copenhagen', 'Denmark',1477),

@@ -41,4 +41,11 @@ public class OrderService {
 
         orderRepository.updateStatusByIds(OrderStatus.DELIVERY, ordersId);
     }
+
+    @Transactional
+    public void sentToSales(List<OrderDTO> orders) {
+        List<Long> ordersId = orders.stream().map(OrderDTO::getId).toList();
+
+        orderRepository.updateStatusByIds(OrderStatus.DELIVERED, ordersId);
+    }
 }

@@ -15,12 +15,14 @@ public interface Mapper {
 
     @Mapping(source = "product.id", target = "productId")
     @Mapping(source = "location.id", target = "locationId")
+    @Mapping(source = "transport.id", target = "transportId")
     @Mapping(source = "migrationId", target = "id")
     OrderDTO toDto(Order order);
 
     @Mapping(source = "productId", target = "product.id")
     @Mapping(source = "id", target = "migrationId")
     @Mapping(source = "locationId", target = "location.id")
+    @Mapping(source = "transportId", target = "transport.id")
     Order toEntity(OrderDTO orderDTO);
 
     List<OrderDTO> toDtoList(List<Order> orders);

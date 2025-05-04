@@ -62,4 +62,14 @@ public class Location {
         this.country = country;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", distanceToWarehouse=" + distanceToWarehouse +
+                '}';
+    }
 }

@@ -5,5 +5,6 @@ public enum OrderStatus {
     IN_PRODUCTION,
     DELIVERY,
     DELIVERED,
+    SOLD,
     RETURNED
 }

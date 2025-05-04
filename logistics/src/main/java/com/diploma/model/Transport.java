@@ -65,4 +65,14 @@ public class Transport {
         this.loadVolume = loadVolume;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Transport{" +
+                "id=" + id +
+                ", type=" + type +
+                ", speed=" + speed +
+                ", loadVolume=" + loadVolume +
+                '}';
+    }
 }

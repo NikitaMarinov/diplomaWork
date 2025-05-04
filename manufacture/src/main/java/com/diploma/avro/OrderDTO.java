@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 5658823457464650798L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":\"long\"},{\"name\":\"quantity\",\"type\":\"int\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"RETURNED\"]}},{\"name\":\"productionTime\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
+  private static final long serialVersionUID = -5981359842430252100L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":\"long\"},{\"name\":\"quantity\",\"type\":\"int\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"SOLD\",\"RETURNED\"]}},{\"name\":\"productionTime\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"locationId\",\"type\":[\"null\",\"long\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -76,6 +76,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
    private int quantity;
    private com.diploma.avro.OrderStatus status;
    private java.lang.CharSequence productionTime;
+   private java.lang.Long locationId;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -91,13 +92,15 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
    * @param quantity The new value for quantity
    * @param status The new value for status
    * @param productionTime The new value for productionTime
+   * @param locationId The new value for locationId
    */
-  public OrderDTO(java.lang.Long id, java.lang.Long productId, java.lang.Integer quantity, com.diploma.avro.OrderStatus status, java.lang.CharSequence productionTime) {
+  public OrderDTO(java.lang.Long id, java.lang.Long productId, java.lang.Integer quantity, com.diploma.avro.OrderStatus status, java.lang.CharSequence productionTime, java.lang.Long locationId) {
     this.id = id;
     this.productId = productId;
     this.quantity = quantity;
     this.status = status;
     this.productionTime = productionTime;
+    this.locationId = locationId;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -110,6 +113,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     case 2: return quantity;
     case 3: return status;
     case 4: return productionTime;
+    case 5: return locationId;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -123,6 +127,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     case 2: quantity = (java.lang.Integer)value$; break;
     case 3: status = (com.diploma.avro.OrderStatus)value$; break;
     case 4: productionTime = (java.lang.CharSequence)value$; break;
+    case 5: locationId = (java.lang.Long)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -213,6 +218,23 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   /**
+   * Gets the value of the 'locationId' field.
+   * @return The value of the 'locationId' field.
+   */
+  public java.lang.Long getLocationId() {
+    return locationId;
+  }
+
+
+  /**
+   * Sets the value of the 'locationId' field.
+   * @param value the value to set.
+   */
+  public void setLocationId(java.lang.Long value) {
+    this.locationId = value;
+  }
+
+  /**
    * Creates a new OrderDTO RecordBuilder.
    * @return A new OrderDTO RecordBuilder
    */
@@ -258,6 +280,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     private int quantity;
     private com.diploma.avro.OrderStatus status;
     private java.lang.CharSequence productionTime;
+    private java.lang.Long locationId;
 
     /** Creates a new Builder */
     private Builder() {
@@ -290,6 +313,10 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         this.productionTime = data().deepCopy(fields()[4].schema(), other.productionTime);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
+      if (isValidValue(fields()[5], other.locationId)) {
+        this.locationId = data().deepCopy(fields()[5].schema(), other.locationId);
+        fieldSetFlags()[5] = other.fieldSetFlags()[5];
+      }
     }
 
     /**
@@ -317,6 +344,10 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       if (isValidValue(fields()[4], other.productionTime)) {
         this.productionTime = data().deepCopy(fields()[4].schema(), other.productionTime);
         fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.locationId)) {
+        this.locationId = data().deepCopy(fields()[5].schema(), other.locationId);
+        fieldSetFlags()[5] = true;
       }
     }
 
@@ -518,6 +549,46 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       return this;
     }
 
+    /**
+      * Gets the value of the 'locationId' field.
+      * @return The value.
+      */
+    public java.lang.Long getLocationId() {
+      return locationId;
+    }
+
+
+    /**
+      * Sets the value of the 'locationId' field.
+      * @param value The value of 'locationId'.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder setLocationId(java.lang.Long value) {
+      validate(fields()[5], value);
+      this.locationId = value;
+      fieldSetFlags()[5] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'locationId' field has been set.
+      * @return True if the 'locationId' field has been set, false otherwise.
+      */
+    public boolean hasLocationId() {
+      return fieldSetFlags()[5];
+    }
+
+
+    /**
+      * Clears the value of the 'locationId' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder clearLocationId() {
+      locationId = null;
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public OrderDTO build() {
@@ -528,6 +599,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         record.quantity = fieldSetFlags()[2] ? this.quantity : (java.lang.Integer) defaultValue(fields()[2]);
         record.status = fieldSetFlags()[3] ? this.status : (com.diploma.avro.OrderStatus) defaultValue(fields()[3]);
         record.productionTime = fieldSetFlags()[4] ? this.productionTime : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.locationId = fieldSetFlags()[5] ? this.locationId : (java.lang.Long) defaultValue(fields()[5]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -582,6 +654,14 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       out.writeString(this.productionTime);
     }
 
+    if (this.locationId == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeLong(this.locationId);
+    }
+
   }
 
   @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
@@ -609,8 +689,15 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         this.productionTime = in.readString(this.productionTime instanceof Utf8 ? (Utf8)this.productionTime : null);
       }
 
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.locationId = null;
+      } else {
+        this.locationId = in.readLong();
+      }
+
     } else {
-      for (int i = 0; i < 5; i++) {
+      for (int i = 0; i < 6; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           if (in.readIndex() != 1) {
@@ -639,6 +726,15 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
             this.productionTime = null;
           } else {
             this.productionTime = in.readString(this.productionTime instanceof Utf8 ? (Utf8)this.productionTime : null);
+          }
+          break;
+
+        case 5:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.locationId = null;
+          } else {
+            this.locationId = in.readLong();
           }
           break;
 

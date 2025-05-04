@@ -1,6 +1,7 @@
 package com.diploma.model;
 
 import com.diploma.constants.OrderStatus;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -26,7 +27,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "location_id")
     private Location location;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "transport_id")
     private Transport transport;
     private Integer quantity;
@@ -141,5 +142,21 @@ public class Order {
     public Order setMigrationId(Long migrationId) {
         this.migrationId = migrationId;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", product=" + product +
+                ", location=" + location +
+                ", transport=" + transport +
+                ", quantity=" + quantity +
+                ", customerName='" + customerName + '\'' +
+                ", status=" + status +
+                ", deliveryTime=" + deliveryTime +
+                ", deliveryDuration='" + deliveryDuration + '\'' +
+                ", migrationId=" + migrationId +
+                '}';
     }
 }

@@ -29,11 +29,12 @@ public class Order {
     private OrderStatus status;
     private Long migration_id;
     private String productionTime;
+    private String locationId;
 
     public Order() {
     }
 
-    public Order(Long id, Product product, Integer quantity, LocalDateTime productionEndTime, OrderStatus status, Long migration_id, String productionTime) {
+    public Order(Long id, Product product, Integer quantity, LocalDateTime productionEndTime, OrderStatus status, Long migration_id, String productionTime, String locationId) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
@@ -41,6 +42,7 @@ public class Order {
         this.status = status;
         this.migration_id = migration_id;
         this.productionTime = productionTime;
+        this.locationId = locationId;
     }
 
     public String getProductionTime() {
@@ -49,6 +51,15 @@ public class Order {
 
     public Order setProductionTime(String productionTime) {
         this.productionTime = productionTime;
+        return this;
+    }
+
+    public String getLocationId() {
+        return locationId;
+    }
+
+    public Order setLocationId(String locationId) {
+        this.locationId = locationId;
         return this;
     }
 

@@ -24,7 +24,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("UPDATE Order o SET o.status = :status WHERE o.migration_id IN :ids")
     int updateStatusByMigrationIds(@Param("status") OrderStatus status, @Param("ids") List<Long> ids);
 
-    @Query("SELECT o.id FROM Order o WHERE o.productionEndTime < CURRENT_TIMESTAMP AND o.status != 'DELIVERY'")
+    @Query("SELECT o.id FROM Order o WHERE o.productionEndTime < CURRENT_TIMESTAMP AND o.status = 'IN_PRODUCTION'")
     List<Long> findExpiredOrderIds();
 
     @Query("SELECT o FROM Order o WHERE o.id IN :ids")

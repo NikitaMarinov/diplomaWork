@@ -16,6 +16,7 @@ CREATE TABLE t_order
     production_end_time TIMESTAMP NOT NULL,
     production_time VARCHAR(255) NOT NULL,
     migration_id BIGINT NOT NULL,
+    location_id VARCHAR(255),
     FOREIGN KEY (product_id) REFERENCES product (id)
 );
 

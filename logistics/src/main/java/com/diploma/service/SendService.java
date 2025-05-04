@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SendService {
-//    @Autowired
-//    private ManufactureService manufactureService;
+    @Autowired
+    private LogisticsService logisticsService;
 
-//    public void sendOrders() {
-//        manufactureService.sendOrdersToLogisticAndUpdateStatus();
-//    }
+    public void sendOrders() {
+        logisticsService.sendOrdersToSalesAndUpdateStatus();
+    }
 }

@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.diploma.constants.OrderStatus.DELIVERED;
 import static com.diploma.constants.OrderStatus.DELIVERY;
 
 @Service
@@ -62,5 +63,12 @@ public class ManufactureService {
         List<OrderDTO> ordersDtoList = mapper.toDtoList(orders);
 
         manufactureProducer.sendManufacture(ordersDtoList);
+    }
+
+    @Transactional
+    public void sentToSales(List<OrderDTO> orders) {
+        List<Long> ordersIds = orders.stream().map(OrderDTO::getId).toList();
+
+        orderRepository.updateStatusByMigrationIds(DELIVERED, ordersIds);
     }
 }
