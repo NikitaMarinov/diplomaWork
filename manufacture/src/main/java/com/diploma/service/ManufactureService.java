@@ -54,6 +54,7 @@ public class ManufactureService {
         orderRepository.saveAll(orderList);
     }
 
+    @Transactional
     public void sendOrdersToLogisticAndUpdateStatus() {
         List<Long> expiredOrders = orderRepository.findExpiredOrderIds();
         orderRepository.updateStatusByIds(DELIVERY, expiredOrders);

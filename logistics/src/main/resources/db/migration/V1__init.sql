@@ -9,14 +9,15 @@ CREATE TABLE product (
 CREATE TABLE location (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
                           city VARCHAR(255) NOT NULL,
-                          country VARCHAR(255) NOT NULL
+                          country VARCHAR(255) NOT NULL,
+                          distance_to_warehouse INT
 );
 
 CREATE TABLE transport (
-                           id SERIAL PRIMARY KEY,
+                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
                            type VARCHAR(50) NOT NULL,
                            speed INT NOT NULL,
-                           capacity INT NOT NULL
+                           load_volume INT NOT NULL
 );
 
 CREATE TABLE t_order (
@@ -25,7 +26,12 @@ CREATE TABLE t_order (
                          quantity INT NOT NULL,
                          customer_name VARCHAR(255) NOT NULL,
                          status VARCHAR(255) NOT NULL,
+                         delivery_time  TIMESTAMP NOT NULL,
+                         delivery_duration VARCHAR(255) NOT NULL,
                          location_id BIGINT,
+                         transport_id BIGINT,
+                         migration_id BIGINT NOT NULL,
                          FOREIGN KEY (location_id) REFERENCES location(id),
+                         FOREIGN KEY (transport_id) REFERENCES transport(id),
                          FOREIGN KEY (product_id) REFERENCES product(id)
 );

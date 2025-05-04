@@ -21,12 +21,12 @@ public class OrderService {
     private OrderProducer orderProducer;
 
     @Autowired
-    Mapper orderMapper;
+    Mapper mapper;
 
     @Transactional
     void sendOrdersAndUpdateStatus(){
         List<Order> orderList = orderRepository.findOrdersByStatus(OrderStatus.OPEN);
-        List<OrderDTO> orderDTOList = orderMapper.toDtoList(orderList);
+        List<OrderDTO> orderDTOList = mapper.toDtoList(orderList);
 
         List<Long> ordersId = orderList.stream().map(Order::getId).toList();
 
@@ -36,10 +36,9 @@ public class OrderService {
     }
 
     @Transactional
-    public void changeStatusToManufacture(List<OrderDTO> orders) {
+    public void changeStatusToDelivery(List<OrderDTO> orders) {
         List<Long> ordersId = orders.stream().map(OrderDTO::getId).toList();
 
         orderRepository.updateStatusByIds(OrderStatus.DELIVERY, ordersId);
-
     }
 }
