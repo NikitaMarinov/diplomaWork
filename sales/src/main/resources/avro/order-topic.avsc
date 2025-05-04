@@ -23,7 +23,6 @@
       { "name": "price",  "type": ["null", "long"], "default": null},
       { "name": "quantity", "type": ["null", "int"], "default": null },
       { "name": "orderDate", "type": ["null", { "type": "int", "logicalType": "date" }], "default": null },
-      { "name": "customerName", "type": ["null", "string"], "default": null },
       { "name": "status", "type": "com.diploma.avro.OrderStatus" }
     ]
   },

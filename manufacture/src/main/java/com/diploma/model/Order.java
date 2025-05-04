@@ -27,20 +27,20 @@ public class Order {
     private LocalDateTime productionEndTime;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
-    private Long migration_id;
+    private Long migrationId;
     private String productionTime;
     private String locationId;
 
     public Order() {
     }
 
-    public Order(Long id, Product product, Integer quantity, LocalDateTime productionEndTime, OrderStatus status, Long migration_id, String productionTime, String locationId) {
+    public Order(Long id, Product product, Integer quantity, LocalDateTime productionEndTime, OrderStatus status, Long migrationId, String productionTime, String locationId) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
         this.productionEndTime = productionEndTime;
         this.status = status;
-        this.migration_id = migration_id;
+        this.migrationId = migrationId;
         this.productionTime = productionTime;
         this.locationId = locationId;
     }
@@ -110,12 +110,13 @@ public class Order {
         return this;
     }
 
-    public Long getMigration_id() {
-        return migration_id;
+
+    public Long getMigrationId() {
+        return migrationId;
     }
 
-    public Order setMigration_id(Long migration_id) {
-        this.migration_id = migration_id;
+    public Order setMigrationId(Long migrationId) {
+        this.migrationId = migrationId;
         return this;
     }
 
@@ -127,8 +128,9 @@ public class Order {
                 ", quantity=" + quantity +
                 ", productionEndTime=" + productionEndTime +
                 ", status=" + status +
-                ", migration_id=" + migration_id +
+                ", migrationId=" + migrationId +
                 ", productionTime='" + productionTime + '\'' +
+                ", locationId='" + locationId + '\'' +
                 '}';
     }
 }

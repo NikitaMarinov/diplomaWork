@@ -151,17 +151,13 @@ public class LogisticsService {
 
     @Transactional
     public void sendOrdersToSalesAndUpdateStatus() {
-        System.out.println("call this");
         List<Long> expiredOrders = orderRepository.findExpiredOrderIds();
         orderRepository.updateStatusByIds(DELIVERED, expiredOrders);
         List<Order> orders = orderRepository.findOrdersByIds(expiredOrders);
-        if (!orders.isEmpty())
-            System.out.println("order----------" + orders.get(0).toString());
+
         List<OrderDTO> ordersDtoList = mapper.toDtoList(orders);
 
         logisticsProducer.sendLogistics(ordersDtoList);
-        if (!ordersDtoList.isEmpty())
-            System.out.println(ordersDtoList.get(0).toString());
     }
 
 }

@@ -1,4 +1,4 @@
-package com.diploma.sales;
+package com.diploma;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
