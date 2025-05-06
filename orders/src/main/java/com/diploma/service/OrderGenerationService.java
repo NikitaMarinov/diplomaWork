@@ -9,8 +9,11 @@ import com.diploma.repository.OrderRepository;
 import com.diploma.repository.ProductRepository;
 import com.github.javafaker.Faker;
 import jakarta.transaction.Transactional;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.logging.LogLevel;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,6 +23,7 @@ import java.util.Locale;
 import java.util.Random;
 
 @Service
+@Log4j2
 public class OrderGenerationService {
     @Value("${order.batch-size}")
     private int batchSize;
@@ -42,12 +46,10 @@ public class OrderGenerationService {
     public void generateOrders() {
         List<Product> products = productRepository.findAll();
         if (products.isEmpty()) {
-            System.out.println("Products DB is empty!");
             return;
         }
         List<Location> locations = locationRepository.findAll();
         if (locations.isEmpty()) {
-            System.out.println("Products DB is empty!");
             return;
         }
 

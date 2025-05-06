@@ -24,3 +24,5 @@ CREATE TABLE t_order (
                          FOREIGN KEY (location_id) REFERENCES location(id),
                          FOREIGN KEY (product_id) REFERENCES product(id)
 );
+
+CREATE INDEX idx_status ON t_order (status);

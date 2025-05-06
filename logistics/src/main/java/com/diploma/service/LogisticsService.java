@@ -35,6 +35,9 @@ public class LogisticsService {
     @Value("${application.warehouse}")
     private String WAREHOUSE;
 
+    @Value("${batch.size}")
+    private int batchSize;
+
     @Autowired
     private GeoService geoService;
 
@@ -110,10 +113,9 @@ public class LogisticsService {
             Integer distanceToWarehouse = locationMap.get(order.getLocation().getId()).getDistanceToWarehouse();
             String deliveryDuration = String.valueOf(distanceToWarehouse / order.getTransport().getSpeed());
 
-            order.setDeliveryTime(LocalDateTime.now().plusSeconds(Long.parseLong(deliveryDuration))); // TODO ПОТОМУ УБРАТЬ ОДИН НОЛЬ!!!!!
+            order.setDeliveryTime(LocalDateTime.now().plusSeconds(Long.parseLong(deliveryDuration)));
             order.setDeliveryDuration(deliveryDuration);
             order.setStatus(DELIVERY);
-            System.out.println("orderrrr"+order.toString());
         }
 
         updateAllByMigrationId(ordersList);
@@ -121,7 +123,6 @@ public class LogisticsService {
 
     @Transactional
     public void updateAllByMigrationId(List<Order> orders) {
-        int batchSize = 1; // TODO INCREMENT BATCH SIZE
         for (int i = 0; i < orders.size(); i++) {
             Order order = orders.get(i);
 
@@ -157,7 +158,17 @@ public class LogisticsService {
 
         List<OrderDTO> ordersDtoList = mapper.toDtoList(orders);
 
+        System.out.println(ordersDtoList.get(0));
         logisticsProducer.sendLogistics(ordersDtoList);
+    }
+
+    @Transactional
+    public void updateSalesStatus(List<OrderDTO> orders){
+        List<Long> ids = orders.stream().map(OrderDTO::getId).toList();
+
+        if(!orders.isEmpty()) {
+            orderRepository.updateStatusByMigrationIds(OrderStatus.valueOf(orders.get(0).getStatus().name()), ids);
+        }
     }
 
 }

@@ -12,7 +12,6 @@ public class SendScheduler {
 
     @Scheduled(fixedRateString = "${send.frequency.ms}")
     public void sendOrders() {
-        System.out.println("Sending orders...");
         service.sendOrders();
     }
 }

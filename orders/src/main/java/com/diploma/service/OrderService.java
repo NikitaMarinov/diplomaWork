@@ -24,7 +24,7 @@ public class OrderService {
     Mapper mapper;
 
     @Transactional
-    void sendOrdersAndUpdateStatus(){
+    void sendOrdersAndUpdateStatus() {
         List<Order> orderList = orderRepository.findOrdersByStatus(OrderStatus.OPEN);
         List<OrderDTO> orderDTOList = mapper.toDtoList(orderList);
 
@@ -47,5 +47,15 @@ public class OrderService {
         List<Long> ordersId = orders.stream().map(OrderDTO::getId).toList();
 
         orderRepository.updateStatusByIds(OrderStatus.DELIVERED, ordersId);
+    }
+
+    @Transactional
+    public void updateSalesStatus(List<OrderDTO> orders) {
+        List<Long> ordersId = orders.stream().map(OrderDTO::getId).toList();
+
+        if (!orders.isEmpty()) {
+            orderRepository.updateStatusByIds(OrderStatus.valueOf(orders.get(0).getStatus().name()), ordersId);
+        }
+
     }
 }

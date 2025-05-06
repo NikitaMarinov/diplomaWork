@@ -71,4 +71,13 @@ public class ManufactureService {
 
         orderRepository.updateStatusByMigrationIds(DELIVERED, ordersIds);
     }
+
+    @Transactional
+    public void updateSalesStatus(List<OrderDTO> orders) {
+        List<Long> ids = orders.stream().map(OrderDTO::getId).toList();
+
+        if(!orders.isEmpty()) {
+            orderRepository.updateStatusByMigrationIds(OrderStatus.valueOf(orders.get(0).getStatus().name()), ids);
+        }
+    }
 }

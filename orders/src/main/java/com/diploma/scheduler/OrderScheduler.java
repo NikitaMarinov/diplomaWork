@@ -12,7 +12,6 @@ public class OrderScheduler {
 
     @Scheduled(fixedRateString = "${order.frequency.ms}")
     public void generateOrders() {
-        System.out.println("Generating orders...");
         orderGenerationService.generateOrders();
     }
 }

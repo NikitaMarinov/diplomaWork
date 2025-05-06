@@ -1,18 +1,22 @@
 package com.diploma.service.kafka;
 
 import com.diploma.avro.OrderListWrapper;
-import com.diploma.service.OrderService;
+import com.diploma.service.ManufactureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-@Component
-public class LogisticsConsumer {
-    @Autowired
-    private OrderService orderService;
+;
 
-    @KafkaListener(topics = "${kafka.logistics-topic}", groupId = "${spring.kafka.consumer.group-id}")
+@Component
+public class SalesConsumer {
+
+    @Autowired
+    private ManufactureService manufactureService;
+
+    @KafkaListener(topics = "${kafka.sales-topic}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenOrder(OrderListWrapper orderListWrapper) {
-        orderService.sentToSales(orderListWrapper.getOrders());
+        manufactureService.updateSalesStatus(orderListWrapper.getOrders());
     }
+
 }

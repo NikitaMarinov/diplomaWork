@@ -9,17 +9,17 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class OrderProducer {
-    @Value("${kafka.order-topic}")
+public class SalesProducer {
+    @Value("${kafka.sales-topic}")
     private String TOPIC;
 
     private final KafkaTemplate<String, OrderListWrapper> kafkaTemplate;
 
-    public OrderProducer(KafkaTemplate<String, OrderListWrapper> kafkaTemplate) {
+    public SalesProducer(KafkaTemplate<String, OrderListWrapper> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendOrder(List<OrderDTO> orders) {
+    public void sendSales(List<OrderDTO> orders) {
         OrderListWrapper wrapper = OrderListWrapper.newBuilder()
                 .setOrders(orders)
                 .build();

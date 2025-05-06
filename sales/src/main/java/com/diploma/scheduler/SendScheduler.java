@@ -1,6 +1,6 @@
 package com.diploma.scheduler;
 
-import com.diploma.service.SendService;
+import com.diploma.service.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class SendScheduler {
     @Autowired
-    private SendService service;
+    private SalesService salesService;
 
     @Scheduled(fixedRateString = "${send.frequency.ms}")
     public void sendOrders() {
-        service.sendOrders();
+        salesService.sendSales();
     }
 }
