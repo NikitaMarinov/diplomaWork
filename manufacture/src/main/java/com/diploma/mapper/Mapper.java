@@ -12,6 +12,9 @@ import java.util.List;
 public interface Mapper {
 
     @Mapping(source = "product.id", target = "productId")
+    @Mapping(source = "product.name", target = "name")
+    @Mapping(source = "product.brand", target = "brand")
+    @Mapping(source = "product.model", target = "model")
     @Mapping(source = "migrationId", target = "id")
     OrderDTO toDto(Order order);
 

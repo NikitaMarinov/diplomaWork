@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -5874399459108487988L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"locationId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"transportId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"quantity\",\"type\":[\"null\",\"int\"],\"default\":null},{\"name\":\"customerName\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"SOLD\",\"RETURNED\"]}},{\"name\":\"deliveryDuration\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
+  private static final long serialVersionUID = 112437390252143006L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"name\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"brand\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"model\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"locationId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"city\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"country\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"distanceToWarehouse\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"transportId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"carType\",\"type\":[\"null\",{\"type\":\"enum\",\"name\":\"CarType\",\"symbols\":[\"CADDY\",\"CARGOVAN\",\"TRUCK\",\"TRAIN\"]}],\"default\":null},{\"name\":\"speed\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"loadVolume\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"quantity\",\"type\":[\"null\",\"int\"],\"default\":null},{\"name\":\"customerName\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"SOLD\",\"RETURNED\"]}},{\"name\":\"deliveryDuration\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -73,8 +73,17 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
 
    private java.lang.Long id;
    private java.lang.Long productId;
+   private java.lang.CharSequence name;
+   private java.lang.CharSequence brand;
+   private java.lang.CharSequence model;
    private java.lang.Long locationId;
+   private java.lang.CharSequence city;
+   private java.lang.CharSequence country;
+   private java.lang.Long distanceToWarehouse;
    private java.lang.Long transportId;
+   private com.diploma.avro.CarType carType;
+   private java.lang.Long speed;
+   private java.lang.Long loadVolume;
    private java.lang.Integer quantity;
    private java.lang.CharSequence customerName;
    private com.diploma.avro.OrderStatus status;
@@ -91,18 +100,36 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
    * All-args constructor.
    * @param id The new value for id
    * @param productId The new value for productId
+   * @param name The new value for name
+   * @param brand The new value for brand
+   * @param model The new value for model
    * @param locationId The new value for locationId
+   * @param city The new value for city
+   * @param country The new value for country
+   * @param distanceToWarehouse The new value for distanceToWarehouse
    * @param transportId The new value for transportId
+   * @param carType The new value for carType
+   * @param speed The new value for speed
+   * @param loadVolume The new value for loadVolume
    * @param quantity The new value for quantity
    * @param customerName The new value for customerName
    * @param status The new value for status
    * @param deliveryDuration The new value for deliveryDuration
    */
-  public OrderDTO(java.lang.Long id, java.lang.Long productId, java.lang.Long locationId, java.lang.Long transportId, java.lang.Integer quantity, java.lang.CharSequence customerName, com.diploma.avro.OrderStatus status, java.lang.CharSequence deliveryDuration) {
+  public OrderDTO(java.lang.Long id, java.lang.Long productId, java.lang.CharSequence name, java.lang.CharSequence brand, java.lang.CharSequence model, java.lang.Long locationId, java.lang.CharSequence city, java.lang.CharSequence country, java.lang.Long distanceToWarehouse, java.lang.Long transportId, com.diploma.avro.CarType carType, java.lang.Long speed, java.lang.Long loadVolume, java.lang.Integer quantity, java.lang.CharSequence customerName, com.diploma.avro.OrderStatus status, java.lang.CharSequence deliveryDuration) {
     this.id = id;
     this.productId = productId;
+    this.name = name;
+    this.brand = brand;
+    this.model = model;
     this.locationId = locationId;
+    this.city = city;
+    this.country = country;
+    this.distanceToWarehouse = distanceToWarehouse;
     this.transportId = transportId;
+    this.carType = carType;
+    this.speed = speed;
+    this.loadVolume = loadVolume;
     this.quantity = quantity;
     this.customerName = customerName;
     this.status = status;
@@ -116,12 +143,21 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     switch (field$) {
     case 0: return id;
     case 1: return productId;
-    case 2: return locationId;
-    case 3: return transportId;
-    case 4: return quantity;
-    case 5: return customerName;
-    case 6: return status;
-    case 7: return deliveryDuration;
+    case 2: return name;
+    case 3: return brand;
+    case 4: return model;
+    case 5: return locationId;
+    case 6: return city;
+    case 7: return country;
+    case 8: return distanceToWarehouse;
+    case 9: return transportId;
+    case 10: return carType;
+    case 11: return speed;
+    case 12: return loadVolume;
+    case 13: return quantity;
+    case 14: return customerName;
+    case 15: return status;
+    case 16: return deliveryDuration;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -132,12 +168,21 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     switch (field$) {
     case 0: id = (java.lang.Long)value$; break;
     case 1: productId = (java.lang.Long)value$; break;
-    case 2: locationId = (java.lang.Long)value$; break;
-    case 3: transportId = (java.lang.Long)value$; break;
-    case 4: quantity = (java.lang.Integer)value$; break;
-    case 5: customerName = (java.lang.CharSequence)value$; break;
-    case 6: status = (com.diploma.avro.OrderStatus)value$; break;
-    case 7: deliveryDuration = (java.lang.CharSequence)value$; break;
+    case 2: name = (java.lang.CharSequence)value$; break;
+    case 3: brand = (java.lang.CharSequence)value$; break;
+    case 4: model = (java.lang.CharSequence)value$; break;
+    case 5: locationId = (java.lang.Long)value$; break;
+    case 6: city = (java.lang.CharSequence)value$; break;
+    case 7: country = (java.lang.CharSequence)value$; break;
+    case 8: distanceToWarehouse = (java.lang.Long)value$; break;
+    case 9: transportId = (java.lang.Long)value$; break;
+    case 10: carType = (com.diploma.avro.CarType)value$; break;
+    case 11: speed = (java.lang.Long)value$; break;
+    case 12: loadVolume = (java.lang.Long)value$; break;
+    case 13: quantity = (java.lang.Integer)value$; break;
+    case 14: customerName = (java.lang.CharSequence)value$; break;
+    case 15: status = (com.diploma.avro.OrderStatus)value$; break;
+    case 16: deliveryDuration = (java.lang.CharSequence)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -177,6 +222,57 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   /**
+   * Gets the value of the 'name' field.
+   * @return The value of the 'name' field.
+   */
+  public java.lang.CharSequence getName() {
+    return name;
+  }
+
+
+  /**
+   * Sets the value of the 'name' field.
+   * @param value the value to set.
+   */
+  public void setName(java.lang.CharSequence value) {
+    this.name = value;
+  }
+
+  /**
+   * Gets the value of the 'brand' field.
+   * @return The value of the 'brand' field.
+   */
+  public java.lang.CharSequence getBrand() {
+    return brand;
+  }
+
+
+  /**
+   * Sets the value of the 'brand' field.
+   * @param value the value to set.
+   */
+  public void setBrand(java.lang.CharSequence value) {
+    this.brand = value;
+  }
+
+  /**
+   * Gets the value of the 'model' field.
+   * @return The value of the 'model' field.
+   */
+  public java.lang.CharSequence getModel() {
+    return model;
+  }
+
+
+  /**
+   * Sets the value of the 'model' field.
+   * @param value the value to set.
+   */
+  public void setModel(java.lang.CharSequence value) {
+    this.model = value;
+  }
+
+  /**
    * Gets the value of the 'locationId' field.
    * @return The value of the 'locationId' field.
    */
@@ -194,6 +290,57 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   /**
+   * Gets the value of the 'city' field.
+   * @return The value of the 'city' field.
+   */
+  public java.lang.CharSequence getCity() {
+    return city;
+  }
+
+
+  /**
+   * Sets the value of the 'city' field.
+   * @param value the value to set.
+   */
+  public void setCity(java.lang.CharSequence value) {
+    this.city = value;
+  }
+
+  /**
+   * Gets the value of the 'country' field.
+   * @return The value of the 'country' field.
+   */
+  public java.lang.CharSequence getCountry() {
+    return country;
+  }
+
+
+  /**
+   * Sets the value of the 'country' field.
+   * @param value the value to set.
+   */
+  public void setCountry(java.lang.CharSequence value) {
+    this.country = value;
+  }
+
+  /**
+   * Gets the value of the 'distanceToWarehouse' field.
+   * @return The value of the 'distanceToWarehouse' field.
+   */
+  public java.lang.Long getDistanceToWarehouse() {
+    return distanceToWarehouse;
+  }
+
+
+  /**
+   * Sets the value of the 'distanceToWarehouse' field.
+   * @param value the value to set.
+   */
+  public void setDistanceToWarehouse(java.lang.Long value) {
+    this.distanceToWarehouse = value;
+  }
+
+  /**
    * Gets the value of the 'transportId' field.
    * @return The value of the 'transportId' field.
    */
@@ -208,6 +355,57 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
    */
   public void setTransportId(java.lang.Long value) {
     this.transportId = value;
+  }
+
+  /**
+   * Gets the value of the 'carType' field.
+   * @return The value of the 'carType' field.
+   */
+  public com.diploma.avro.CarType getCarType() {
+    return carType;
+  }
+
+
+  /**
+   * Sets the value of the 'carType' field.
+   * @param value the value to set.
+   */
+  public void setCarType(com.diploma.avro.CarType value) {
+    this.carType = value;
+  }
+
+  /**
+   * Gets the value of the 'speed' field.
+   * @return The value of the 'speed' field.
+   */
+  public java.lang.Long getSpeed() {
+    return speed;
+  }
+
+
+  /**
+   * Sets the value of the 'speed' field.
+   * @param value the value to set.
+   */
+  public void setSpeed(java.lang.Long value) {
+    this.speed = value;
+  }
+
+  /**
+   * Gets the value of the 'loadVolume' field.
+   * @return The value of the 'loadVolume' field.
+   */
+  public java.lang.Long getLoadVolume() {
+    return loadVolume;
+  }
+
+
+  /**
+   * Sets the value of the 'loadVolume' field.
+   * @param value the value to set.
+   */
+  public void setLoadVolume(java.lang.Long value) {
+    this.loadVolume = value;
   }
 
   /**
@@ -321,8 +519,17 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
 
     private java.lang.Long id;
     private java.lang.Long productId;
+    private java.lang.CharSequence name;
+    private java.lang.CharSequence brand;
+    private java.lang.CharSequence model;
     private java.lang.Long locationId;
+    private java.lang.CharSequence city;
+    private java.lang.CharSequence country;
+    private java.lang.Long distanceToWarehouse;
     private java.lang.Long transportId;
+    private com.diploma.avro.CarType carType;
+    private java.lang.Long speed;
+    private java.lang.Long loadVolume;
     private java.lang.Integer quantity;
     private java.lang.CharSequence customerName;
     private com.diploma.avro.OrderStatus status;
@@ -347,29 +554,65 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         this.productId = data().deepCopy(fields()[1].schema(), other.productId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.locationId)) {
-        this.locationId = data().deepCopy(fields()[2].schema(), other.locationId);
+      if (isValidValue(fields()[2], other.name)) {
+        this.name = data().deepCopy(fields()[2].schema(), other.name);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.transportId)) {
-        this.transportId = data().deepCopy(fields()[3].schema(), other.transportId);
+      if (isValidValue(fields()[3], other.brand)) {
+        this.brand = data().deepCopy(fields()[3].schema(), other.brand);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.quantity)) {
-        this.quantity = data().deepCopy(fields()[4].schema(), other.quantity);
+      if (isValidValue(fields()[4], other.model)) {
+        this.model = data().deepCopy(fields()[4].schema(), other.model);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
-      if (isValidValue(fields()[5], other.customerName)) {
-        this.customerName = data().deepCopy(fields()[5].schema(), other.customerName);
+      if (isValidValue(fields()[5], other.locationId)) {
+        this.locationId = data().deepCopy(fields()[5].schema(), other.locationId);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
-      if (isValidValue(fields()[6], other.status)) {
-        this.status = data().deepCopy(fields()[6].schema(), other.status);
+      if (isValidValue(fields()[6], other.city)) {
+        this.city = data().deepCopy(fields()[6].schema(), other.city);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
-      if (isValidValue(fields()[7], other.deliveryDuration)) {
-        this.deliveryDuration = data().deepCopy(fields()[7].schema(), other.deliveryDuration);
+      if (isValidValue(fields()[7], other.country)) {
+        this.country = data().deepCopy(fields()[7].schema(), other.country);
         fieldSetFlags()[7] = other.fieldSetFlags()[7];
+      }
+      if (isValidValue(fields()[8], other.distanceToWarehouse)) {
+        this.distanceToWarehouse = data().deepCopy(fields()[8].schema(), other.distanceToWarehouse);
+        fieldSetFlags()[8] = other.fieldSetFlags()[8];
+      }
+      if (isValidValue(fields()[9], other.transportId)) {
+        this.transportId = data().deepCopy(fields()[9].schema(), other.transportId);
+        fieldSetFlags()[9] = other.fieldSetFlags()[9];
+      }
+      if (isValidValue(fields()[10], other.carType)) {
+        this.carType = data().deepCopy(fields()[10].schema(), other.carType);
+        fieldSetFlags()[10] = other.fieldSetFlags()[10];
+      }
+      if (isValidValue(fields()[11], other.speed)) {
+        this.speed = data().deepCopy(fields()[11].schema(), other.speed);
+        fieldSetFlags()[11] = other.fieldSetFlags()[11];
+      }
+      if (isValidValue(fields()[12], other.loadVolume)) {
+        this.loadVolume = data().deepCopy(fields()[12].schema(), other.loadVolume);
+        fieldSetFlags()[12] = other.fieldSetFlags()[12];
+      }
+      if (isValidValue(fields()[13], other.quantity)) {
+        this.quantity = data().deepCopy(fields()[13].schema(), other.quantity);
+        fieldSetFlags()[13] = other.fieldSetFlags()[13];
+      }
+      if (isValidValue(fields()[14], other.customerName)) {
+        this.customerName = data().deepCopy(fields()[14].schema(), other.customerName);
+        fieldSetFlags()[14] = other.fieldSetFlags()[14];
+      }
+      if (isValidValue(fields()[15], other.status)) {
+        this.status = data().deepCopy(fields()[15].schema(), other.status);
+        fieldSetFlags()[15] = other.fieldSetFlags()[15];
+      }
+      if (isValidValue(fields()[16], other.deliveryDuration)) {
+        this.deliveryDuration = data().deepCopy(fields()[16].schema(), other.deliveryDuration);
+        fieldSetFlags()[16] = other.fieldSetFlags()[16];
       }
     }
 
@@ -387,29 +630,65 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         this.productId = data().deepCopy(fields()[1].schema(), other.productId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.locationId)) {
-        this.locationId = data().deepCopy(fields()[2].schema(), other.locationId);
+      if (isValidValue(fields()[2], other.name)) {
+        this.name = data().deepCopy(fields()[2].schema(), other.name);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.transportId)) {
-        this.transportId = data().deepCopy(fields()[3].schema(), other.transportId);
+      if (isValidValue(fields()[3], other.brand)) {
+        this.brand = data().deepCopy(fields()[3].schema(), other.brand);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.quantity)) {
-        this.quantity = data().deepCopy(fields()[4].schema(), other.quantity);
+      if (isValidValue(fields()[4], other.model)) {
+        this.model = data().deepCopy(fields()[4].schema(), other.model);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.customerName)) {
-        this.customerName = data().deepCopy(fields()[5].schema(), other.customerName);
+      if (isValidValue(fields()[5], other.locationId)) {
+        this.locationId = data().deepCopy(fields()[5].schema(), other.locationId);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.status)) {
-        this.status = data().deepCopy(fields()[6].schema(), other.status);
+      if (isValidValue(fields()[6], other.city)) {
+        this.city = data().deepCopy(fields()[6].schema(), other.city);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.deliveryDuration)) {
-        this.deliveryDuration = data().deepCopy(fields()[7].schema(), other.deliveryDuration);
+      if (isValidValue(fields()[7], other.country)) {
+        this.country = data().deepCopy(fields()[7].schema(), other.country);
         fieldSetFlags()[7] = true;
+      }
+      if (isValidValue(fields()[8], other.distanceToWarehouse)) {
+        this.distanceToWarehouse = data().deepCopy(fields()[8].schema(), other.distanceToWarehouse);
+        fieldSetFlags()[8] = true;
+      }
+      if (isValidValue(fields()[9], other.transportId)) {
+        this.transportId = data().deepCopy(fields()[9].schema(), other.transportId);
+        fieldSetFlags()[9] = true;
+      }
+      if (isValidValue(fields()[10], other.carType)) {
+        this.carType = data().deepCopy(fields()[10].schema(), other.carType);
+        fieldSetFlags()[10] = true;
+      }
+      if (isValidValue(fields()[11], other.speed)) {
+        this.speed = data().deepCopy(fields()[11].schema(), other.speed);
+        fieldSetFlags()[11] = true;
+      }
+      if (isValidValue(fields()[12], other.loadVolume)) {
+        this.loadVolume = data().deepCopy(fields()[12].schema(), other.loadVolume);
+        fieldSetFlags()[12] = true;
+      }
+      if (isValidValue(fields()[13], other.quantity)) {
+        this.quantity = data().deepCopy(fields()[13].schema(), other.quantity);
+        fieldSetFlags()[13] = true;
+      }
+      if (isValidValue(fields()[14], other.customerName)) {
+        this.customerName = data().deepCopy(fields()[14].schema(), other.customerName);
+        fieldSetFlags()[14] = true;
+      }
+      if (isValidValue(fields()[15], other.status)) {
+        this.status = data().deepCopy(fields()[15].schema(), other.status);
+        fieldSetFlags()[15] = true;
+      }
+      if (isValidValue(fields()[16], other.deliveryDuration)) {
+        this.deliveryDuration = data().deepCopy(fields()[16].schema(), other.deliveryDuration);
+        fieldSetFlags()[16] = true;
       }
     }
 
@@ -494,6 +773,126 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
     }
 
     /**
+      * Gets the value of the 'name' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getName() {
+      return name;
+    }
+
+
+    /**
+      * Sets the value of the 'name' field.
+      * @param value The value of 'name'.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder setName(java.lang.CharSequence value) {
+      validate(fields()[2], value);
+      this.name = value;
+      fieldSetFlags()[2] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'name' field has been set.
+      * @return True if the 'name' field has been set, false otherwise.
+      */
+    public boolean hasName() {
+      return fieldSetFlags()[2];
+    }
+
+
+    /**
+      * Clears the value of the 'name' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder clearName() {
+      name = null;
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'brand' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getBrand() {
+      return brand;
+    }
+
+
+    /**
+      * Sets the value of the 'brand' field.
+      * @param value The value of 'brand'.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder setBrand(java.lang.CharSequence value) {
+      validate(fields()[3], value);
+      this.brand = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'brand' field has been set.
+      * @return True if the 'brand' field has been set, false otherwise.
+      */
+    public boolean hasBrand() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'brand' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder clearBrand() {
+      brand = null;
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'model' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getModel() {
+      return model;
+    }
+
+
+    /**
+      * Sets the value of the 'model' field.
+      * @param value The value of 'model'.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder setModel(java.lang.CharSequence value) {
+      validate(fields()[4], value);
+      this.model = value;
+      fieldSetFlags()[4] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'model' field has been set.
+      * @return True if the 'model' field has been set, false otherwise.
+      */
+    public boolean hasModel() {
+      return fieldSetFlags()[4];
+    }
+
+
+    /**
+      * Clears the value of the 'model' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder clearModel() {
+      model = null;
+      fieldSetFlags()[4] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'locationId' field.
       * @return The value.
       */
@@ -508,9 +907,9 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return This builder.
       */
     public com.diploma.avro.OrderDTO.Builder setLocationId(java.lang.Long value) {
-      validate(fields()[2], value);
+      validate(fields()[5], value);
       this.locationId = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[5] = true;
       return this;
     }
 
@@ -519,7 +918,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return True if the 'locationId' field has been set, false otherwise.
       */
     public boolean hasLocationId() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[5];
     }
 
 
@@ -529,7 +928,127 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       */
     public com.diploma.avro.OrderDTO.Builder clearLocationId() {
       locationId = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'city' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getCity() {
+      return city;
+    }
+
+
+    /**
+      * Sets the value of the 'city' field.
+      * @param value The value of 'city'.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder setCity(java.lang.CharSequence value) {
+      validate(fields()[6], value);
+      this.city = value;
+      fieldSetFlags()[6] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'city' field has been set.
+      * @return True if the 'city' field has been set, false otherwise.
+      */
+    public boolean hasCity() {
+      return fieldSetFlags()[6];
+    }
+
+
+    /**
+      * Clears the value of the 'city' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder clearCity() {
+      city = null;
+      fieldSetFlags()[6] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'country' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getCountry() {
+      return country;
+    }
+
+
+    /**
+      * Sets the value of the 'country' field.
+      * @param value The value of 'country'.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder setCountry(java.lang.CharSequence value) {
+      validate(fields()[7], value);
+      this.country = value;
+      fieldSetFlags()[7] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'country' field has been set.
+      * @return True if the 'country' field has been set, false otherwise.
+      */
+    public boolean hasCountry() {
+      return fieldSetFlags()[7];
+    }
+
+
+    /**
+      * Clears the value of the 'country' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder clearCountry() {
+      country = null;
+      fieldSetFlags()[7] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'distanceToWarehouse' field.
+      * @return The value.
+      */
+    public java.lang.Long getDistanceToWarehouse() {
+      return distanceToWarehouse;
+    }
+
+
+    /**
+      * Sets the value of the 'distanceToWarehouse' field.
+      * @param value The value of 'distanceToWarehouse'.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder setDistanceToWarehouse(java.lang.Long value) {
+      validate(fields()[8], value);
+      this.distanceToWarehouse = value;
+      fieldSetFlags()[8] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'distanceToWarehouse' field has been set.
+      * @return True if the 'distanceToWarehouse' field has been set, false otherwise.
+      */
+    public boolean hasDistanceToWarehouse() {
+      return fieldSetFlags()[8];
+    }
+
+
+    /**
+      * Clears the value of the 'distanceToWarehouse' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder clearDistanceToWarehouse() {
+      distanceToWarehouse = null;
+      fieldSetFlags()[8] = false;
       return this;
     }
 
@@ -548,9 +1067,9 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return This builder.
       */
     public com.diploma.avro.OrderDTO.Builder setTransportId(java.lang.Long value) {
-      validate(fields()[3], value);
+      validate(fields()[9], value);
       this.transportId = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[9] = true;
       return this;
     }
 
@@ -559,7 +1078,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return True if the 'transportId' field has been set, false otherwise.
       */
     public boolean hasTransportId() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[9];
     }
 
 
@@ -569,7 +1088,127 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       */
     public com.diploma.avro.OrderDTO.Builder clearTransportId() {
       transportId = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[9] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'carType' field.
+      * @return The value.
+      */
+    public com.diploma.avro.CarType getCarType() {
+      return carType;
+    }
+
+
+    /**
+      * Sets the value of the 'carType' field.
+      * @param value The value of 'carType'.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder setCarType(com.diploma.avro.CarType value) {
+      validate(fields()[10], value);
+      this.carType = value;
+      fieldSetFlags()[10] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'carType' field has been set.
+      * @return True if the 'carType' field has been set, false otherwise.
+      */
+    public boolean hasCarType() {
+      return fieldSetFlags()[10];
+    }
+
+
+    /**
+      * Clears the value of the 'carType' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder clearCarType() {
+      carType = null;
+      fieldSetFlags()[10] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'speed' field.
+      * @return The value.
+      */
+    public java.lang.Long getSpeed() {
+      return speed;
+    }
+
+
+    /**
+      * Sets the value of the 'speed' field.
+      * @param value The value of 'speed'.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder setSpeed(java.lang.Long value) {
+      validate(fields()[11], value);
+      this.speed = value;
+      fieldSetFlags()[11] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'speed' field has been set.
+      * @return True if the 'speed' field has been set, false otherwise.
+      */
+    public boolean hasSpeed() {
+      return fieldSetFlags()[11];
+    }
+
+
+    /**
+      * Clears the value of the 'speed' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder clearSpeed() {
+      speed = null;
+      fieldSetFlags()[11] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'loadVolume' field.
+      * @return The value.
+      */
+    public java.lang.Long getLoadVolume() {
+      return loadVolume;
+    }
+
+
+    /**
+      * Sets the value of the 'loadVolume' field.
+      * @param value The value of 'loadVolume'.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder setLoadVolume(java.lang.Long value) {
+      validate(fields()[12], value);
+      this.loadVolume = value;
+      fieldSetFlags()[12] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'loadVolume' field has been set.
+      * @return True if the 'loadVolume' field has been set, false otherwise.
+      */
+    public boolean hasLoadVolume() {
+      return fieldSetFlags()[12];
+    }
+
+
+    /**
+      * Clears the value of the 'loadVolume' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.OrderDTO.Builder clearLoadVolume() {
+      loadVolume = null;
+      fieldSetFlags()[12] = false;
       return this;
     }
 
@@ -588,9 +1227,9 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return This builder.
       */
     public com.diploma.avro.OrderDTO.Builder setQuantity(java.lang.Integer value) {
-      validate(fields()[4], value);
+      validate(fields()[13], value);
       this.quantity = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[13] = true;
       return this;
     }
 
@@ -599,7 +1238,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return True if the 'quantity' field has been set, false otherwise.
       */
     public boolean hasQuantity() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[13];
     }
 
 
@@ -609,7 +1248,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       */
     public com.diploma.avro.OrderDTO.Builder clearQuantity() {
       quantity = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[13] = false;
       return this;
     }
 
@@ -628,9 +1267,9 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return This builder.
       */
     public com.diploma.avro.OrderDTO.Builder setCustomerName(java.lang.CharSequence value) {
-      validate(fields()[5], value);
+      validate(fields()[14], value);
       this.customerName = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[14] = true;
       return this;
     }
 
@@ -639,7 +1278,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return True if the 'customerName' field has been set, false otherwise.
       */
     public boolean hasCustomerName() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[14];
     }
 
 
@@ -649,7 +1288,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       */
     public com.diploma.avro.OrderDTO.Builder clearCustomerName() {
       customerName = null;
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[14] = false;
       return this;
     }
 
@@ -668,9 +1307,9 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return This builder.
       */
     public com.diploma.avro.OrderDTO.Builder setStatus(com.diploma.avro.OrderStatus value) {
-      validate(fields()[6], value);
+      validate(fields()[15], value);
       this.status = value;
-      fieldSetFlags()[6] = true;
+      fieldSetFlags()[15] = true;
       return this;
     }
 
@@ -679,7 +1318,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return True if the 'status' field has been set, false otherwise.
       */
     public boolean hasStatus() {
-      return fieldSetFlags()[6];
+      return fieldSetFlags()[15];
     }
 
 
@@ -689,7 +1328,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       */
     public com.diploma.avro.OrderDTO.Builder clearStatus() {
       status = null;
-      fieldSetFlags()[6] = false;
+      fieldSetFlags()[15] = false;
       return this;
     }
 
@@ -708,9 +1347,9 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return This builder.
       */
     public com.diploma.avro.OrderDTO.Builder setDeliveryDuration(java.lang.CharSequence value) {
-      validate(fields()[7], value);
+      validate(fields()[16], value);
       this.deliveryDuration = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[16] = true;
       return this;
     }
 
@@ -719,7 +1358,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       * @return True if the 'deliveryDuration' field has been set, false otherwise.
       */
     public boolean hasDeliveryDuration() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[16];
     }
 
 
@@ -729,7 +1368,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       */
     public com.diploma.avro.OrderDTO.Builder clearDeliveryDuration() {
       deliveryDuration = null;
-      fieldSetFlags()[7] = false;
+      fieldSetFlags()[16] = false;
       return this;
     }
 
@@ -740,12 +1379,21 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         OrderDTO record = new OrderDTO();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.Long) defaultValue(fields()[0]);
         record.productId = fieldSetFlags()[1] ? this.productId : (java.lang.Long) defaultValue(fields()[1]);
-        record.locationId = fieldSetFlags()[2] ? this.locationId : (java.lang.Long) defaultValue(fields()[2]);
-        record.transportId = fieldSetFlags()[3] ? this.transportId : (java.lang.Long) defaultValue(fields()[3]);
-        record.quantity = fieldSetFlags()[4] ? this.quantity : (java.lang.Integer) defaultValue(fields()[4]);
-        record.customerName = fieldSetFlags()[5] ? this.customerName : (java.lang.CharSequence) defaultValue(fields()[5]);
-        record.status = fieldSetFlags()[6] ? this.status : (com.diploma.avro.OrderStatus) defaultValue(fields()[6]);
-        record.deliveryDuration = fieldSetFlags()[7] ? this.deliveryDuration : (java.lang.CharSequence) defaultValue(fields()[7]);
+        record.name = fieldSetFlags()[2] ? this.name : (java.lang.CharSequence) defaultValue(fields()[2]);
+        record.brand = fieldSetFlags()[3] ? this.brand : (java.lang.CharSequence) defaultValue(fields()[3]);
+        record.model = fieldSetFlags()[4] ? this.model : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.locationId = fieldSetFlags()[5] ? this.locationId : (java.lang.Long) defaultValue(fields()[5]);
+        record.city = fieldSetFlags()[6] ? this.city : (java.lang.CharSequence) defaultValue(fields()[6]);
+        record.country = fieldSetFlags()[7] ? this.country : (java.lang.CharSequence) defaultValue(fields()[7]);
+        record.distanceToWarehouse = fieldSetFlags()[8] ? this.distanceToWarehouse : (java.lang.Long) defaultValue(fields()[8]);
+        record.transportId = fieldSetFlags()[9] ? this.transportId : (java.lang.Long) defaultValue(fields()[9]);
+        record.carType = fieldSetFlags()[10] ? this.carType : (com.diploma.avro.CarType) defaultValue(fields()[10]);
+        record.speed = fieldSetFlags()[11] ? this.speed : (java.lang.Long) defaultValue(fields()[11]);
+        record.loadVolume = fieldSetFlags()[12] ? this.loadVolume : (java.lang.Long) defaultValue(fields()[12]);
+        record.quantity = fieldSetFlags()[13] ? this.quantity : (java.lang.Integer) defaultValue(fields()[13]);
+        record.customerName = fieldSetFlags()[14] ? this.customerName : (java.lang.CharSequence) defaultValue(fields()[14]);
+        record.status = fieldSetFlags()[15] ? this.status : (com.diploma.avro.OrderStatus) defaultValue(fields()[15]);
+        record.deliveryDuration = fieldSetFlags()[16] ? this.deliveryDuration : (java.lang.CharSequence) defaultValue(fields()[16]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -794,6 +1442,30 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       out.writeLong(this.productId);
     }
 
+    if (this.name == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.name);
+    }
+
+    if (this.brand == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.brand);
+    }
+
+    if (this.model == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.model);
+    }
+
     if (this.locationId == null) {
       out.writeIndex(0);
       out.writeNull();
@@ -802,12 +1474,60 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       out.writeLong(this.locationId);
     }
 
+    if (this.city == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.city);
+    }
+
+    if (this.country == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.country);
+    }
+
+    if (this.distanceToWarehouse == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeLong(this.distanceToWarehouse);
+    }
+
     if (this.transportId == null) {
       out.writeIndex(0);
       out.writeNull();
     } else {
       out.writeIndex(1);
       out.writeLong(this.transportId);
+    }
+
+    if (this.carType == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeEnum(this.carType.ordinal());
+    }
+
+    if (this.speed == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeLong(this.speed);
+    }
+
+    if (this.loadVolume == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeLong(this.loadVolume);
     }
 
     if (this.quantity == null) {
@@ -859,6 +1579,27 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
 
       if (in.readIndex() != 1) {
         in.readNull();
+        this.name = null;
+      } else {
+        this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.brand = null;
+      } else {
+        this.brand = in.readString(this.brand instanceof Utf8 ? (Utf8)this.brand : null);
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.model = null;
+      } else {
+        this.model = in.readString(this.model instanceof Utf8 ? (Utf8)this.model : null);
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
         this.locationId = null;
       } else {
         this.locationId = in.readLong();
@@ -866,9 +1607,51 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
 
       if (in.readIndex() != 1) {
         in.readNull();
+        this.city = null;
+      } else {
+        this.city = in.readString(this.city instanceof Utf8 ? (Utf8)this.city : null);
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.country = null;
+      } else {
+        this.country = in.readString(this.country instanceof Utf8 ? (Utf8)this.country : null);
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.distanceToWarehouse = null;
+      } else {
+        this.distanceToWarehouse = in.readLong();
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
         this.transportId = null;
       } else {
         this.transportId = in.readLong();
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.carType = null;
+      } else {
+        this.carType = com.diploma.avro.CarType.values()[in.readEnum()];
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.speed = null;
+      } else {
+        this.speed = in.readLong();
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.loadVolume = null;
+      } else {
+        this.loadVolume = in.readLong();
       }
 
       if (in.readIndex() != 1) {
@@ -895,7 +1678,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
       }
 
     } else {
-      for (int i = 0; i < 8; i++) {
+      for (int i = 0; i < 17; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           if (in.readIndex() != 1) {
@@ -918,13 +1701,67 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
         case 2:
           if (in.readIndex() != 1) {
             in.readNull();
+            this.name = null;
+          } else {
+            this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
+          }
+          break;
+
+        case 3:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.brand = null;
+          } else {
+            this.brand = in.readString(this.brand instanceof Utf8 ? (Utf8)this.brand : null);
+          }
+          break;
+
+        case 4:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.model = null;
+          } else {
+            this.model = in.readString(this.model instanceof Utf8 ? (Utf8)this.model : null);
+          }
+          break;
+
+        case 5:
+          if (in.readIndex() != 1) {
+            in.readNull();
             this.locationId = null;
           } else {
             this.locationId = in.readLong();
           }
           break;
 
-        case 3:
+        case 6:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.city = null;
+          } else {
+            this.city = in.readString(this.city instanceof Utf8 ? (Utf8)this.city : null);
+          }
+          break;
+
+        case 7:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.country = null;
+          } else {
+            this.country = in.readString(this.country instanceof Utf8 ? (Utf8)this.country : null);
+          }
+          break;
+
+        case 8:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.distanceToWarehouse = null;
+          } else {
+            this.distanceToWarehouse = in.readLong();
+          }
+          break;
+
+        case 9:
           if (in.readIndex() != 1) {
             in.readNull();
             this.transportId = null;
@@ -933,7 +1770,34 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
           }
           break;
 
-        case 4:
+        case 10:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.carType = null;
+          } else {
+            this.carType = com.diploma.avro.CarType.values()[in.readEnum()];
+          }
+          break;
+
+        case 11:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.speed = null;
+          } else {
+            this.speed = in.readLong();
+          }
+          break;
+
+        case 12:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.loadVolume = null;
+          } else {
+            this.loadVolume = in.readLong();
+          }
+          break;
+
+        case 13:
           if (in.readIndex() != 1) {
             in.readNull();
             this.quantity = null;
@@ -942,7 +1806,7 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
           }
           break;
 
-        case 5:
+        case 14:
           if (in.readIndex() != 1) {
             in.readNull();
             this.customerName = null;
@@ -951,11 +1815,11 @@ public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implem
           }
           break;
 
-        case 6:
+        case 15:
           this.status = com.diploma.avro.OrderStatus.values()[in.readEnum()];
           break;
 
-        case 7:
+        case 16:
           if (in.readIndex() != 1) {
             in.readNull();
             this.deliveryDuration = null;

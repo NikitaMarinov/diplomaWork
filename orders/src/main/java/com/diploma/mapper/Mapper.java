@@ -13,6 +13,10 @@ public interface Mapper {
 
     @Mapping(source = "product.id", target = "productId")
     @Mapping(source = "location.id", target = "locationId")
+    @Mapping(source = "product.name", target = "name")
+    @Mapping(source = "product.brand", target = "brand")
+    @Mapping(source = "product.model", target = "model")
+    @Mapping(source = "product.price", target = "pricePerObject")
     OrderDTO toDto(Order order);
 
     @Mapping(source = "productId", target = "product.id")

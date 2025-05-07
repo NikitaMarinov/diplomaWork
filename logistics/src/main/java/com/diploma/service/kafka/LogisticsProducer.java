@@ -14,6 +14,10 @@ public class LogisticsProducer {
     @Value("${kafka.logistics-topic}")
     private String TOPIC;
 
+    //NewTopic topic = new NewTopic("name", 3, (short)1);  TODO
+   // создаем топик с 3 партициями
+    //создаем 3 реплики
+    //3брокера
     private final KafkaTemplate<String, OrderListWrapper> kafkaTemplate;
 
     public LogisticsProducer(KafkaTemplate<String, OrderListWrapper> kafkaTemplate) {
@@ -26,5 +30,6 @@ public class LogisticsProducer {
                 .build();
 
         kafkaTemplate.send(TOPIC, wrapper);
+        System.out.println(wrapper.getOrders().get(0));
     }
 }

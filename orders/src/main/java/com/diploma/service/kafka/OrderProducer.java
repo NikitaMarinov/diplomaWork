@@ -25,5 +25,6 @@ public class OrderProducer {
                 .build();
 
         kafkaTemplate.send(TOPIC, wrapper);
+        System.out.println(wrapper.getOrders().get(0));
     }
 }

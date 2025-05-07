@@ -13,7 +13,7 @@ public class ManufactureConsumer {
     private LogisticsService logisticsService;
 
     @KafkaListener(topics = "${kafka.manufacture-topic}", groupId = "${spring.kafka.consumer.group-id}")
-    public void listenOrder(OrderListWrapper orderListWrapper) {
+    public void listenManufacture(OrderListWrapper orderListWrapper) {
         logisticsService.changeStatusToDelivery(orderListWrapper.getOrders());
     }
 
