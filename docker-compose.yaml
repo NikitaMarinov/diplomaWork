@@ -137,6 +137,19 @@ services:
     networks:
       - app-network
 
+  elastic-init:
+    image: curlimages/curl:latest
+    depends_on:
+      - elasticsearch
+    entrypoint: >
+      sh -c "until nc -z elasticsearch 9200; do echo waiting for elasticsearch; sleep 2; done;
+      sh /scripts/init-elasticsearch.sh"
+    volumes:
+      - ./scripts/init-elasticsearch.sh:/scripts/init-elasticsearch.sh
+    networks:
+      - app-network
+
+
 networks:
   app-network:
     driver: bridge
