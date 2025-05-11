@@ -49,6 +49,55 @@
   },
   {
     "type": "record",
+    "name": "ManufactureDto",
+    "namespace": "com.diploma.avro",
+    "fields": [
+      { "name": "id", "type": ["null", "long"], "default": null },
+      { "name": "productId", "type": "long" },
+      { "name": "name", "type": ["null", "string"], "default": null },
+      { "name": "brand", "type": ["null", "string"], "default": null },
+      { "name": "model", "type": ["null", "string"], "default": null },
+      { "name": "quantity", "type": "int" },
+      { "name": "status", "type": "com.diploma.avro.OrderStatus" },
+      { "name": "productionTime", "type": ["null", "string"], "default": null  },
+      { "name": "locationId", "type": ["null", "long"], "default": null }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "LogisticsDTO",
+    "namespace": "com.diploma.avro",
+    "fields": [
+      { "name": "id", "type": ["null", "long"], "default": null },
+      { "name": "productId", "type": ["null", "long"], "default": null},
+      { "name": "name", "type": ["null", "string"], "default": null },
+      { "name": "brand", "type": ["null", "string"], "default": null },
+      { "name": "model", "type": ["null", "string"], "default": null },
+      { "name": "locationId", "type": ["null", "long"], "default": null },
+      { "name": "city", "type": ["null", "string"], "default": null },
+      { "name": "country", "type": ["null", "string"], "default": null },
+      { "name": "distanceToWarehouse", "type": ["null", "long"], "default": null },
+      { "name": "transportId", "type": ["null", "long"], "default": null },
+      { "name": "carType", "type": ["null", "com.diploma.avro.CarType"], "default": null},
+      { "name": "speed", "type": ["null", "long"], "default": null },
+      { "name": "loadVolume", "type": ["null", "long"], "default": null },
+      { "name": "quantity", "type": ["null", "int"], "default": null },
+      { "name": "customerName", "type": ["null", "string"], "default": null },
+      { "name": "status", "type": "com.diploma.avro.OrderStatus" },
+      { "name": "deliveryDuration", "type": ["null", "string"], "default": null  }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "SalesDTO",
+    "namespace": "com.diploma.avro",
+    "fields": [
+      { "name": "id", "type": ["null", "long"], "default": null },
+      { "name": "status", "type": "com.diploma.avro.OrderStatus" }
+    ]
+  },
+  {
+    "type": "record",
     "name": "OrderListWrapper",
     "namespace": "com.diploma.avro",
     "fields": [
@@ -57,6 +106,48 @@
         "type": {
           "type": "array",
           "items": "com.diploma.avro.OrderDTO"
+        }
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "ManufactureListWrapper",
+    "namespace": "com.diploma.avro",
+    "fields": [
+      {
+        "name": "manufactures",
+        "type": {
+          "type": "array",
+          "items": "com.diploma.avro.ManufactureDto"
+        }
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "LogisticsListWrapper",
+    "namespace": "com.diploma.avro",
+    "fields": [
+      {
+        "name": "logistics",
+        "type": {
+          "type": "array",
+          "items": "com.diploma.avro.LogisticsDTO"
+        }
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "SalesListWrapper",
+    "namespace": "com.diploma.avro",
+    "fields": [
+      {
+        "name": "sales",
+        "type": {
+          "type": "array",
+          "items": "com.diploma.avro.SalesDTO"
         }
       }
     ]

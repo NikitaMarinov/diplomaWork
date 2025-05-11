@@ -1,6 +1,9 @@
 package com.diploma.service;
 
+import com.diploma.avro.LogisticsDto;
+import com.diploma.avro.ManufactureDto;
 import com.diploma.avro.OrderDTO;
+import com.diploma.avro.SalesDto;
 import com.diploma.constants.OrderStatus;
 import com.diploma.mapper.Mapper;
 import com.diploma.model.Manufacture;
@@ -60,24 +63,24 @@ public class ManufactureService {
         List<Long> expiredOrders = orderRepository.findExpiredOrderIds();
         orderRepository.updateStatusByIds(DELIVERY, expiredOrders);
         List<Order> orders = orderRepository.findOrdersByIds(expiredOrders);
-        List<OrderDTO> ordersDtoList = mapper.toDtoList(orders);
+        List<ManufactureDto> manufactureDtos = mapper.toManufactureDtoList(orders);
 
-        manufactureProducer.sendManufacture(ordersDtoList);
+        manufactureProducer.sendManufacture(manufactureDtos);
     }
 
     @Transactional
-    public void sentToSales(List<OrderDTO> orders) {
-        List<Long> ordersIds = orders.stream().map(OrderDTO::getId).toList();
+    public void sentToSales(List<LogisticsDto> logisticsDtos) {
+        List<Long> ordersIds = logisticsDtos.stream().map(LogisticsDto::getId).toList();
 
         orderRepository.updateStatusByMigrationIds(DELIVERED, ordersIds);
     }
 
     @Transactional
-    public void updateSalesStatus(List<OrderDTO> orders) {
-        List<Long> ids = orders.stream().map(OrderDTO::getId).toList();
+    public void updateSalesStatus(List<SalesDto> salesDtos) {
+        List<Long> ids = salesDtos.stream().map(SalesDto::getId).toList();
 
-        if(!orders.isEmpty()) {
-            orderRepository.updateStatusByMigrationIds(OrderStatus.valueOf(orders.get(0).getStatus().name()), ids);
+        if (!ids.isEmpty()){
+            orderRepository.updateStatusByIds(OrderStatus.valueOf(salesDtos.get(0).getStatus().name()), ids);
         }
     }
 }

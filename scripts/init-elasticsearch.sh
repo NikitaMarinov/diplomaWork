@@ -92,3 +92,34 @@ curl -X PUT "http://elasticsearch:9200/sales_index" -H 'Content-Type: applicatio
 }'
 
 echo "? All indexes created."
+
+
+curl -X POST "http://kibana:5601/api/index_patterns/index_pattern" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d '
+{
+  "index_pattern": {
+    "title": "order_index",
+    "timeFieldName": "orderDate"
+  }
+}'
+
+curl -X POST "http://kibana:5601/api/index_patterns/index_pattern" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d '
+{
+  "index_pattern": {
+    "title": "manufacture_index"
+  }
+}'
+
+curl -X POST "http://kibana:5601/api/index_patterns/index_pattern" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d '
+{
+  "index_pattern": {
+    "title": "logistics_index"
+  }
+}'
+
+curl -X POST "http://kibana:5601/api/index_patterns/index_pattern" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d '
+{
+  "index_pattern": {
+    "title": "sales_index",
+    "timeFieldName": "orderDate"
+  }
+}'

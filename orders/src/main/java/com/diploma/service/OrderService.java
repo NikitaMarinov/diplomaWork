@@ -1,6 +1,9 @@
 package com.diploma.service;
 
+import com.diploma.avro.LogisticsDTO;
+import com.diploma.avro.ManufactureDTO;
 import com.diploma.avro.OrderDTO;
+import com.diploma.avro.SalesDTO;
 import com.diploma.constants.OrderStatus;
 import com.diploma.mapper.Mapper;
 import com.diploma.model.Order;
@@ -36,25 +39,25 @@ public class OrderService {
     }
 
     @Transactional
-    public void changeStatusToDelivery(List<OrderDTO> orders) {
-        List<Long> ordersId = orders.stream().map(OrderDTO::getId).toList();
+    public void changeStatusToDelivery(List<ManufactureDTO> manufactureDTOS) {
+        List<Long> ordersId = manufactureDTOS.stream().map(ManufactureDTO::getId).toList();
 
         orderRepository.updateStatusByIds(OrderStatus.DELIVERY, ordersId);
     }
 
     @Transactional
-    public void sentToSales(List<OrderDTO> orders) {
-        List<Long> ordersId = orders.stream().map(OrderDTO::getId).toList();
+    public void sentToSales(List<LogisticsDTO> logisticsDTOS) {
+        List<Long> ordersId = logisticsDTOS.stream().map(LogisticsDTO::getId).toList();
 
         orderRepository.updateStatusByIds(OrderStatus.DELIVERED, ordersId);
     }
 
     @Transactional
-    public void updateSalesStatus(List<OrderDTO> orders) {
-        List<Long> ordersId = orders.stream().map(OrderDTO::getId).toList();
+    public void updateSalesStatus(List<SalesDTO> salesDTOS) {
+        List<Long> ordersId = salesDTOS.stream().map(SalesDTO::getId).toList();
 
-        if (!orders.isEmpty()) {
-            orderRepository.updateStatusByIds(OrderStatus.valueOf(orders.get(0).getStatus().name()), ordersId);
+        if (!salesDTOS.isEmpty()) {
+            orderRepository.updateStatusByIds(OrderStatus.valueOf(salesDTOS.get(0).getStatus().name()), ordersId);
         }
 
     }

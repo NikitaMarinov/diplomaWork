@@ -13,9 +13,10 @@ public class SalesConsumer {
     @Autowired
     private DataProcService dataProcService;
 
-    @KafkaListener(topics = "${kafka.order-topic}", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "${kafka.sales-topic}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenOrder(SalesListWrapper salesListWrapper) {
         dataProcService.saveSales(salesListWrapper.getSales());
+        System.out.println(salesListWrapper.getSales());
     }
 
 }

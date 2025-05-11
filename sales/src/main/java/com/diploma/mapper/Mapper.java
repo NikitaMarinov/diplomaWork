@@ -1,6 +1,7 @@
 package com.diploma.mapper;
 
 import com.diploma.avro.OrderDTO;
+import com.diploma.avro.SalesDTO;
 import com.diploma.model.Order;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -20,6 +21,16 @@ public interface Mapper {
     @Mapping(source = "migrationId", target = "id")
     OrderDTO toDto(Order order);
 
+    @Mapping(source = "product.id", target = "productId")
+    @Mapping(source = "product.name", target = "name")
+    @Mapping(source = "product.brand", target = "brand")
+    @Mapping(source = "product.model", target = "model")
+    @Mapping(source = "location.id", target = "locationId")
+    @Mapping(source = "location.city", target = "city")
+    @Mapping(source = "location.country", target = "country")
+    @Mapping(source = "migrationId", target = "id")
+    SalesDTO toSalesDto(Order order);
+
     @Mapping(source = "productId", target = "product.id")
     @Mapping(source = "locationId", target = "location.id")
     @Mapping(source = "id", target = "migrationId")
@@ -30,6 +41,7 @@ public interface Mapper {
     }
 
     List<OrderDTO> toDtoList(List<Order> orders);
+    List<SalesDTO> toDtoSalesList(List<Order> orders);
 
     List<Order> toEntityList(List<OrderDTO> orderDTOs);
 }

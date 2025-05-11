@@ -1,5 +1,7 @@
 package com.diploma.service;
 
+import com.diploma.avro.LogisticsDTO;
+import com.diploma.avro.ManufactureDTO;
 import com.diploma.avro.OrderDTO;
 import com.diploma.constants.OrderStatus;
 import com.diploma.mapper.Mapper;
@@ -40,16 +42,15 @@ public class SalesService {
     }
 
     @Transactional
-    public void changeStatusToDelivery(List<OrderDTO> orders) {
-        List<Long> ids = orders.stream().map(OrderDTO::getId).toList();
+    public void changeStatusToDelivery(List<ManufactureDTO> manufactureDto) {
+        List<Long> ids = manufactureDto.stream().map(ManufactureDTO::getId).toList();
 
         orderRepository.updateStatusByMigrationIds(OrderStatus.DELIVERY, ids);
     }
 
     @Transactional
-    public void sentToSales(List<OrderDTO> orders) {
-        List<Long> ids = orders.stream().map(OrderDTO::getId).toList();
-        System.out.println(orders.get(0).toString());
+    public void sentToSales(List<LogisticsDTO> logisticsDTOList) {
+        List<Long> ids = logisticsDTOList.stream().map(LogisticsDTO::getId).toList();
         orderRepository.updateStatusByMigrationIds(OrderStatus.DELIVERED, ids);
     }
 
@@ -93,9 +94,10 @@ public class SalesService {
         }
 
         if (!soldOrders.isEmpty()) {
-            salesProducer.sendSales(mapper.toDtoList(soldOrders));
+            salesProducer.sendSales(mapper.toDtoSalesList(soldOrders));
         }
         if (!returnedOrders.isEmpty()) {
-            salesProducer.sendSales(mapper.toDtoList(returnedOrders));
-        }    }
+            salesProducer.sendSales(mapper.toDtoSalesList(returnedOrders));
+        }
+    }
 }

@@ -1,6 +1,9 @@
 package com.diploma.service;
 
+import com.diploma.avro.LogisticsDTO;
+import com.diploma.avro.ManufactureDto;
 import com.diploma.avro.OrderDTO;
+import com.diploma.avro.SalesDTO;
 import com.diploma.constants.OrderStatus;
 import com.diploma.exception.LocationNotFoundException;
 import com.diploma.mapper.Mapper;
@@ -89,8 +92,8 @@ public class LogisticsService {
     }
 
     @Transactional
-    public void changeStatusToDelivery(List<OrderDTO> orders) {
-        List<Order> ordersList = mapper.toEntityList(orders);
+    public void changeStatusToDelivery(List<ManufactureDto> manufactureDtos) {
+        List<Order> ordersList = mapper.toEntityListFromManufacture(manufactureDtos);
         List<Location> locationList = locationRepository.findAll();
 
         List<Transport> transports = transportRepository.findAll()
@@ -156,18 +159,17 @@ public class LogisticsService {
         orderRepository.updateStatusByIds(DELIVERED, expiredOrders);
         List<Order> orders = orderRepository.findOrdersByIds(expiredOrders);
 
-        List<OrderDTO> ordersDtoList = mapper.toDtoList(orders);
+        List<LogisticsDTO> logisticsDTOList = mapper.toLogisticsDtoList(orders);
 
-        System.out.println(ordersDtoList.get(0));
-        logisticsProducer.sendLogistics(ordersDtoList);
+        logisticsProducer.sendLogistics(logisticsDTOList);
     }
 
     @Transactional
-    public void updateSalesStatus(List<OrderDTO> orders){
-        List<Long> ids = orders.stream().map(OrderDTO::getId).toList();
+    public void updateSalesStatus(List<SalesDTO> salesDTOS) {
+        List<Long> ids = salesDTOS.stream().map(SalesDTO::getId).toList();
 
-        if(!orders.isEmpty()) {
-            orderRepository.updateStatusByMigrationIds(OrderStatus.valueOf(orders.get(0).getStatus().name()), ids);
+        if (!salesDTOS.isEmpty()) {
+            orderRepository.updateStatusByIds(OrderStatus.valueOf(salesDTOS.get(0).getStatus().name()), ids);
         }
     }
 

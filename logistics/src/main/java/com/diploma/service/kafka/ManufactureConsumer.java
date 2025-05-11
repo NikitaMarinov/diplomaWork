@@ -1,6 +1,6 @@
 package com.diploma.service.kafka;
 
-import com.diploma.avro.OrderListWrapper;
+import com.diploma.avro.ManufactureListWrapper;
 import com.diploma.service.LogisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -13,8 +13,9 @@ public class ManufactureConsumer {
     private LogisticsService logisticsService;
 
     @KafkaListener(topics = "${kafka.manufacture-topic}", groupId = "${spring.kafka.consumer.group-id}")
-    public void listenManufacture(OrderListWrapper orderListWrapper) {
-        logisticsService.changeStatusToDelivery(orderListWrapper.getOrders());
+    public void listenManufacture(ManufactureListWrapper manufactureListWrapper) {
+        logisticsService.changeStatusToDelivery(manufactureListWrapper.getManufactures());
+        System.out.println(manufactureListWrapper.getManufactures());
     }
 
 }

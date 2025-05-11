@@ -1,8 +1,7 @@
 package com.diploma.service.kafka;
 
-import com.diploma.avro.OrderDTO;
-import com.diploma.avro.OrderListWrapper;
-import com.diploma.model.Order;
+import com.diploma.avro.ManufactureDto;
+import com.diploma.avro.ManufactureListWrapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -14,18 +13,18 @@ public class ManufactureProducer {
     @Value("${kafka.manufacture-topic}")
     private String TOPIC;
 
-    private final KafkaTemplate<String, OrderListWrapper> kafkaTemplate;
+    private final KafkaTemplate<String, ManufactureListWrapper> kafkaTemplate;
 
-    public ManufactureProducer(KafkaTemplate<String, OrderListWrapper> kafkaTemplate) {
+    public ManufactureProducer(KafkaTemplate<String, ManufactureListWrapper> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendManufacture(List<OrderDTO> orders) {
-        OrderListWrapper wrapper = OrderListWrapper.newBuilder()
-                .setOrders(orders)
+    public void sendManufacture(List<ManufactureDto> manufactureDtos) {
+        ManufactureListWrapper wrapper = ManufactureListWrapper.newBuilder()
+                .setManufactures(manufactureDtos)
                 .build();
 
         kafkaTemplate.send(TOPIC, wrapper);
-        System.out.println(wrapper.getOrders().get(0));
+        System.out.println(wrapper.getManufactures().get(0));
     }
 }

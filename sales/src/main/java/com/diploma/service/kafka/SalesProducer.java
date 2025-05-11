@@ -1,7 +1,7 @@
 package com.diploma.service.kafka;
 
-import com.diploma.avro.OrderDTO;
-import com.diploma.avro.OrderListWrapper;
+import com.diploma.avro.SalesDTO;
+import com.diploma.avro.SalesListWrapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -13,18 +13,18 @@ public class SalesProducer {
     @Value("${kafka.sales-topic}")
     private String TOPIC;
 
-    private final KafkaTemplate<String, OrderListWrapper> kafkaTemplate;
+    private final KafkaTemplate<String, SalesListWrapper> kafkaTemplate;
 
-    public SalesProducer(KafkaTemplate<String, OrderListWrapper> kafkaTemplate) {
+    public SalesProducer(KafkaTemplate<String, SalesListWrapper> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendSales(List<OrderDTO> orders) {
-        OrderListWrapper wrapper = OrderListWrapper.newBuilder()
-                .setOrders(orders)
+    public void sendSales(List<SalesDTO> salesDTOS) {
+        SalesListWrapper wrapper = SalesListWrapper.newBuilder()
+                .setSales(salesDTOS)
                 .build();
 
         kafkaTemplate.send(TOPIC, wrapper);
-        System.out.println(wrapper.getOrders().get(0));
+        System.out.println(wrapper.getSales().get(0));
     }
 }

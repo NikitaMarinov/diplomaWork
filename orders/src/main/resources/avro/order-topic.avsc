@@ -33,6 +33,31 @@
   },
   {
     "type": "record",
+    "name": "ManufactureDTO",
+    "namespace": "com.diploma.avro",
+    "fields": [
+      { "name": "id", "type": ["null", "long"], "default": null }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "LogisticsDTO",
+    "namespace": "com.diploma.avro",
+    "fields": [
+      { "name": "id", "type": ["null", "long"], "default": null }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "SalesDTO",
+    "namespace": "com.diploma.avro",
+    "fields": [
+      { "name": "id", "type": ["null", "long"], "default": null },
+      { "name": "status", "type": "com.diploma.avro.OrderStatus" }
+    ]
+  },
+  {
+    "type": "record",
     "name": "OrderListWrapper",
     "namespace": "com.diploma.avro",
     "fields": [
@@ -41,6 +66,48 @@
         "type": {
           "type": "array",
           "items": "com.diploma.avro.OrderDTO"
+        }
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "ManufactureListWrapper",
+    "namespace": "com.diploma.avro",
+    "fields": [
+      {
+        "name": "manufactures",
+        "type": {
+          "type": "array",
+          "items": "com.diploma.avro.ManufactureDTO"
+        }
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "SalesListWrapper",
+    "namespace": "com.diploma.avro",
+    "fields": [
+      {
+        "name": "sales",
+        "type": {
+          "type": "array",
+          "items": "com.diploma.avro.SalesDTO"
+        }
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "LogisticsListWrapper",
+    "namespace": "com.diploma.avro",
+    "fields": [
+      {
+        "name": "logistics",
+        "type": {
+          "type": "array",
+          "items": "com.diploma.avro.LogisticsDTO"
         }
       }
     ]
