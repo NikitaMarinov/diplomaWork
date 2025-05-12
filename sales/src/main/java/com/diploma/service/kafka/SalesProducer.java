@@ -25,6 +25,5 @@ public class SalesProducer {
                 .build();
 
         kafkaTemplate.send(TOPIC, wrapper);
-        System.out.println(wrapper.getSales().get(0));
     }
 }

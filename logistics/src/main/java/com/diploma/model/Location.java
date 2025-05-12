@@ -16,19 +16,31 @@ public class Location {
     private String city;
     private String country;
     private Integer distanceToWarehouse;
+    private String location;
+
 
     public Location() {
     }
 
-    public Location(Long id, String city, String country, Integer distanceToWarehouse) {
+    public Location(Long id, String city, String country, Integer distanceToWarehouse, String location) {
         this.id = id;
         this.city = city;
         this.country = country;
         this.distanceToWarehouse = distanceToWarehouse;
+        this.location = location;
     }
 
     public Integer getDistanceToWarehouse() {
         return distanceToWarehouse;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public Location setLocation(String location) {
+        this.location = location;
+        return this;
     }
 
     public Location setDistanceToWarehouse(Integer distanceToWarehouse) {

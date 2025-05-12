@@ -39,7 +39,7 @@ public interface Mapper {
 
     @Named("instantToZonedDateTime")
     default ZonedDateTime instantToZonedDateTime(Instant instant) {
-        return instant != null ? instant.atZone(ZoneId.of("Europe/Moscow")) : null;
+        return instant != null ? instant.atZone(ZoneId.of("UTC")) : null;
     }
 
     List<OrderDTO> toDtoList(List<Order> orders);

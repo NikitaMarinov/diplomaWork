@@ -28,8 +28,6 @@ public class LogisticsProducer {
         LogisticsListWrapper wrapper = LogisticsListWrapper.newBuilder()
                 .setLogistics(logisticsDTOList)
                 .build();
-
         kafkaTemplate.send(TOPIC, wrapper);
-        System.out.println(wrapper.getLogistics().get(0));
     }
 }

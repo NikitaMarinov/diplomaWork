@@ -10,7 +10,8 @@ CREATE TABLE location (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
                           city VARCHAR(255) NOT NULL,
                           country VARCHAR(255) NOT NULL,
-                          distance_to_warehouse INT
+                          distance_to_warehouse INT,
+                          location VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE transport (

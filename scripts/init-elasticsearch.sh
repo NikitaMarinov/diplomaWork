@@ -24,7 +24,7 @@ curl -X PUT "http://elasticsearch:9200/order_index" -H 'Content-Type: applicatio
       "locationId": { "type": "long" },
       "price": { "type": "long" },
       "quantity": { "type": "integer" },
-      "orderDate": {"type": "date", "format": "strict_date_optional_time||epoch_millis"},
+      "orderDate": {"type": "date", "format": "strict_date_optional_time||yyyy-MM-dd HH:mm:ss" },
       "customerName": { "type": "text" },
       "status": { "type": "keyword" }
     }
@@ -44,7 +44,8 @@ curl -X PUT "http://elasticsearch:9200/manufacture_index" -H 'Content-Type: appl
       "quantity": { "type": "integer" },
       "status": { "type": "keyword" },
       "productionTime": { "type": "text" },
-      "locationId": { "type": "long" }
+      "locationId": { "type": "long" },
+      "productionEndTime": {"type": "date", "format": "strict_date_optional_time||yyyy-MM-dd HH:mm:ss" }
     }
   }
 }'
@@ -60,6 +61,7 @@ curl -X PUT "http://elasticsearch:9200/logistics_index" -H 'Content-Type: applic
       "brand": { "type": "text" },
       "model": { "type": "text" },
       "locationId": { "type": "long" },
+      "location": {"type": "geo_point"},
       "city": { "type": "text" },
       "country": { "type": "text" },
       "distanceToWarehouse": { "type": "long" },
@@ -69,6 +71,7 @@ curl -X PUT "http://elasticsearch:9200/logistics_index" -H 'Content-Type: applic
       "loadVolume": { "type": "long" },
       "quantity": { "type": "integer" },
       "customerName": { "type": "text" },
+      "deliveryEndTime": {"type": "date", "format": "strict_date_optional_time||yyyy-MM-dd HH:mm:ss" },
       "status": { "type": "keyword" },
       "deliveryDuration": { "type": "text" }
     }
@@ -90,7 +93,7 @@ curl -X PUT "http://elasticsearch:9200/sales_index" -H 'Content-Type: applicatio
       "country": { "type": "text" },
       "price": { "type": "long" },
       "quantity": { "type": "integer" },
-      "orderDate": {"type": "date", "format": "strict_date_optional_time||epoch_millis"},
+      "orderDate": {"type": "date", "format": "strict_date_optional_time||yyyy-MM-dd HH:mm:ss" },
       "status": { "type": "keyword" }
     }
   }

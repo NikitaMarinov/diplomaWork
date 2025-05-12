@@ -41,6 +41,7 @@ public interface Mapper {
     @Mapping(source = "location.id", target = "locationId")
     @Mapping(source = "location.city", target = "city")
     @Mapping(source = "location.country", target = "country")
+    @Mapping(source = "location.location", target = "location")
     @Mapping(source = "location.distanceToWarehouse", target = "distanceToWarehouse")
     @Mapping(source = "transport.id", target = "transportId")
     @Mapping(source = "transport.type", target = "carType")
@@ -80,7 +81,7 @@ public interface Mapper {
 
     @Named("instantToZonedDateTime")
     default ZonedDateTime instantToZonedDateTime(Instant instant) {
-        return instant != null ? instant.atZone(ZoneId.of("Europe/Moscow")) : null;
+        return instant != null ? instant.atZone(ZoneId.of("UTC")) : null;
     }
 
 }

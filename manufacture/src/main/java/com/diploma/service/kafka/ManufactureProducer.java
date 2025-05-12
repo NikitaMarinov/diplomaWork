@@ -25,6 +25,5 @@ public class ManufactureProducer {
                 .build();
 
         kafkaTemplate.send(TOPIC, wrapper);
-        System.out.println(wrapper.getManufactures().get(0));
     }
 }

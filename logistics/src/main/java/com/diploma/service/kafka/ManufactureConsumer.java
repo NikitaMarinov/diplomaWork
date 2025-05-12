@@ -15,7 +15,6 @@ public class ManufactureConsumer {
     @KafkaListener(topics = "${kafka.manufacture-topic}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenManufacture(ManufactureListWrapper manufactureListWrapper) {
         logisticsService.changeStatusToDelivery(manufactureListWrapper.getManufactures());
-        System.out.println(manufactureListWrapper.getManufactures());
     }
 
 }

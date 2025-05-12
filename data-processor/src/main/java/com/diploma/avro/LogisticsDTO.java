@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class LogisticsDTO extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -4462449826342533573L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"LogisticsDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"name\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"brand\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"model\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"locationId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"city\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"country\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"distanceToWarehouse\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"transportId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"carType\",\"type\":[\"null\",{\"type\":\"enum\",\"name\":\"CarType\",\"symbols\":[\"CADDY\",\"CARGOVAN\",\"TRUCK\",\"TRAIN\"]}],\"default\":null},{\"name\":\"speed\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"loadVolume\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"quantity\",\"type\":[\"null\",\"int\"],\"default\":null},{\"name\":\"customerName\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"SOLD\",\"RETURNED\"]}},{\"name\":\"deliveryDuration\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"deliveryEndTime\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}],\"default\":null}]}");
+  private static final long serialVersionUID = 3434580359314004929L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"LogisticsDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"name\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"brand\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"model\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"locationId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"city\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"country\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"distanceToWarehouse\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"transportId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"carType\",\"type\":[\"null\",{\"type\":\"enum\",\"name\":\"CarType\",\"symbols\":[\"CADDY\",\"CARGOVAN\",\"TRUCK\",\"TRAIN\"]}],\"default\":null},{\"name\":\"speed\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"loadVolume\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"quantity\",\"type\":[\"null\",\"int\"],\"default\":null},{\"name\":\"customerName\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"SOLD\",\"RETURNED\"]}},{\"name\":\"deliveryDuration\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"deliveryEndTime\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}],\"default\":null},{\"name\":\"location\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -92,6 +92,7 @@ static {
    private com.diploma.avro.OrderStatus status;
    private java.lang.CharSequence deliveryDuration;
    private java.time.Instant deliveryEndTime;
+   private java.lang.CharSequence location;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -120,8 +121,9 @@ static {
    * @param status The new value for status
    * @param deliveryDuration The new value for deliveryDuration
    * @param deliveryEndTime The new value for deliveryEndTime
+   * @param location The new value for location
    */
-  public LogisticsDTO(java.lang.Long id, java.lang.Long productId, java.lang.CharSequence name, java.lang.CharSequence brand, java.lang.CharSequence model, java.lang.Long locationId, java.lang.CharSequence city, java.lang.CharSequence country, java.lang.Long distanceToWarehouse, java.lang.Long transportId, com.diploma.avro.CarType carType, java.lang.Long speed, java.lang.Long loadVolume, java.lang.Integer quantity, java.lang.CharSequence customerName, com.diploma.avro.OrderStatus status, java.lang.CharSequence deliveryDuration, java.time.Instant deliveryEndTime) {
+  public LogisticsDTO(java.lang.Long id, java.lang.Long productId, java.lang.CharSequence name, java.lang.CharSequence brand, java.lang.CharSequence model, java.lang.Long locationId, java.lang.CharSequence city, java.lang.CharSequence country, java.lang.Long distanceToWarehouse, java.lang.Long transportId, com.diploma.avro.CarType carType, java.lang.Long speed, java.lang.Long loadVolume, java.lang.Integer quantity, java.lang.CharSequence customerName, com.diploma.avro.OrderStatus status, java.lang.CharSequence deliveryDuration, java.time.Instant deliveryEndTime, java.lang.CharSequence location) {
     this.id = id;
     this.productId = productId;
     this.name = name;
@@ -140,6 +142,7 @@ static {
     this.status = status;
     this.deliveryDuration = deliveryDuration;
     this.deliveryEndTime = deliveryEndTime;
+    this.location = location;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -165,6 +168,7 @@ static {
     case 15: return status;
     case 16: return deliveryDuration;
     case 17: return deliveryEndTime;
+    case 18: return location;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -191,6 +195,7 @@ static {
     case 15: status = (com.diploma.avro.OrderStatus)value$; break;
     case 16: deliveryDuration = (java.lang.CharSequence)value$; break;
     case 17: deliveryEndTime = (java.time.Instant)value$; break;
+    case 18: location = (java.lang.CharSequence)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -502,6 +507,23 @@ static {
   }
 
   /**
+   * Gets the value of the 'location' field.
+   * @return The value of the 'location' field.
+   */
+  public java.lang.CharSequence getLocation() {
+    return location;
+  }
+
+
+  /**
+   * Sets the value of the 'location' field.
+   * @param value the value to set.
+   */
+  public void setLocation(java.lang.CharSequence value) {
+    this.location = value;
+  }
+
+  /**
    * Creates a new LogisticsDTO RecordBuilder.
    * @return A new LogisticsDTO RecordBuilder
    */
@@ -560,6 +582,7 @@ static {
     private com.diploma.avro.OrderStatus status;
     private java.lang.CharSequence deliveryDuration;
     private java.time.Instant deliveryEndTime;
+    private java.lang.CharSequence location;
 
     /** Creates a new Builder */
     private Builder() {
@@ -644,6 +667,10 @@ static {
         this.deliveryEndTime = data().deepCopy(fields()[17].schema(), other.deliveryEndTime);
         fieldSetFlags()[17] = other.fieldSetFlags()[17];
       }
+      if (isValidValue(fields()[18], other.location)) {
+        this.location = data().deepCopy(fields()[18].schema(), other.location);
+        fieldSetFlags()[18] = other.fieldSetFlags()[18];
+      }
     }
 
     /**
@@ -723,6 +750,10 @@ static {
       if (isValidValue(fields()[17], other.deliveryEndTime)) {
         this.deliveryEndTime = data().deepCopy(fields()[17].schema(), other.deliveryEndTime);
         fieldSetFlags()[17] = true;
+      }
+      if (isValidValue(fields()[18], other.location)) {
+        this.location = data().deepCopy(fields()[18].schema(), other.location);
+        fieldSetFlags()[18] = true;
       }
     }
 
@@ -1446,6 +1477,46 @@ static {
       return this;
     }
 
+    /**
+      * Gets the value of the 'location' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getLocation() {
+      return location;
+    }
+
+
+    /**
+      * Sets the value of the 'location' field.
+      * @param value The value of 'location'.
+      * @return This builder.
+      */
+    public com.diploma.avro.LogisticsDTO.Builder setLocation(java.lang.CharSequence value) {
+      validate(fields()[18], value);
+      this.location = value;
+      fieldSetFlags()[18] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'location' field has been set.
+      * @return True if the 'location' field has been set, false otherwise.
+      */
+    public boolean hasLocation() {
+      return fieldSetFlags()[18];
+    }
+
+
+    /**
+      * Clears the value of the 'location' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.LogisticsDTO.Builder clearLocation() {
+      location = null;
+      fieldSetFlags()[18] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public LogisticsDTO build() {
@@ -1469,6 +1540,7 @@ static {
         record.status = fieldSetFlags()[15] ? this.status : (com.diploma.avro.OrderStatus) defaultValue(fields()[15]);
         record.deliveryDuration = fieldSetFlags()[16] ? this.deliveryDuration : (java.lang.CharSequence) defaultValue(fields()[16]);
         record.deliveryEndTime = fieldSetFlags()[17] ? this.deliveryEndTime : (java.time.Instant) defaultValue(fields()[17]);
+        record.location = fieldSetFlags()[18] ? this.location : (java.lang.CharSequence) defaultValue(fields()[18]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

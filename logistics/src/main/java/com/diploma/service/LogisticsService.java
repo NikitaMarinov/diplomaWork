@@ -23,7 +23,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Comparator;
@@ -84,11 +83,17 @@ public class LogisticsService {
         Map<String, Double> cityLoc = geoService.getCityCoordinates(locationDto.getCity());
         Map<String, Double> warLoc = geoService.getCityCoordinates(WAREHOUSE);
 
+        double latitude = warLoc.get("lat");
+        double longitude = warLoc.get("lon");
+
+        String coords = latitude + "," + longitude;
+
         double distance = geoService.distanceBetweenCities(warLoc.get("lat"), warLoc.get("lon"), cityLoc.get("lat"), cityLoc.get("lon"));
 
         Location location = mapper.toEntity(locationDto);
 
         location.setDistanceToWarehouse((int) distance);
+        location.setLocation(coords);
 
         return locationRepository.save(location);
     }
@@ -118,7 +123,7 @@ public class LogisticsService {
             Integer distanceToWarehouse = locationMap.get(order.getLocation().getId()).getDistanceToWarehouse();
             String deliveryDuration = String.valueOf(distanceToWarehouse / order.getTransport().getSpeed());
 
-            order.setDeliveryEndTime(ZonedDateTime.now(ZoneId.of("Europe/Moscow")).plusSeconds(Long.parseLong(deliveryDuration)));
+            order.setDeliveryEndTime(ZonedDateTime.now(ZoneId.of("UTC")).plusSeconds(Long.parseLong(deliveryDuration)));
             order.setDeliveryDuration(deliveryDuration);
             order.setStatus(DELIVERY);
         }

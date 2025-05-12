@@ -9,9 +9,8 @@ CREATE TABLE product (
 CREATE TABLE location (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
                           city VARCHAR(255) NOT NULL,
-                          country VARCHAR(255) NOT NULL,
-                          distance_to_warehouse INT
-);
+                          country VARCHAR(255) NOT NULL
+                      );
 
 CREATE TABLE t_order (
                          id BIGINT AUTO_INCREMENT PRIMARY KEY,

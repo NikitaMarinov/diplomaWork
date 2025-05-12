@@ -14,6 +14,5 @@ public class LogisticsConsumer {
     @KafkaListener(topics = "${kafka.logistics-topic}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenOrder(LogisticsListWrapper logisticsListWrapper) {
         salesService.sentToSales(logisticsListWrapper.getLogistics());
-        System.out.println(logisticsListWrapper.getLogistics().size());
     }
 }

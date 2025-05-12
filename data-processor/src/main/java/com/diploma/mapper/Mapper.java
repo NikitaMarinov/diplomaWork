@@ -14,7 +14,6 @@ import org.mapstruct.MappingConstants;
 import org.mapstruct.Named;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -60,22 +59,6 @@ public interface Mapper {
     List<LogisticsDTO> logisticsListToDtoList(List<Logistics> logistics);
 
     List<Logistics> logisticsListToEntityList(List<LogisticsDTO> logisticsDTOS);
-
-
-    default Instant map(LocalDateTime localDateTime) {
-        if (localDateTime == null) {
-            return null;
-        }
-        return localDateTime.atZone(ZoneId.systemDefault()).toInstant();
-    }
-
-
-    default LocalDateTime map(Instant instant) {
-        if (instant == null) {
-            return null;
-        }
-        return instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
-    }
 
     @Named("zonedDateTimeToInstant")
     default Instant zonedDateTimeToInstant(ZonedDateTime zonedDateTime) {

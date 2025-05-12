@@ -5,6 +5,7 @@ import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.GeoPointField;
 
 import java.time.ZonedDateTime;
 
@@ -30,11 +31,13 @@ public class Logistics {
     private String deliveryDuration;
     @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private ZonedDateTime deliveryEndTime;
+    @GeoPointField
+    private String location;
 
     public Logistics() {
     }
 
-    public Logistics(Long id, Long productId, String name, String brand, String model, Long locationId, String city, String country, Long distanceToWarehouse, Long transportId, String carType, Long speed, Long loadVolume, Integer quantity, String customerName, String status, String deliveryDuration, ZonedDateTime deliveryEndTime) {
+    public Logistics(Long id, Long productId, String name, String brand, String model, Long locationId, String city, String country, Long distanceToWarehouse, Long transportId, String carType, Long speed, Long loadVolume, Integer quantity, String customerName, String status, String deliveryDuration, ZonedDateTime deliveryEndTime, String location) {
         this.id = id;
         this.productId = productId;
         this.name = name;
@@ -53,6 +56,7 @@ public class Logistics {
         this.status = status;
         this.deliveryDuration = deliveryDuration;
         this.deliveryEndTime = deliveryEndTime;
+        this.location = location;
     }
 
     public Long getId() {
@@ -61,6 +65,15 @@ public class Logistics {
 
     public Logistics setId(Long id) {
         this.id = id;
+        return this;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public Logistics setLocation(String location) {
+        this.location = location;
         return this;
     }
 
