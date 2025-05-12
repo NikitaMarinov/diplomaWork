@@ -14,11 +14,14 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class ManufactureDto extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 4909893068603788813L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ManufactureDto\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":\"long\"},{\"name\":\"name\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"brand\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"model\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"quantity\",\"type\":\"int\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"SOLD\",\"RETURNED\"]}},{\"name\":\"productionTime\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"locationId\",\"type\":[\"null\",\"long\"],\"default\":null}]}");
+  private static final long serialVersionUID = 410845733454452374L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ManufactureDto\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":\"long\"},{\"name\":\"name\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"brand\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"model\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"quantity\",\"type\":\"int\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"SOLD\",\"RETURNED\"]}},{\"name\":\"productionTime\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"locationId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productionEndTime\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
+static {
+    MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.TimestampMillisConversion());
+  }
 
   private static final BinaryMessageEncoder<ManufactureDto> ENCODER =
       new BinaryMessageEncoder<ManufactureDto>(MODEL$, SCHEMA$);
@@ -80,6 +83,7 @@ public class ManufactureDto extends org.apache.avro.specific.SpecificRecordBase 
    private com.diploma.avro.OrderStatus status;
    private java.lang.CharSequence productionTime;
    private java.lang.Long locationId;
+   private java.time.Instant productionEndTime;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -99,8 +103,9 @@ public class ManufactureDto extends org.apache.avro.specific.SpecificRecordBase 
    * @param status The new value for status
    * @param productionTime The new value for productionTime
    * @param locationId The new value for locationId
+   * @param productionEndTime The new value for productionEndTime
    */
-  public ManufactureDto(java.lang.Long id, java.lang.Long productId, java.lang.CharSequence name, java.lang.CharSequence brand, java.lang.CharSequence model, java.lang.Integer quantity, com.diploma.avro.OrderStatus status, java.lang.CharSequence productionTime, java.lang.Long locationId) {
+  public ManufactureDto(java.lang.Long id, java.lang.Long productId, java.lang.CharSequence name, java.lang.CharSequence brand, java.lang.CharSequence model, java.lang.Integer quantity, com.diploma.avro.OrderStatus status, java.lang.CharSequence productionTime, java.lang.Long locationId, java.time.Instant productionEndTime) {
     this.id = id;
     this.productId = productId;
     this.name = name;
@@ -110,6 +115,7 @@ public class ManufactureDto extends org.apache.avro.specific.SpecificRecordBase 
     this.status = status;
     this.productionTime = productionTime;
     this.locationId = locationId;
+    this.productionEndTime = productionEndTime;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -126,6 +132,7 @@ public class ManufactureDto extends org.apache.avro.specific.SpecificRecordBase 
     case 6: return status;
     case 7: return productionTime;
     case 8: return locationId;
+    case 9: return productionEndTime;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -143,6 +150,7 @@ public class ManufactureDto extends org.apache.avro.specific.SpecificRecordBase 
     case 6: status = (com.diploma.avro.OrderStatus)value$; break;
     case 7: productionTime = (java.lang.CharSequence)value$; break;
     case 8: locationId = (java.lang.Long)value$; break;
+    case 9: productionEndTime = (java.time.Instant)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -301,6 +309,23 @@ public class ManufactureDto extends org.apache.avro.specific.SpecificRecordBase 
   }
 
   /**
+   * Gets the value of the 'productionEndTime' field.
+   * @return The value of the 'productionEndTime' field.
+   */
+  public java.time.Instant getProductionEndTime() {
+    return productionEndTime;
+  }
+
+
+  /**
+   * Sets the value of the 'productionEndTime' field.
+   * @param value the value to set.
+   */
+  public void setProductionEndTime(java.time.Instant value) {
+    this.productionEndTime = value;
+  }
+
+  /**
    * Creates a new ManufactureDto RecordBuilder.
    * @return A new ManufactureDto RecordBuilder
    */
@@ -350,6 +375,7 @@ public class ManufactureDto extends org.apache.avro.specific.SpecificRecordBase 
     private com.diploma.avro.OrderStatus status;
     private java.lang.CharSequence productionTime;
     private java.lang.Long locationId;
+    private java.time.Instant productionEndTime;
 
     /** Creates a new Builder */
     private Builder() {
@@ -398,6 +424,10 @@ public class ManufactureDto extends org.apache.avro.specific.SpecificRecordBase 
         this.locationId = data().deepCopy(fields()[8].schema(), other.locationId);
         fieldSetFlags()[8] = other.fieldSetFlags()[8];
       }
+      if (isValidValue(fields()[9], other.productionEndTime)) {
+        this.productionEndTime = data().deepCopy(fields()[9].schema(), other.productionEndTime);
+        fieldSetFlags()[9] = other.fieldSetFlags()[9];
+      }
     }
 
     /**
@@ -441,6 +471,10 @@ public class ManufactureDto extends org.apache.avro.specific.SpecificRecordBase 
       if (isValidValue(fields()[8], other.locationId)) {
         this.locationId = data().deepCopy(fields()[8].schema(), other.locationId);
         fieldSetFlags()[8] = true;
+      }
+      if (isValidValue(fields()[9], other.productionEndTime)) {
+        this.productionEndTime = data().deepCopy(fields()[9].schema(), other.productionEndTime);
+        fieldSetFlags()[9] = true;
       }
     }
 
@@ -802,6 +836,46 @@ public class ManufactureDto extends org.apache.avro.specific.SpecificRecordBase 
       return this;
     }
 
+    /**
+      * Gets the value of the 'productionEndTime' field.
+      * @return The value.
+      */
+    public java.time.Instant getProductionEndTime() {
+      return productionEndTime;
+    }
+
+
+    /**
+      * Sets the value of the 'productionEndTime' field.
+      * @param value The value of 'productionEndTime'.
+      * @return This builder.
+      */
+    public com.diploma.avro.ManufactureDto.Builder setProductionEndTime(java.time.Instant value) {
+      validate(fields()[9], value);
+      this.productionEndTime = value;
+      fieldSetFlags()[9] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'productionEndTime' field has been set.
+      * @return True if the 'productionEndTime' field has been set, false otherwise.
+      */
+    public boolean hasProductionEndTime() {
+      return fieldSetFlags()[9];
+    }
+
+
+    /**
+      * Clears the value of the 'productionEndTime' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.ManufactureDto.Builder clearProductionEndTime() {
+      productionEndTime = null;
+      fieldSetFlags()[9] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public ManufactureDto build() {
@@ -816,6 +890,7 @@ public class ManufactureDto extends org.apache.avro.specific.SpecificRecordBase 
         record.status = fieldSetFlags()[6] ? this.status : (com.diploma.avro.OrderStatus) defaultValue(fields()[6]);
         record.productionTime = fieldSetFlags()[7] ? this.productionTime : (java.lang.CharSequence) defaultValue(fields()[7]);
         record.locationId = fieldSetFlags()[8] ? this.locationId : (java.lang.Long) defaultValue(fields()[8]);
+        record.productionEndTime = fieldSetFlags()[9] ? this.productionEndTime : (java.time.Instant) defaultValue(fields()[9]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -843,195 +918,6 @@ public class ManufactureDto extends org.apache.avro.specific.SpecificRecordBase 
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
-  @Override protected boolean hasCustomCoders() { return true; }
-
-  @Override public void customEncode(org.apache.avro.io.Encoder out)
-    throws java.io.IOException
-  {
-    if (this.id == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeLong(this.id);
-    }
-
-    out.writeLong(this.productId);
-
-    if (this.name == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeString(this.name);
-    }
-
-    if (this.brand == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeString(this.brand);
-    }
-
-    if (this.model == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeString(this.model);
-    }
-
-    out.writeInt(this.quantity);
-
-    out.writeEnum(this.status.ordinal());
-
-    if (this.productionTime == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeString(this.productionTime);
-    }
-
-    if (this.locationId == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeLong(this.locationId);
-    }
-
-  }
-
-  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
-    throws java.io.IOException
-  {
-    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
-    if (fieldOrder == null) {
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.id = null;
-      } else {
-        this.id = in.readLong();
-      }
-
-      this.productId = in.readLong();
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.name = null;
-      } else {
-        this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.brand = null;
-      } else {
-        this.brand = in.readString(this.brand instanceof Utf8 ? (Utf8)this.brand : null);
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.model = null;
-      } else {
-        this.model = in.readString(this.model instanceof Utf8 ? (Utf8)this.model : null);
-      }
-
-      this.quantity = in.readInt();
-
-      this.status = com.diploma.avro.OrderStatus.values()[in.readEnum()];
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.productionTime = null;
-      } else {
-        this.productionTime = in.readString(this.productionTime instanceof Utf8 ? (Utf8)this.productionTime : null);
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.locationId = null;
-      } else {
-        this.locationId = in.readLong();
-      }
-
-    } else {
-      for (int i = 0; i < 9; i++) {
-        switch (fieldOrder[i].pos()) {
-        case 0:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.id = null;
-          } else {
-            this.id = in.readLong();
-          }
-          break;
-
-        case 1:
-          this.productId = in.readLong();
-          break;
-
-        case 2:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.name = null;
-          } else {
-            this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
-          }
-          break;
-
-        case 3:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.brand = null;
-          } else {
-            this.brand = in.readString(this.brand instanceof Utf8 ? (Utf8)this.brand : null);
-          }
-          break;
-
-        case 4:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.model = null;
-          } else {
-            this.model = in.readString(this.model instanceof Utf8 ? (Utf8)this.model : null);
-          }
-          break;
-
-        case 5:
-          this.quantity = in.readInt();
-          break;
-
-        case 6:
-          this.status = com.diploma.avro.OrderStatus.values()[in.readEnum()];
-          break;
-
-        case 7:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.productionTime = null;
-          } else {
-            this.productionTime = in.readString(this.productionTime instanceof Utf8 ? (Utf8)this.productionTime : null);
-          }
-          break;
-
-        case 8:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.locationId = null;
-          } else {
-            this.locationId = in.readLong();
-          }
-          break;
-
-        default:
-          throw new java.io.IOException("Corrupt ResolvingDecoder.");
-        }
-      }
-    }
-  }
 }
 
 

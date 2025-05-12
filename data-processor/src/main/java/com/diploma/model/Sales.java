@@ -6,7 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 @Document(indexName = "sales_index")
 public class Sales {
@@ -22,13 +22,13 @@ public class Sales {
     private Long price;
     private Integer quantity;
     @Field(type = FieldType.Date)
-    private LocalDate orderDate;
+    private ZonedDateTime orderDate;
     private String status;
 
     public Sales() {
     }
 
-    public Sales(String status, LocalDate orderDate, Integer quantity, Long price, String country, String city, Long locationId, String model, String brand, String name, Long productId, Long id) {
+    public Sales(String status, ZonedDateTime orderDate, Integer quantity, Long price, String country, String city, Long locationId, String model, String brand, String name, Long productId, Long id) {
         this.status = status;
         this.orderDate = orderDate;
         this.quantity = quantity;
@@ -133,11 +133,11 @@ public class Sales {
         return this;
     }
 
-    public LocalDate getOrderDate() {
+    public ZonedDateTime getOrderDate() {
         return orderDate;
     }
 
-    public Sales setOrderDate(LocalDate orderDate) {
+    public Sales setOrderDate(ZonedDateTime orderDate) {
         this.orderDate = orderDate;
         return this;
     }

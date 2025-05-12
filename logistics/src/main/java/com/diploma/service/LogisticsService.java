@@ -24,6 +24,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -116,7 +118,7 @@ public class LogisticsService {
             Integer distanceToWarehouse = locationMap.get(order.getLocation().getId()).getDistanceToWarehouse();
             String deliveryDuration = String.valueOf(distanceToWarehouse / order.getTransport().getSpeed());
 
-            order.setDeliveryTime(LocalDateTime.now().plusSeconds(Long.parseLong(deliveryDuration)));
+            order.setDeliveryEndTime(ZonedDateTime.now(ZoneId.of("Europe/Moscow")).plusSeconds(Long.parseLong(deliveryDuration)));
             order.setDeliveryDuration(deliveryDuration);
             order.setStatus(DELIVERY);
         }
@@ -132,7 +134,7 @@ public class LogisticsService {
             String jpql = "UPDATE Order o SET " +
                     "o.status = :status, " +
                     "o.deliveryDuration = :deliveryDuration, " +
-                    "o.deliveryTime = :deliveryTime, " +
+                    "o.deliveryEndTime = :deliveryEndTime, " +
                     "o.transport = :transport, " +
                     "o.location = :location " +
                     "WHERE o.migrationId = :migrationId";
@@ -140,7 +142,7 @@ public class LogisticsService {
             Query query = entityManager.createQuery(jpql);
             query.setParameter("status", order.getStatus());
             query.setParameter("deliveryDuration", order.getDeliveryDuration());
-            query.setParameter("deliveryTime", order.getDeliveryTime());
+            query.setParameter("deliveryEndTime", order.getDeliveryEndTime());
             query.setParameter("transport", order.getTransport());
             query.setParameter("location", order.getLocation());
             query.setParameter("migrationId", order.getMigrationId());

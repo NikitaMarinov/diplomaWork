@@ -14,11 +14,14 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class LogisticsDTO extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8768805114841225035L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"LogisticsDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"name\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"brand\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"model\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"locationId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"city\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"country\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"distanceToWarehouse\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"transportId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"carType\",\"type\":[\"null\",{\"type\":\"enum\",\"name\":\"CarType\",\"symbols\":[\"CADDY\",\"CARGOVAN\",\"TRUCK\",\"TRAIN\"]}],\"default\":null},{\"name\":\"speed\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"loadVolume\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"quantity\",\"type\":[\"null\",\"int\"],\"default\":null},{\"name\":\"customerName\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"SOLD\",\"RETURNED\"]}},{\"name\":\"deliveryDuration\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
+  private static final long serialVersionUID = -4462449826342533573L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"LogisticsDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"name\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"brand\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"model\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"locationId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"city\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"country\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"distanceToWarehouse\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"transportId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"carType\",\"type\":[\"null\",{\"type\":\"enum\",\"name\":\"CarType\",\"symbols\":[\"CADDY\",\"CARGOVAN\",\"TRUCK\",\"TRAIN\"]}],\"default\":null},{\"name\":\"speed\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"loadVolume\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"quantity\",\"type\":[\"null\",\"int\"],\"default\":null},{\"name\":\"customerName\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"SOLD\",\"RETURNED\"]}},{\"name\":\"deliveryDuration\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"deliveryEndTime\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
+static {
+    MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.TimestampMillisConversion());
+  }
 
   private static final BinaryMessageEncoder<LogisticsDTO> ENCODER =
       new BinaryMessageEncoder<LogisticsDTO>(MODEL$, SCHEMA$);
@@ -88,6 +91,7 @@ public class LogisticsDTO extends org.apache.avro.specific.SpecificRecordBase im
    private java.lang.CharSequence customerName;
    private com.diploma.avro.OrderStatus status;
    private java.lang.CharSequence deliveryDuration;
+   private java.time.Instant deliveryEndTime;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -115,8 +119,9 @@ public class LogisticsDTO extends org.apache.avro.specific.SpecificRecordBase im
    * @param customerName The new value for customerName
    * @param status The new value for status
    * @param deliveryDuration The new value for deliveryDuration
+   * @param deliveryEndTime The new value for deliveryEndTime
    */
-  public LogisticsDTO(java.lang.Long id, java.lang.Long productId, java.lang.CharSequence name, java.lang.CharSequence brand, java.lang.CharSequence model, java.lang.Long locationId, java.lang.CharSequence city, java.lang.CharSequence country, java.lang.Long distanceToWarehouse, java.lang.Long transportId, com.diploma.avro.CarType carType, java.lang.Long speed, java.lang.Long loadVolume, java.lang.Integer quantity, java.lang.CharSequence customerName, com.diploma.avro.OrderStatus status, java.lang.CharSequence deliveryDuration) {
+  public LogisticsDTO(java.lang.Long id, java.lang.Long productId, java.lang.CharSequence name, java.lang.CharSequence brand, java.lang.CharSequence model, java.lang.Long locationId, java.lang.CharSequence city, java.lang.CharSequence country, java.lang.Long distanceToWarehouse, java.lang.Long transportId, com.diploma.avro.CarType carType, java.lang.Long speed, java.lang.Long loadVolume, java.lang.Integer quantity, java.lang.CharSequence customerName, com.diploma.avro.OrderStatus status, java.lang.CharSequence deliveryDuration, java.time.Instant deliveryEndTime) {
     this.id = id;
     this.productId = productId;
     this.name = name;
@@ -134,6 +139,7 @@ public class LogisticsDTO extends org.apache.avro.specific.SpecificRecordBase im
     this.customerName = customerName;
     this.status = status;
     this.deliveryDuration = deliveryDuration;
+    this.deliveryEndTime = deliveryEndTime;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -158,6 +164,7 @@ public class LogisticsDTO extends org.apache.avro.specific.SpecificRecordBase im
     case 14: return customerName;
     case 15: return status;
     case 16: return deliveryDuration;
+    case 17: return deliveryEndTime;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -183,6 +190,7 @@ public class LogisticsDTO extends org.apache.avro.specific.SpecificRecordBase im
     case 14: customerName = (java.lang.CharSequence)value$; break;
     case 15: status = (com.diploma.avro.OrderStatus)value$; break;
     case 16: deliveryDuration = (java.lang.CharSequence)value$; break;
+    case 17: deliveryEndTime = (java.time.Instant)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -477,6 +485,23 @@ public class LogisticsDTO extends org.apache.avro.specific.SpecificRecordBase im
   }
 
   /**
+   * Gets the value of the 'deliveryEndTime' field.
+   * @return The value of the 'deliveryEndTime' field.
+   */
+  public java.time.Instant getDeliveryEndTime() {
+    return deliveryEndTime;
+  }
+
+
+  /**
+   * Sets the value of the 'deliveryEndTime' field.
+   * @param value the value to set.
+   */
+  public void setDeliveryEndTime(java.time.Instant value) {
+    this.deliveryEndTime = value;
+  }
+
+  /**
    * Creates a new LogisticsDTO RecordBuilder.
    * @return A new LogisticsDTO RecordBuilder
    */
@@ -534,6 +559,7 @@ public class LogisticsDTO extends org.apache.avro.specific.SpecificRecordBase im
     private java.lang.CharSequence customerName;
     private com.diploma.avro.OrderStatus status;
     private java.lang.CharSequence deliveryDuration;
+    private java.time.Instant deliveryEndTime;
 
     /** Creates a new Builder */
     private Builder() {
@@ -614,6 +640,10 @@ public class LogisticsDTO extends org.apache.avro.specific.SpecificRecordBase im
         this.deliveryDuration = data().deepCopy(fields()[16].schema(), other.deliveryDuration);
         fieldSetFlags()[16] = other.fieldSetFlags()[16];
       }
+      if (isValidValue(fields()[17], other.deliveryEndTime)) {
+        this.deliveryEndTime = data().deepCopy(fields()[17].schema(), other.deliveryEndTime);
+        fieldSetFlags()[17] = other.fieldSetFlags()[17];
+      }
     }
 
     /**
@@ -689,6 +719,10 @@ public class LogisticsDTO extends org.apache.avro.specific.SpecificRecordBase im
       if (isValidValue(fields()[16], other.deliveryDuration)) {
         this.deliveryDuration = data().deepCopy(fields()[16].schema(), other.deliveryDuration);
         fieldSetFlags()[16] = true;
+      }
+      if (isValidValue(fields()[17], other.deliveryEndTime)) {
+        this.deliveryEndTime = data().deepCopy(fields()[17].schema(), other.deliveryEndTime);
+        fieldSetFlags()[17] = true;
       }
     }
 
@@ -1372,6 +1406,46 @@ public class LogisticsDTO extends org.apache.avro.specific.SpecificRecordBase im
       return this;
     }
 
+    /**
+      * Gets the value of the 'deliveryEndTime' field.
+      * @return The value.
+      */
+    public java.time.Instant getDeliveryEndTime() {
+      return deliveryEndTime;
+    }
+
+
+    /**
+      * Sets the value of the 'deliveryEndTime' field.
+      * @param value The value of 'deliveryEndTime'.
+      * @return This builder.
+      */
+    public com.diploma.avro.LogisticsDTO.Builder setDeliveryEndTime(java.time.Instant value) {
+      validate(fields()[17], value);
+      this.deliveryEndTime = value;
+      fieldSetFlags()[17] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'deliveryEndTime' field has been set.
+      * @return True if the 'deliveryEndTime' field has been set, false otherwise.
+      */
+    public boolean hasDeliveryEndTime() {
+      return fieldSetFlags()[17];
+    }
+
+
+    /**
+      * Clears the value of the 'deliveryEndTime' field.
+      * @return This builder.
+      */
+    public com.diploma.avro.LogisticsDTO.Builder clearDeliveryEndTime() {
+      deliveryEndTime = null;
+      fieldSetFlags()[17] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public LogisticsDTO build() {
@@ -1394,6 +1468,7 @@ public class LogisticsDTO extends org.apache.avro.specific.SpecificRecordBase im
         record.customerName = fieldSetFlags()[14] ? this.customerName : (java.lang.CharSequence) defaultValue(fields()[14]);
         record.status = fieldSetFlags()[15] ? this.status : (com.diploma.avro.OrderStatus) defaultValue(fields()[15]);
         record.deliveryDuration = fieldSetFlags()[16] ? this.deliveryDuration : (java.lang.CharSequence) defaultValue(fields()[16]);
+        record.deliveryEndTime = fieldSetFlags()[17] ? this.deliveryEndTime : (java.time.Instant) defaultValue(fields()[17]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -1421,419 +1496,6 @@ public class LogisticsDTO extends org.apache.avro.specific.SpecificRecordBase im
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
-  @Override protected boolean hasCustomCoders() { return true; }
-
-  @Override public void customEncode(org.apache.avro.io.Encoder out)
-    throws java.io.IOException
-  {
-    if (this.id == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeLong(this.id);
-    }
-
-    if (this.productId == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeLong(this.productId);
-    }
-
-    if (this.name == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeString(this.name);
-    }
-
-    if (this.brand == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeString(this.brand);
-    }
-
-    if (this.model == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeString(this.model);
-    }
-
-    if (this.locationId == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeLong(this.locationId);
-    }
-
-    if (this.city == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeString(this.city);
-    }
-
-    if (this.country == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeString(this.country);
-    }
-
-    if (this.distanceToWarehouse == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeLong(this.distanceToWarehouse);
-    }
-
-    if (this.transportId == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeLong(this.transportId);
-    }
-
-    if (this.carType == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeEnum(this.carType.ordinal());
-    }
-
-    if (this.speed == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeLong(this.speed);
-    }
-
-    if (this.loadVolume == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeLong(this.loadVolume);
-    }
-
-    if (this.quantity == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeInt(this.quantity);
-    }
-
-    if (this.customerName == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeString(this.customerName);
-    }
-
-    out.writeEnum(this.status.ordinal());
-
-    if (this.deliveryDuration == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeString(this.deliveryDuration);
-    }
-
-  }
-
-  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
-    throws java.io.IOException
-  {
-    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
-    if (fieldOrder == null) {
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.id = null;
-      } else {
-        this.id = in.readLong();
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.productId = null;
-      } else {
-        this.productId = in.readLong();
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.name = null;
-      } else {
-        this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.brand = null;
-      } else {
-        this.brand = in.readString(this.brand instanceof Utf8 ? (Utf8)this.brand : null);
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.model = null;
-      } else {
-        this.model = in.readString(this.model instanceof Utf8 ? (Utf8)this.model : null);
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.locationId = null;
-      } else {
-        this.locationId = in.readLong();
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.city = null;
-      } else {
-        this.city = in.readString(this.city instanceof Utf8 ? (Utf8)this.city : null);
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.country = null;
-      } else {
-        this.country = in.readString(this.country instanceof Utf8 ? (Utf8)this.country : null);
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.distanceToWarehouse = null;
-      } else {
-        this.distanceToWarehouse = in.readLong();
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.transportId = null;
-      } else {
-        this.transportId = in.readLong();
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.carType = null;
-      } else {
-        this.carType = com.diploma.avro.CarType.values()[in.readEnum()];
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.speed = null;
-      } else {
-        this.speed = in.readLong();
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.loadVolume = null;
-      } else {
-        this.loadVolume = in.readLong();
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.quantity = null;
-      } else {
-        this.quantity = in.readInt();
-      }
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.customerName = null;
-      } else {
-        this.customerName = in.readString(this.customerName instanceof Utf8 ? (Utf8)this.customerName : null);
-      }
-
-      this.status = com.diploma.avro.OrderStatus.values()[in.readEnum()];
-
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.deliveryDuration = null;
-      } else {
-        this.deliveryDuration = in.readString(this.deliveryDuration instanceof Utf8 ? (Utf8)this.deliveryDuration : null);
-      }
-
-    } else {
-      for (int i = 0; i < 17; i++) {
-        switch (fieldOrder[i].pos()) {
-        case 0:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.id = null;
-          } else {
-            this.id = in.readLong();
-          }
-          break;
-
-        case 1:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.productId = null;
-          } else {
-            this.productId = in.readLong();
-          }
-          break;
-
-        case 2:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.name = null;
-          } else {
-            this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
-          }
-          break;
-
-        case 3:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.brand = null;
-          } else {
-            this.brand = in.readString(this.brand instanceof Utf8 ? (Utf8)this.brand : null);
-          }
-          break;
-
-        case 4:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.model = null;
-          } else {
-            this.model = in.readString(this.model instanceof Utf8 ? (Utf8)this.model : null);
-          }
-          break;
-
-        case 5:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.locationId = null;
-          } else {
-            this.locationId = in.readLong();
-          }
-          break;
-
-        case 6:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.city = null;
-          } else {
-            this.city = in.readString(this.city instanceof Utf8 ? (Utf8)this.city : null);
-          }
-          break;
-
-        case 7:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.country = null;
-          } else {
-            this.country = in.readString(this.country instanceof Utf8 ? (Utf8)this.country : null);
-          }
-          break;
-
-        case 8:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.distanceToWarehouse = null;
-          } else {
-            this.distanceToWarehouse = in.readLong();
-          }
-          break;
-
-        case 9:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.transportId = null;
-          } else {
-            this.transportId = in.readLong();
-          }
-          break;
-
-        case 10:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.carType = null;
-          } else {
-            this.carType = com.diploma.avro.CarType.values()[in.readEnum()];
-          }
-          break;
-
-        case 11:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.speed = null;
-          } else {
-            this.speed = in.readLong();
-          }
-          break;
-
-        case 12:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.loadVolume = null;
-          } else {
-            this.loadVolume = in.readLong();
-          }
-          break;
-
-        case 13:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.quantity = null;
-          } else {
-            this.quantity = in.readInt();
-          }
-          break;
-
-        case 14:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.customerName = null;
-          } else {
-            this.customerName = in.readString(this.customerName instanceof Utf8 ? (Utf8)this.customerName : null);
-          }
-          break;
-
-        case 15:
-          this.status = com.diploma.avro.OrderStatus.values()[in.readEnum()];
-          break;
-
-        case 16:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.deliveryDuration = null;
-          } else {
-            this.deliveryDuration = in.readString(this.deliveryDuration instanceof Utf8 ? (Utf8)this.deliveryDuration : null);
-          }
-          break;
-
-        default:
-          throw new java.io.IOException("Corrupt ResolvingDecoder.");
-        }
-      }
-    }
-  }
 }
 
 

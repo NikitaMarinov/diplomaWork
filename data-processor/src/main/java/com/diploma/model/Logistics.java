@@ -1,7 +1,12 @@
 package com.diploma.model;
 
 import jakarta.persistence.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import java.time.ZonedDateTime;
 
 @Document(indexName = "logistics_index")
 public class Logistics {
@@ -23,11 +28,13 @@ public class Logistics {
     private String customerName;
     private String status;
     private String deliveryDuration;
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private ZonedDateTime deliveryEndTime;
 
     public Logistics() {
     }
 
-    public Logistics(Long id, Long productId, String name, String brand, String model, Long locationId, String city, String country, Long distanceToWarehouse, Long transportId, String carType, Long speed, Long loadVolume, Integer quantity, String customerName, String status, String deliveryDuration) {
+    public Logistics(Long id, Long productId, String name, String brand, String model, Long locationId, String city, String country, Long distanceToWarehouse, Long transportId, String carType, Long speed, Long loadVolume, Integer quantity, String customerName, String status, String deliveryDuration, ZonedDateTime deliveryEndTime) {
         this.id = id;
         this.productId = productId;
         this.name = name;
@@ -45,6 +52,7 @@ public class Logistics {
         this.customerName = customerName;
         this.status = status;
         this.deliveryDuration = deliveryDuration;
+        this.deliveryEndTime = deliveryEndTime;
     }
 
     public Long getId() {
@@ -53,6 +61,15 @@ public class Logistics {
 
     public Logistics setId(Long id) {
         this.id = id;
+        return this;
+    }
+
+    public ZonedDateTime getDeliveryEndTime() {
+        return deliveryEndTime;
+    }
+
+    public Logistics setDeliveryEndTime(ZonedDateTime deliveryEndTime) {
+        this.deliveryEndTime = deliveryEndTime;
         return this;
     }
 

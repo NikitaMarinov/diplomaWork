@@ -26,7 +26,7 @@ CREATE TABLE t_order (
                          quantity INT NOT NULL,
                          customer_name VARCHAR(255) NOT NULL,
                          status VARCHAR(255) NOT NULL,
-                         delivery_time  TIMESTAMP,
+                         delivery_end_time  TIMESTAMP,
                          delivery_duration VARCHAR(255),
                          location_id BIGINT,
                          transport_id BIGINT,

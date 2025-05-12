@@ -12,7 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "t_order")
@@ -34,14 +34,14 @@ public class Order {
     private String customerName;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
-    private LocalDateTime deliveryTime;
+    private ZonedDateTime deliveryEndTime;
     private String deliveryDuration;
     private Long migrationId;
 
     public Order() {
     }
 
-    public Order(Long id, Product product, Location location, Transport transport, Integer quantity, String customerName, OrderStatus status, LocalDateTime deliveryTime, String deliveryDuration, Long migrationId) {
+    public Order(Long id, Product product, Location location, Transport transport, Integer quantity, String customerName, OrderStatus status, ZonedDateTime deliveryEndTime, String deliveryDuration, Long migrationId) {
         this.id = id;
         this.product = product;
         this.location = location;
@@ -49,7 +49,7 @@ public class Order {
         this.quantity = quantity;
         this.customerName = customerName;
         this.status = status;
-        this.deliveryTime = deliveryTime;
+        this.deliveryEndTime = deliveryEndTime;
         this.deliveryDuration = deliveryDuration;
         this.migrationId = migrationId;
     }
@@ -117,12 +117,13 @@ public class Order {
         return this;
     }
 
-    public LocalDateTime getDeliveryTime() {
-        return deliveryTime;
+
+    public ZonedDateTime getDeliveryEndTime() {
+        return deliveryEndTime;
     }
 
-    public Order setDeliveryTime(LocalDateTime deliveryTime) {
-        this.deliveryTime = deliveryTime;
+    public Order setDeliveryEndTime(ZonedDateTime deliveryEndTime) {
+        this.deliveryEndTime = deliveryEndTime;
         return this;
     }
 
@@ -154,7 +155,7 @@ public class Order {
                 ", quantity=" + quantity +
                 ", customerName='" + customerName + '\'' +
                 ", status=" + status +
-                ", deliveryTime=" + deliveryTime +
+                ", deliveryEndTime=" + deliveryEndTime +
                 ", deliveryDuration='" + deliveryDuration + '\'' +
                 ", migrationId=" + migrationId +
                 '}';

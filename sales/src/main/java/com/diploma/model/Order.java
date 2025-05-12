@@ -11,7 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "t_order")
@@ -28,12 +28,12 @@ public class Order {
     private Location location;
     private Long price;
     private Integer quantity;
-    private LocalDate orderDate;
+    private ZonedDateTime orderDate;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
     private Long migrationId;
 
-    public Order(Long id, Product product, Location location, Long price, Integer quantity, LocalDate orderDate, OrderStatus status, Long migrationId) {
+    public Order(Long id, Product product, Location location, Long price, Integer quantity, ZonedDateTime orderDate, OrderStatus status, Long migrationId) {
         this.id = id;
         this.product = product;
         this.location = location;
@@ -92,11 +92,11 @@ public class Order {
         return this;
     }
 
-    public LocalDate getOrderDate() {
+    public ZonedDateTime getOrderDate() {
         return orderDate;
     }
 
-    public Order setOrderDate(LocalDate orderDate) {
+    public Order setOrderDate(ZonedDateTime orderDate) {
         this.orderDate = orderDate;
         return this;
     }

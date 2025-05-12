@@ -1,7 +1,12 @@
 package com.diploma.model;
 
 import jakarta.persistence.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import java.time.ZonedDateTime;
 
 @Document(indexName = "manufacture_index")
 public class Manufacture {
@@ -15,11 +20,14 @@ public class Manufacture {
     private String status;
     private String productionTime;
     private Long locationId;
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private ZonedDateTime productionEndTime;
+
 
     public Manufacture() {
     }
 
-    public Manufacture(Long id, Long productId, String name, String brand, String model, Integer quantity, String status, String productionTime, Long locationId) {
+    public Manufacture(Long id, Long productId, String name, String brand, String model, Integer quantity, String status, String productionTime, Long locationId, ZonedDateTime productionEndTime) {
         this.id = id;
         this.productId = productId;
         this.name = name;
@@ -29,6 +37,16 @@ public class Manufacture {
         this.status = status;
         this.productionTime = productionTime;
         this.locationId = locationId;
+        this.productionEndTime = productionEndTime;
+    }
+
+    public ZonedDateTime getProductionEndTime() {
+        return productionEndTime;
+    }
+
+    public Manufacture setProductionEndTime(ZonedDateTime productionEndTime) {
+        this.productionEndTime = productionEndTime;
+        return this;
     }
 
     public Long getId() {

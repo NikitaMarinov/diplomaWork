@@ -41,7 +41,8 @@
       { "name": "quantity", "type": "int" },
       { "name": "status", "type": "com.diploma.avro.OrderStatus" },
       { "name": "productionTime", "type": ["null", "string"], "default": null  },
-      { "name": "locationId", "type": ["null", "long"], "default": null }
+      { "name": "locationId", "type": ["null", "long"], "default": null },
+      { "name": "productionEndTime", "type": ["null", { "type": "long", "logicalType": "timestamp-millis" }], "default": null}
     ]
   },
   {

@@ -1,7 +1,12 @@
 #!/bin/bash
 
 echo "? Waiting Elasticsearch..."
-until curl -s http://elasticsearch:9200/_cluster/health?wait_for_status=yellow; do
+until curl -s http://elasticsearch:9200/_cluster/health | grep -q '"status":"green"\|"status":"yellow"'; do
+  sleep 2
+done
+
+echo "? Waiting for Kibana..."
+until curl -s http://kibana:5601/api/status | grep -q '"level":"available"'; do
   sleep 2
 done
 
@@ -19,7 +24,7 @@ curl -X PUT "http://elasticsearch:9200/order_index" -H 'Content-Type: applicatio
       "locationId": { "type": "long" },
       "price": { "type": "long" },
       "quantity": { "type": "integer" },
-      "orderDate": { "type": "date", "format": "yyyy-MM-dd" },
+      "orderDate": {"type": "date", "format": "strict_date_optional_time||epoch_millis"},
       "customerName": { "type": "text" },
       "status": { "type": "keyword" }
     }
@@ -85,7 +90,7 @@ curl -X PUT "http://elasticsearch:9200/sales_index" -H 'Content-Type: applicatio
       "country": { "type": "text" },
       "price": { "type": "long" },
       "quantity": { "type": "integer" },
-      "orderDate": { "type": "date" },
+      "orderDate": {"type": "date", "format": "strict_date_optional_time||epoch_millis"},
       "status": { "type": "keyword" }
     }
   }
@@ -105,14 +110,16 @@ curl -X POST "http://kibana:5601/api/index_patterns/index_pattern" -H 'kbn-xsrf:
 curl -X POST "http://kibana:5601/api/index_patterns/index_pattern" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d '
 {
   "index_pattern": {
-    "title": "manufacture_index"
+    "title": "manufacture_index",
+    "timeFieldName": "productionEndTime"
   }
 }'
 
 curl -X POST "http://kibana:5601/api/index_patterns/index_pattern" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d '
 {
   "index_pattern": {
-    "title": "logistics_index"
+    "title": "logistics_index",
+    "timeFieldName": "deliveryEndTime"
   }
 }'
 

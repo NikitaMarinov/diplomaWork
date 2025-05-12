@@ -17,6 +17,9 @@ import org.springframework.boot.logging.LogLevel;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -61,7 +64,7 @@ public class OrderGenerationService {
             Location randomLocation = locations.get(random.nextInt(locations.size()));
 
             Order order = getRandomOrder(randomProduct, randomLocation, random);
-
+            System.out.println(order.getOrderDate());
             ordersBatch.add(order);
 
 
@@ -84,7 +87,7 @@ public class OrderGenerationService {
         order.setProduct(randomProduct);
         order.setPrice(totalPrice);
         order.setQuantity(quantity);
-        order.setOrderDate(LocalDate.now());
+        order.setOrderDate(LocalDateTime.now().atZone(ZoneId.of("Europe/Moscow")));
         order.setCustomerName(faker.name().fullName());
         order.setStatus(OrderStatus.OPEN);
         order.setLocation(randomLocation);

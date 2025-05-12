@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -50,7 +52,7 @@ public class ManufactureService {
         for (Order order : orderList) {
             manufacturingTimePerObject = Integer.parseInt(manufactureMap.get(order.getProduct().getId()).getManufacturing_time());
             order.setStatus(OrderStatus.IN_PRODUCTION);
-            order.setProductionEndTime(LocalDateTime.now().plusSeconds(((long) manufacturingTimePerObject * order.getQuantity()) / 10000)); // TODO ПОТОМУ УБРАТЬ ОДИН НОЛЬ!!!!!
+            order.setProductionEndTime(ZonedDateTime.now(ZoneId.of("Europe/Moscow")).plusSeconds(((long) manufacturingTimePerObject * order.getQuantity()) / 10000)); // TODO ПОТОМУ УБРАТЬ ОДИН НОЛЬ!!!!!
             order.setProductionTime(String.valueOf((long) manufacturingTimePerObject * order.getQuantity()));
             order.setId(null);
         }

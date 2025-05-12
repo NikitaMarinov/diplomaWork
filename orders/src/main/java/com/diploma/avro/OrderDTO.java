@@ -14,13 +14,13 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class OrderDTO extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -7850789549189956199L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"name\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"brand\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"model\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"pricePerObject\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"locationId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"price\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"quantity\",\"type\":[\"null\",\"int\"],\"default\":null},{\"name\":\"orderDate\",\"type\":[\"null\",{\"type\":\"int\",\"logicalType\":\"date\"}],\"default\":null},{\"name\":\"customerName\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"SOLD\",\"RETURNED\"]}}]}");
+  private static final long serialVersionUID = 6459122982561835073L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderDTO\",\"namespace\":\"com.diploma.avro\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"productId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"name\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"brand\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"model\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"pricePerObject\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"locationId\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"price\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"quantity\",\"type\":[\"null\",\"int\"],\"default\":null},{\"name\":\"orderDate\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}],\"default\":null},{\"name\":\"customerName\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"OrderStatus\",\"symbols\":[\"OPEN\",\"IN_PRODUCTION\",\"DELIVERY\",\"DELIVERED\",\"SOLD\",\"RETURNED\"]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
 static {
-    MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.DateConversion());
+    MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.TimestampMillisConversion());
   }
 
   private static final BinaryMessageEncoder<OrderDTO> ENCODER =
@@ -83,7 +83,7 @@ static {
    private java.lang.Long locationId;
    private java.lang.Long price;
    private java.lang.Integer quantity;
-   private java.time.LocalDate orderDate;
+   private java.time.Instant orderDate;
    private java.lang.CharSequence customerName;
    private com.diploma.avro.OrderStatus status;
 
@@ -109,7 +109,7 @@ static {
    * @param customerName The new value for customerName
    * @param status The new value for status
    */
-  public OrderDTO(java.lang.Long id, java.lang.Long productId, java.lang.CharSequence name, java.lang.CharSequence brand, java.lang.CharSequence model, java.lang.Long pricePerObject, java.lang.Long locationId, java.lang.Long price, java.lang.Integer quantity, java.time.LocalDate orderDate, java.lang.CharSequence customerName, com.diploma.avro.OrderStatus status) {
+  public OrderDTO(java.lang.Long id, java.lang.Long productId, java.lang.CharSequence name, java.lang.CharSequence brand, java.lang.CharSequence model, java.lang.Long pricePerObject, java.lang.Long locationId, java.lang.Long price, java.lang.Integer quantity, java.time.Instant orderDate, java.lang.CharSequence customerName, com.diploma.avro.OrderStatus status) {
     this.id = id;
     this.productId = productId;
     this.name = name;
@@ -158,7 +158,7 @@ static {
     case 6: locationId = (java.lang.Long)value$; break;
     case 7: price = (java.lang.Long)value$; break;
     case 8: quantity = (java.lang.Integer)value$; break;
-    case 9: orderDate = (java.time.LocalDate)value$; break;
+    case 9: orderDate = (java.time.Instant)value$; break;
     case 10: customerName = (java.lang.CharSequence)value$; break;
     case 11: status = (com.diploma.avro.OrderStatus)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
@@ -322,7 +322,7 @@ static {
    * Gets the value of the 'orderDate' field.
    * @return The value of the 'orderDate' field.
    */
-  public java.time.LocalDate getOrderDate() {
+  public java.time.Instant getOrderDate() {
     return orderDate;
   }
 
@@ -331,7 +331,7 @@ static {
    * Sets the value of the 'orderDate' field.
    * @param value the value to set.
    */
-  public void setOrderDate(java.time.LocalDate value) {
+  public void setOrderDate(java.time.Instant value) {
     this.orderDate = value;
   }
 
@@ -419,7 +419,7 @@ static {
     private java.lang.Long locationId;
     private java.lang.Long price;
     private java.lang.Integer quantity;
-    private java.time.LocalDate orderDate;
+    private java.time.Instant orderDate;
     private java.lang.CharSequence customerName;
     private com.diploma.avro.OrderStatus status;
 
@@ -904,7 +904,7 @@ static {
       * Gets the value of the 'orderDate' field.
       * @return The value.
       */
-    public java.time.LocalDate getOrderDate() {
+    public java.time.Instant getOrderDate() {
       return orderDate;
     }
 
@@ -914,7 +914,7 @@ static {
       * @param value The value of 'orderDate'.
       * @return This builder.
       */
-    public com.diploma.avro.OrderDTO.Builder setOrderDate(java.time.LocalDate value) {
+    public com.diploma.avro.OrderDTO.Builder setOrderDate(java.time.Instant value) {
       validate(fields()[9], value);
       this.orderDate = value;
       fieldSetFlags()[9] = true;
@@ -1034,7 +1034,7 @@ static {
         record.locationId = fieldSetFlags()[6] ? this.locationId : (java.lang.Long) defaultValue(fields()[6]);
         record.price = fieldSetFlags()[7] ? this.price : (java.lang.Long) defaultValue(fields()[7]);
         record.quantity = fieldSetFlags()[8] ? this.quantity : (java.lang.Integer) defaultValue(fields()[8]);
-        record.orderDate = fieldSetFlags()[9] ? this.orderDate : (java.time.LocalDate) defaultValue(fields()[9]);
+        record.orderDate = fieldSetFlags()[9] ? this.orderDate : (java.time.Instant) defaultValue(fields()[9]);
         record.customerName = fieldSetFlags()[10] ? this.customerName : (java.lang.CharSequence) defaultValue(fields()[10]);
         record.status = fieldSetFlags()[11] ? this.status : (com.diploma.avro.OrderStatus) defaultValue(fields()[11]);
         return record;

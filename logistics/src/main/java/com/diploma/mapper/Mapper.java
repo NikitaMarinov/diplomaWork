@@ -9,7 +9,11 @@ import com.diploma.model.Order;
 import com.diploma.model.dto.LocationDto;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.Named;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @org.mapstruct.Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
@@ -43,6 +47,7 @@ public interface Mapper {
     @Mapping(source = "transport.speed", target = "speed")
     @Mapping(source = "transport.loadVolume", target = "loadVolume")
     @Mapping(source = "migrationId", target = "id")
+    @Mapping(source = "deliveryEndTime", target = "deliveryEndTime", qualifiedByName = "zonedDateTimeToInstant")
     LogisticsDTO toLogisticsDto(Order order);
 
     @Mapping(source = "productId", target = "product.id")
@@ -67,4 +72,15 @@ public interface Mapper {
     default String map(CharSequence value) {
         return value == null ? null : value.toString();
     }
+
+    @Named("zonedDateTimeToInstant")
+    default Instant zonedDateTimeToInstant(ZonedDateTime zonedDateTime) {
+        return zonedDateTime != null ? zonedDateTime.toInstant() : null;
+    }
+
+    @Named("instantToZonedDateTime")
+    default ZonedDateTime instantToZonedDateTime(Instant instant) {
+        return instant != null ? instant.atZone(ZoneId.of("Europe/Moscow")) : null;
+    }
+
 }

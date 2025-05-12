@@ -1,11 +1,12 @@
 package com.diploma.model;
 
 import jakarta.persistence.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 @Document(indexName = "order_index")
 public class Order {
@@ -19,15 +20,15 @@ public class Order {
     private Long locationId;
     private Long price;
     private Integer quantity;
-    @Field(type = FieldType.Date)
-    private LocalDate orderDate;
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private ZonedDateTime orderDate;
     private String customerName;
     private String status;
 
     public Order() {
     }
 
-    public Order(Long id, Long productId, String name, String brand, String model, Long pricePerObject, Long locationId, Long price, Integer quantity, LocalDate orderDate, String customerName, String status) {
+    public Order(Long id, Long productId, String name, String brand, String model, Long pricePerObject, Long locationId, Long price, Integer quantity, ZonedDateTime orderDate, String customerName, String status) {
         this.id = id;
         this.productId = productId;
         this.name = name;
@@ -123,11 +124,11 @@ public class Order {
         return this;
     }
 
-    public LocalDate getOrderDate() {
+    public ZonedDateTime getOrderDate() {
         return orderDate;
     }
 
-    public Order setOrderDate(LocalDate orderDate) {
+    public Order setOrderDate(ZonedDateTime  orderDate) {
         this.orderDate = orderDate;
         return this;
     }
