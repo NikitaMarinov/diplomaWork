@@ -14,10 +14,6 @@ public class LogisticsProducer {
     @Value("${kafka.logistics-topic}")
     private String TOPIC;
 
-    //NewTopic topic = new NewTopic("name", 3, (short)1);  TODO
-    // создаем топик с 3 партициями
-    //создаем 3 реплики
-    //3брокера
     private final KafkaTemplate<String, LogisticsListWrapper> kafkaTemplate;
 
     public LogisticsProducer(KafkaTemplate<String, LogisticsListWrapper> kafkaTemplate) {
