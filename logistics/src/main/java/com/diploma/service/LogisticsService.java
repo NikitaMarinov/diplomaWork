@@ -36,14 +36,8 @@ import static com.diploma.constants.OrderStatus.DELIVERY;
 @Service
 public class LogisticsService {
 
-    @Value("${application.warehouse}")
-    private String WAREHOUSE;
-
     @Value("${batch.size}")
     private int batchSize;
-
-    @Autowired
-    private GeoService geoService;
 
     @Autowired
     private LocationRepository locationRepository;
@@ -52,10 +46,10 @@ public class LogisticsService {
     private TransportRepository transportRepository;
 
     @Autowired
-    OrderRepository orderRepository;
+    private OrderRepository orderRepository;
 
     @Autowired
-    Mapper mapper;
+    private Mapper mapper;
 
     @Autowired
     private LogisticsProducer logisticsProducer;
@@ -76,26 +70,6 @@ public class LogisticsService {
         }
 
         orderRepository.saveAll(ordersList);
-    }
-
-    @Transactional
-    public Location addNewLocation(LocationDto locationDto) throws LocationNotFoundException {
-        Map<String, Double> cityLoc = geoService.getCityCoordinates(locationDto.getCity());
-        Map<String, Double> warLoc = geoService.getCityCoordinates(WAREHOUSE);
-
-        double latitude = warLoc.get("lat");
-        double longitude = warLoc.get("lon");
-
-        String coords = latitude + "," + longitude;
-
-        double distance = geoService.distanceBetweenCities(warLoc.get("lat"), warLoc.get("lon"), cityLoc.get("lat"), cityLoc.get("lon"));
-
-        Location location = mapper.toEntity(locationDto);
-
-        location.setDistanceToWarehouse((int) distance);
-        location.setLocation(coords);
-
-        return locationRepository.save(location);
     }
 
     @Transactional

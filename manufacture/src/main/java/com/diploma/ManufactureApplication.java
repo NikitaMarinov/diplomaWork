@@ -1,6 +1,5 @@
 package com.diploma;
 
-import org.antlr.v4.runtime.atn.SemanticContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

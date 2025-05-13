@@ -13,17 +13,6 @@
     ]
   },
   {
-    "type": "enum",
-    "name": "CarType",
-    "namespace": "com.diploma.avro",
-    "symbols": [
-      "CADDY",
-      "CARGOVAN",
-      "TRUCK",
-      "TRAIN"
-    ]
-  },
-  {
     "type": "record",
     "name": "OrderDTO",
     "namespace": "com.diploma.avro",
@@ -74,7 +63,7 @@
       { "name": "country", "type": ["null", "string"], "default": null },
       { "name": "distanceToWarehouse", "type": ["null", "long"], "default": null },
       { "name": "transportId", "type": ["null", "long"], "default": null },
-      { "name": "carType", "type": ["null", "com.diploma.avro.CarType"], "default": null},
+      { "name": "carType", "type": ["null", "string"], "default": null},
       { "name": "speed", "type": ["null", "long"], "default": null },
       { "name": "loadVolume", "type": ["null", "long"], "default": null },
       { "name": "quantity", "type": ["null", "int"], "default": null },

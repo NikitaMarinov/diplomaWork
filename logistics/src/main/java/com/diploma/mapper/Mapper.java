@@ -23,14 +23,6 @@ public interface Mapper {
     @Mapping(source = "product.name", target = "name")
     @Mapping(source = "product.brand", target = "brand")
     @Mapping(source = "product.model", target = "model")
-    @Mapping(source = "location.id", target = "locationId")
-    @Mapping(source = "location.city", target = "city")
-    @Mapping(source = "location.country", target = "country")
-    @Mapping(source = "location.distanceToWarehouse", target = "distanceToWarehouse")
-    @Mapping(source = "transport.id", target = "transportId")
-    @Mapping(source = "transport.type", target = "carType")
-    @Mapping(source = "transport.speed", target = "speed")
-    @Mapping(source = "transport.loadVolume", target = "loadVolume")
     @Mapping(source = "migrationId", target = "id")
     OrderDTO toDto(Order order);
 
@@ -44,7 +36,7 @@ public interface Mapper {
     @Mapping(source = "location.location", target = "location")
     @Mapping(source = "location.distanceToWarehouse", target = "distanceToWarehouse")
     @Mapping(source = "transport.id", target = "transportId")
-    @Mapping(source = "transport.type", target = "carType")
+    @Mapping(source = "transport.carType", target = "carType")
     @Mapping(source = "transport.speed", target = "speed")
     @Mapping(source = "transport.loadVolume", target = "loadVolume")
     @Mapping(source = "migrationId", target = "id")
@@ -54,7 +46,6 @@ public interface Mapper {
     @Mapping(source = "productId", target = "product.id")
     @Mapping(source = "id", target = "migrationId")
     @Mapping(source = "locationId", target = "location.id")
-    @Mapping(source = "transportId", target = "transport.id")
     Order toEntity(OrderDTO orderDTO);
 
     @Mapping(source = "productId", target = "product.id")

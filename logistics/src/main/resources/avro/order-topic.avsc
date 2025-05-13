@@ -34,17 +34,9 @@
       { "name": "brand", "type": ["null", "string"], "default": null },
       { "name": "model", "type": ["null", "string"], "default": null },
       { "name": "locationId", "type": ["null", "long"], "default": null },
-      { "name": "city", "type": ["null", "string"], "default": null },
-      { "name": "country", "type": ["null", "string"], "default": null },
-      { "name": "distanceToWarehouse", "type": ["null", "long"], "default": null },
-      { "name": "transportId", "type": ["null", "long"], "default": null },
-      { "name": "carType", "type": ["null", "com.diploma.avro.CarType"], "default": null},
-      { "name": "speed", "type": ["null", "long"], "default": null },
-      { "name": "loadVolume", "type": ["null", "long"], "default": null },
       { "name": "quantity", "type": ["null", "int"], "default": null },
       { "name": "customerName", "type": ["null", "string"], "default": null },
-      { "name": "status", "type": "com.diploma.avro.OrderStatus" },
-      { "name": "deliveryDuration", "type": ["null", "string"], "default": null  }
+      { "name": "status", "type": "com.diploma.avro.OrderStatus" }
     ]
   },
   {
@@ -61,7 +53,6 @@
       { "name": "status", "type": "com.diploma.avro.OrderStatus" },
       { "name": "productionTime", "type": ["null", "string"], "default": null  },
       { "name": "locationId", "type": ["null", "long"], "default": null }
-
     ]
   },
   {
@@ -79,7 +70,7 @@
       { "name": "country", "type": ["null", "string"], "default": null },
       { "name": "distanceToWarehouse", "type": ["null", "long"], "default": null },
       { "name": "transportId", "type": ["null", "long"], "default": null },
-      { "name": "carType", "type": ["null", "com.diploma.avro.CarType"], "default": null},
+      { "name": "carType", "type": ["null", "string"], "default": null},
       { "name": "speed", "type": ["null", "long"], "default": null },
       { "name": "loadVolume", "type": ["null", "long"], "default": null },
       { "name": "quantity", "type": ["null", "int"], "default": null },

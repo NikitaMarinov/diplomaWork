@@ -16,7 +16,7 @@ CREATE TABLE location (
 
 CREATE TABLE transport (
                            id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                           type VARCHAR(50) NOT NULL,
+                           car_type VARCHAR(50) NOT NULL,
                            speed INT NOT NULL,
                            load_volume INT NOT NULL
 );

@@ -1,9 +1,6 @@
 package com.diploma.model;
 
-import com.diploma.constants.CarType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,18 +12,17 @@ public class Transport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Enumerated(EnumType.STRING)
-    private CarType type;
+    private String carType;
     private Long speed;
     private Long loadVolume;
 
     public Transport() {
     }
 
-    public Transport(Long loadVolume, Long speed, CarType type, Long id) {
+    public Transport(Long loadVolume, Long speed, String carType, Long id) {
         this.loadVolume = loadVolume;
         this.speed = speed;
-        this.type = type;
+        this.carType = carType;
         this.id = id;
     }
 
@@ -39,12 +35,12 @@ public class Transport {
         return this;
     }
 
-    public CarType getType() {
-        return type;
+    public String getCarType() {
+        return carType;
     }
 
-    public Transport setType(CarType type) {
-        this.type = type;
+    public Transport setCarType(String carType) {
+        this.carType = carType;
         return this;
     }
 
@@ -70,7 +66,7 @@ public class Transport {
     public String toString() {
         return "Transport{" +
                 "id=" + id +
-                ", type=" + type +
+                ", carType=" + carType +
                 ", speed=" + speed +
                 ", loadVolume=" + loadVolume +
                 '}';
