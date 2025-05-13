@@ -1,6 +1,5 @@
 package com.diploma.service.kafka;
 
-import com.diploma.avro.OrderListWrapper;
 import com.diploma.avro.SalesListWrapper;
 import com.diploma.service.DataProcService;
 import org.springframework.beans.factory.annotation.Autowired;
