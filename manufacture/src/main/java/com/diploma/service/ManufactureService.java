@@ -49,7 +49,7 @@ public class ManufactureService {
         int manufacturingTimePerObject;
 
         for (Order order : orderList) {
-            manufacturingTimePerObject = Integer.parseInt(manufactureMap.get(order.getProduct().getId()).getManufacturing_time());
+            manufacturingTimePerObject = Integer.parseInt(manufactureMap.get(order.getProduct().getId()).getManufacturingTime());
             order.setStatus(OrderStatus.IN_PRODUCTION);
             order.setProductionEndTime(ZonedDateTime.now(ZoneId.of("UTC")).plusSeconds(((long) manufacturingTimePerObject * order.getQuantity()) / 10000));
             order.setProductionTime(String.valueOf((long) manufacturingTimePerObject * order.getQuantity()));

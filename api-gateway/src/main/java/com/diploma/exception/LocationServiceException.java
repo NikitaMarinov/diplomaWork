@@ -1,4 +1,4 @@
-package com.diploma.model.exception;
+package com.diploma.exception;
 
 import org.springframework.http.HttpStatus;
 

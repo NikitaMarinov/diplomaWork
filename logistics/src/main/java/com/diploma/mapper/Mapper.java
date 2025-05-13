@@ -6,7 +6,11 @@ import com.diploma.avro.ManufactureDto;
 import com.diploma.avro.OrderDTO;
 import com.diploma.model.Location;
 import com.diploma.model.Order;
+import com.diploma.model.Product;
+import com.diploma.model.Transport;
 import com.diploma.model.dto.LocationDto;
+import com.diploma.model.dto.ProductDto;
+import com.diploma.model.dto.TransportDto;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.Named;
@@ -53,13 +57,21 @@ public interface Mapper {
     @Mapping(source = "locationId", target = "location.id")
     Order toEntityFromManufacture(ManufactureDto manufactureDto);
 
+    Product toEntity(ProductDto productDto);
+
     List<OrderDTO> toDtoList(List<Order> orders);
+
     List<LogisticsDTO> toLogisticsDtoList(List<Order> orders);
+
     List<Order> toEntityList(List<OrderDTO> orderDTOs);
+
     List<Order> toEntityListFromManufacture(List<ManufactureDto> manufactureDtos);
 
     LocationDto toDto(Location location);
+
     Location toEntity(LocationDto locationDto);
+
+    Transport toEntity(TransportDto transportDto);
 
     default String map(CharSequence value) {
         return value == null ? null : value.toString();

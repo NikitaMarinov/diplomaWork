@@ -14,6 +14,7 @@ public class OrderConsumer {
 
     @KafkaListener(topics = "${kafka.order-topic}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenOrder(OrderListWrapper orderListWrapper) {
+        System.out.println(orderListWrapper.getOrders());
         dataProcService.saveOders(orderListWrapper.getOrders());
     }
 

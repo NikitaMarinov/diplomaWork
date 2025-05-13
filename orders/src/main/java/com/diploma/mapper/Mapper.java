@@ -1,7 +1,11 @@
 package com.diploma.mapper;
 
 import com.diploma.avro.OrderDTO;
+import com.diploma.model.Location;
 import com.diploma.model.Order;
+import com.diploma.model.Product;
+import com.diploma.model.dto.LocationDto;
+import com.diploma.model.dto.ProductDto;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.Named;
@@ -27,6 +31,9 @@ public interface Mapper {
     @Mapping(source = "locationId", target = "location.id")
     @Mapping(source = "orderDate", target = "orderDate", qualifiedByName = "instantToZonedDateTime")
     Order toEntity(OrderDTO orderDTO);
+
+    Product toEntity(ProductDto productDto);
+    Location toEntity(LocationDto locationDto);
 
     default String map(CharSequence value) {
         return value == null ? null : value.toString();

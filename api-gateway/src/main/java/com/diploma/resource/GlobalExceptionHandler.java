@@ -1,11 +1,13 @@
 package com.diploma.resource;
 
-import com.diploma.model.exception.ErrorResponse;
-import com.diploma.model.exception.LocationServiceException;
+import com.diploma.exception.ErrorResponse;
+import com.diploma.exception.LocationServiceException;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+@Hidden
 @ControllerAdvice
 public class GlobalExceptionHandler {
 

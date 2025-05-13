@@ -2,8 +2,9 @@ package com.diploma.mapper;
 
 
 import com.diploma.avro.ManufactureDto;
-import com.diploma.model.Order;
 import com.diploma.avro.OrderDTO;
+import com.diploma.model.Manufacture;
+import com.diploma.model.Order;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.Named;
@@ -34,6 +35,8 @@ public interface Mapper {
     @Mapping(source = "migrationId", target = "id")
     @Mapping(source = "productionEndTime", target = "productionEndTime", qualifiedByName = "zonedDateTimeToInstant")
     ManufactureDto toManufactureDto(Order order);
+
+    Manufacture toEntity( com.diploma.model.dto.ManufactureDto manufactureDto);
 
     List<OrderDTO> toDtoList(List<Order> orders);
 

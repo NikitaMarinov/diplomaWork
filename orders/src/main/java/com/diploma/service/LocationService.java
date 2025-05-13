@@ -1,28 +1,22 @@
 package com.diploma.service;
 
+import com.diploma.exception.InvalidLocationDataException;
 import com.diploma.exception.LocationNotFoundException;
 import com.diploma.mapper.Mapper;
 import com.diploma.model.Location;
 import com.diploma.model.dto.LocationDto;
 import com.diploma.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class LocationService {
-    @Value("${application.warehouse}")
-    private String WAREHOUSE;
 
     @Autowired
     private LocationRepository locationRepository;
-
-    @Autowired
-    private GeoService geoService;
 
     @Autowired
     private Mapper mapper;
@@ -30,22 +24,19 @@ public class LocationService {
 
     @Transactional
     public Location addNewLocation(LocationDto locationDto) throws LocationNotFoundException {
-        Map<String, Double> cityLoc = geoService.getCityCoordinates(locationDto.getCity());
-        Map<String, Double> warLoc = geoService.getCityCoordinates(WAREHOUSE);
-
-        double latitude = warLoc.get("lat");
-        double longitude = warLoc.get("lon");
-
-        String coords = latitude + "," + longitude;
-
-        double distance = geoService.distanceBetweenCities(warLoc.get("lat"), warLoc.get("lon"), cityLoc.get("lat"), cityLoc.get("lon"));
-
         Location location = mapper.toEntity(locationDto);
-
-        location.setDistanceToWarehouse((int) distance);
-        location.setLocation(coords);
+        validateLocation(location);
 
         return locationRepository.save(location);
+    }
+
+    private void validateLocation(Location location) {
+        if(location.getCity() == null || location.getCity().isEmpty()) {
+            throw new InvalidLocationDataException("Location city is empty");
+        }
+        if (location.getCountry() == null || location.getCountry().isEmpty()) {
+            throw new InvalidLocationDataException("Location country is empty");
+        }
     }
 
     public void deleteLocation(Long locationId) throws LocationNotFoundException {
